@@ -1,0 +1,22 @@
+$font-sizes: (
+        1: 2em,
+        2: 1.75em,
+        3: 1.5em,
+        4: 1.25em,
+        5: 1em,
+        6: 0.85em,
+        7: 0.75em,
+);
+
+.select2-container {
+  min-width: unset;
+}
+.select2-container--default .select2-selection--single {
+  border: 1px solid #ced4da;
+}
+.select2-container .select2-selection--single {
+  height: 38px;
+}
+.select2-container--default .select2-selection--single .select2-selection__arrow {
+  height: 38px;
+}

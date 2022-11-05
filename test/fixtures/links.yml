@@ -1,0 +1,27 @@
+# == Schema Information
+#
+# Table name: links
+#
+#  id               :bigint           not null, primary key
+#  name             :string
+#  slug             :string
+#  website          :string
+#  description      :text
+#  link_category_id :bigint           not null
+#  created_at       :datetime         not null
+#  updated_at       :datetime         not null
+#
+
+one:
+  name: MyString
+  slug: MyString
+  website: MyString
+  description: MyText
+  link_category: one
+
+two:
+  name: MyString
+  slug: MyString
+  website: MyString
+  description: MyText
+  link_category: two
