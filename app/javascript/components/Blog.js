@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import {format} from 'date-fns';
 import PropTypes from "prop-types";
+import NewBlogPost from './_new_blog_post';
 
 export class Blog extends Component {
 	constructor(props) {
@@ -9,6 +10,11 @@ export class Blog extends Component {
 			blog_posts: [],
 			loading: true
 		};
+		this.handleFormSubmit = this.handleFormSubmit.bind(NewBlogPost);
+	}
+
+	handleFormSubmit(title, content, status){
+		console.log(title, content, status);
 	}
 
 	componentDidMount() {
@@ -19,6 +25,7 @@ export class Blog extends Component {
 		if (blog_posts.length > 0) {
 			return (
 				<div>
+					<NewBlogPost />
 					<ul>
 						{blog_posts.map(post =>
 							<BlogPost
@@ -32,6 +39,7 @@ export class Blog extends Component {
 		} else {
 			return (
 				<div>
+					<NewBlogPost />
 					<p>There are no blog posts in the database!</p>
 				</div>
 			)
@@ -64,7 +72,7 @@ class BlogPost extends Component {
 	}
 
 	render() {
-		const {title, content, created_at} = this.props.post;
+		const {title, slug, content, created_at} = this.props.post;
 
 		return (
 			<div className='post-stub'>
@@ -73,7 +81,7 @@ class BlogPost extends Component {
 						{format(new Date(created_at), 'yyyy-MM-dd')}
 						&nbsp;
 					</span>
-					<a href="/blog/post/{slug}">
+					<a href={`/blog/post/${slug}`}>
 						{title}
 					</a>
 				</h3>

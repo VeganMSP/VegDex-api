@@ -23,7 +23,7 @@ Rails.application.routes.draw do
       resources :vegan_companies, only: %i[index]
       resources :farmers_markets, only: %i[index]
       resources :blog_posts_by_category, only: %i[index]
-      resources :blog_posts, only: %i[index]
+      resources :blog_posts, only: [:index, :create, :destroy, :update]
     end
   end
 
