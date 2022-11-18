@@ -18,7 +18,6 @@ class Restaurant < ApplicationRecord
   validates :name, presence: true
   validates :description, presence: true
 
-
   def city_name
     self.city
   end

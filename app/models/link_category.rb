@@ -12,5 +12,4 @@
 class LinkCategory < ApplicationRecord
   has_many :links
   slug :name
-
 end

@@ -13,15 +13,15 @@
 #
 
 one:
-  title: MyString
+  title: Welcome to VegDex!
   content: MyText
-  slug: MyString
-  status: 1
-  blogpostcategory: one
+  slug: welcome-to-vegdex
+  status: 0
+  blog_post_category: one
 
 two:
-  title: MyString
+  title: My other post
   content: MyText
-  slug: MyString
+  slug: my-other-post
   status: 1
-  blogpostcategory: two
+  blog_post_category: two

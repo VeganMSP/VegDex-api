@@ -25,6 +25,6 @@ two:
   name: MyString
   street1: MyString
   street2: MyString
-  city: two
+  city: one
   state: MyString
   zip_code: MyString

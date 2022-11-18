@@ -35,6 +35,8 @@
   ],
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.8",
+    "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "mini-css-extract-plugin": "^2.7.0",
     "react-refresh": "^0.14.0"
   }
 }
