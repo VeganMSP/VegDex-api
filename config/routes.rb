@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 Rails.application.routes.draw do
   namespace :admin do
     resources :addresses
@@ -9,7 +11,7 @@ Rails.application.routes.draw do
     resources :blog_posts
     resources :blog_post_categories
 
-    root to: "addresses#index"
+    root to: 'addresses#index'
   end
 
   namespace :api do
@@ -23,7 +25,7 @@ Rails.application.routes.draw do
       resources :vegan_companies, only: %i[index]
       resources :farmers_markets, only: %i[index]
       resources :blog_posts_by_category, only: %i[index]
-      resources :blog_posts, only: [:index, :create, :destroy, :update]
+      resources :blog_posts, only: %i[index create destroy update]
     end
   end
 

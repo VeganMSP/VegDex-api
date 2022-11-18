@@ -1,0 +1,46 @@
+require:
+  - rubocop-rails
+
+AllCops:
+  NewCops: disable
+  Exclude:
+    - node_modules/**/*
+    - vendor/bundle/**/*
+
+Metrics/BlockLength:
+  Max: 55
+  Exclude:
+    - 'db/schema.rb'
+
+Metrics/MethodLength:
+  CountComments: false
+  Max: 65
+
+Metrics/CyclomaticComplexity:
+  Max: 25
+
+Metrics/PerceivedComplexity:
+  Max: 25
+
+Layout/EmptyLineAfterMagicComment:
+  Enabled: true
+
+Layout/LineLength:
+  AllowURI: true
+  Enabled: false
+
+Rails/HasManyOrHasOneDependent:
+  Enabled: false
+
+Style/ClassAndModuleChildren:
+  Enabled: false
+
+Style/Documentation:
+  Enabled: false
+
+Style/FrozenStringLiteralComment:
+  Enabled: true
+  EnforcedStyle: always_true
+
+Style/SymbolArray:
+  Enabled: false

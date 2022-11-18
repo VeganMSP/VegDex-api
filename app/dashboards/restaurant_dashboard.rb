@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class RestaurantDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -16,7 +18,7 @@ class RestaurantDashboard < Administrate::BaseDashboard
     slug: Field::String,
     website: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
