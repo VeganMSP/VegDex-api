@@ -20,11 +20,3 @@ one:
   website: MyString
   description: MyText
   all_vegan: false
-
-two:
-  name: MyString
-  city: two
-  slug: MyString
-  website: MyString
-  description: MyText
-  all_vegan: false
