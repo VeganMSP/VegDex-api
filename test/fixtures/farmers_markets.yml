@@ -20,11 +20,3 @@ one:
   slug: MyString
   phone: MyString
   website: MyString
-
-two:
-  address: two
-  hours: MyText
-  name: MyString
-  slug: MyString
-  phone: MyString
-  website: MyString

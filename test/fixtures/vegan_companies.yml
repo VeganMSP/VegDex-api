@@ -16,9 +16,3 @@ one:
   slug: MyString
   website: MyString
   description: MyText
-
-two:
-  name: MyString
-  slug: MyString
-  website: MyString
-  description: MyText
