@@ -1,16 +1,16 @@
 Rails.application.routes.draw do
   namespace :admin do
-      resources :addresses
-      resources :cities
-      resources :farmers_markets
-      resources :links
-      resources :link_categories
-      resources :restaurants
-      resources :blog_posts
-      resources :blog_post_categories
+    resources :addresses
+    resources :cities
+    resources :farmers_markets
+    resources :links
+    resources :link_categories
+    resources :restaurants
+    resources :blog_posts
+    resources :blog_post_categories
 
-      root to: "addresses#index"
-    end
+    root to: "addresses#index"
+  end
 
   namespace :api do
     namespace :v1 do
