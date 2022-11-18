@@ -42,6 +42,8 @@ group :development, :test do
 
   gem "annotate", "~> 3.2"
 
+  gem "bundler-audit"
+
   gem "rubocop"
 end
 

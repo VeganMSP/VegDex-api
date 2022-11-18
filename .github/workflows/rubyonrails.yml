@@ -55,5 +55,7 @@ jobs:
         with:
           bundler-cache: true
       # Add or replace any other lints here
+      - name: Security audit dependencies
+        run: bundle exec bundle audit --update
       - name: Lint Ruby files
         run: rubocop --parallel
