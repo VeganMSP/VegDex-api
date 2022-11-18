@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::BlogPostsController < ApplicationController
   def index
     render json: BlogPost.all, include: :blog_post_category
@@ -5,7 +7,7 @@ class Api::V1::BlogPostsController < ApplicationController
 
   def create
     post = BlogPost.create(post_params)
-    puts json: post
+    Rails.logger.info json: post
     render json: post
   end
 

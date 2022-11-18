@@ -1,4 +1,6 @@
-require "administrate/base_dashboard"
+# frozen_string_literal: true
+
+require 'administrate/base_dashboard'
 
 class AddressDashboard < Administrate::BaseDashboard
   # ATTRIBUTE_TYPES
@@ -17,7 +19,7 @@ class AddressDashboard < Administrate::BaseDashboard
     street2: Field::String,
     zip_code: Field::String,
     created_at: Field::DateTime,
-    updated_at: Field::DateTime,
+    updated_at: Field::DateTime
   }.freeze
 
   # COLLECTION_ATTRIBUTES
