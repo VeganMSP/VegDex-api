@@ -58,4 +58,4 @@ jobs:
       - name: Security audit dependencies
         run: bundle exec bundle audit --update
       - name: Lint Ruby files
-        run: rubocop --parallel
+        run: bundle exec rubocop --parallel
