@@ -33,6 +33,7 @@ Rails.application.routes.draw do
   get 'shopping', to: 'home#index'
   get 'links', to: 'home#index'
   get 'blog', to: 'home#index'
+  get 'blog/:year/:month/:day/:slug', to: 'home#index'
   get 'about', to: 'home#index'
 
   root 'home#index'
