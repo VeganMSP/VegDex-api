@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class Api::V1::BlogPostsByCategoryController < ApplicationController
   def index
     @blog_post_categories = BlogPostCategory.all

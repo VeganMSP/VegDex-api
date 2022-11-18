@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # == Schema Information
 #
 # Table name: restaurants
@@ -19,6 +21,6 @@ class Restaurant < ApplicationRecord
   validates :description, presence: true
 
   def city_name
-    self.city
+    city
   end
 end
