@@ -18,10 +18,3 @@ one:
   website: MyString
   description: MyText
   link_category: one
-
-two:
-  name: MyString
-  slug: MyString
-  website: MyString
-  description: MyText
-  link_category: two

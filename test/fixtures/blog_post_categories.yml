@@ -10,9 +10,9 @@
 #
 
 one:
-  name: MyString
-  slug: MyString
+  name: Site News
+  slug: site-news
 
 two:
-  name: MyString
-  slug: MyString
+  name: Activism
+  slug: activism
