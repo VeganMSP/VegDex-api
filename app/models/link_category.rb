@@ -13,5 +13,7 @@
 #
 class LinkCategory < ApplicationRecord
   has_many :links
+  validates :slug, uniqueness: true
+
   slug :name
 end
