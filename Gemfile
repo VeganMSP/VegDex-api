@@ -77,4 +77,4 @@ gem 'administrate', '~> 0.18.0'
 
 gem 'slug', '~> 4.1'
 
-gem "dotenv-rails", "~> 2.8"
+gem 'dotenv-rails', '~> 2.8'
