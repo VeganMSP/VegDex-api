@@ -6,10 +6,9 @@ class NewLink extends Component {
     constructor(props) {
         super(props);
         this.state = {
+            link_categories: [],
             newLinkModal: false,
-            form: {
-                link_category_id: 6
-            }
+            form: {}
         };
         this.toggleLinkForm = this.toggleLinkForm.bind(NewLink);
     }
@@ -44,7 +43,24 @@ class NewLink extends Component {
         }
     }
 
+    componentDidMount() {
+        this.populateLinkCategories();
+    }
+
+    static renderLinkCategoryOptions(link_categories){
+        return (
+            <>
+                {link_categories.map(category =>
+                    <option value={category.id}>{category.name}</option>
+                )}
+            </>
+        )
+    }
+
     render() {
+        let categories = this.state.loading
+            ? <p><em>Loading...</em></p>
+            : NewLink.renderLinkCategoryOptions(this.state.link_categories);
 
         return (
             <>
@@ -100,16 +116,18 @@ class NewLink extends Component {
                                 </Col>
                             </FormGroup>
                             <FormGroup row>
-                                <Label for="link_category"
+                                <Label for="link_category_id"
                                        sm={2}>
                                     Category:
                                 </Label>
                                 <Col sm={10}>
-                                    <Input id="link_category"
-                                           name="link_category"
+                                    <Input id="link_category_id"
+                                           name="link_category_id"
                                            type="select"
                                            onChange={this.handleChange}
-                                    />
+                                    >
+                                        {categories}
+                                    </Input>
                                     <NewLinkCategory/>
                                 </Col>
                             </FormGroup>
@@ -120,6 +138,13 @@ class NewLink extends Component {
             </>
         )
     }
+
+    async populateLinkCategories() {
+        const response = await fetch('api/v1/link_categories');
+        const data = await response.json();
+        this.setState({link_categories: data, loading: false});
+    }
+
 }
 
 export default NewLink
