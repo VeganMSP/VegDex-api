@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-class Api::V1::BlogPostsController < ApplicationController
+class Api::V1::BlogPostsController < Api::BaseController
   def index
     render json: BlogPost.all, include: :blog_post_category
   end
