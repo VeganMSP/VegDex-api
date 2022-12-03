@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, Col, FormGroup, Input, Modal, ModalBody, Label } from 'reactstrap';
-import NewLinkCategory from "./_new_link_category";
+import AsyncCreatableSelect from 'react-select/async-creatable';
 
 class NewLink extends Component {
     constructor(props) {
@@ -22,6 +22,11 @@ class NewLink extends Component {
 
     handleChange = (e) => {
         this.state.form[e.target.name] = e.target.value;
+    }
+
+    handleLinkCategorySelectChange = (e) => {
+        // TODO: handle creating new categories here
+        this.state.form['link_category_id'] = e.id;
     }
 
     submitForm = async (e) => {
@@ -58,9 +63,6 @@ class NewLink extends Component {
     }
 
     render() {
-        let categories = this.state.loading
-            ? <p><em>Loading...</em></p>
-            : NewLink.renderLinkCategoryOptions(this.state.link_categories);
 
         return (
             <>
@@ -121,14 +123,16 @@ class NewLink extends Component {
                                     Category:
                                 </Label>
                                 <Col sm={10}>
-                                    <Input id="link_category_id"
-                                           name="link_category_id"
-                                           type="select"
-                                           onChange={this.handleChange}
-                                    >
-                                        {categories}
-                                    </Input>
-                                    <NewLinkCategory/>
+                                    <AsyncCreatableSelect id="link_category_id"
+                                                          name="link_category_id"
+                                                          cacheOptions
+                                                          defaultOptions
+                                                          isClearable
+                                                          getOptionLabel={e => e.name}
+                                                          getOptionValue={e => e.id}
+                                                          loadOptions={this.populateLinkCategories}
+                                                          onChange={this.handleLinkCategorySelectChange}
+                                    />
                                 </Col>
                             </FormGroup>
                             <Button color="primary">Submit</Button>
@@ -142,7 +146,7 @@ class NewLink extends Component {
     async populateLinkCategories() {
         const response = await fetch('api/v1/link_categories');
         const data = await response.json();
-        this.setState({link_categories: data, loading: false});
+        return data;
     }
 
 }
