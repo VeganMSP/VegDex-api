@@ -8,7 +8,7 @@ class Api::V1::LinksController < Api::BaseController
 
   def create
     link = Link.create(link_params)
-    puts link.errors.full_messages
+    Rails.logger.info link.errors.full_messages
     render json: link
   end
 
@@ -23,6 +23,7 @@ class Api::V1::LinksController < Api::BaseController
   end
 
   private
+
   def link_params
     params.require(:link).permit(:id, :name, :website, :description, :link_category_id)
   end

@@ -8,7 +8,7 @@ class Api::V1::LinkCategoriesController < Api::BaseController
 
   def create
     link_category = LinkCategory.create(link_category_params)
-    puts link_category.errors.full_messages
+    Rails.logger.info link_category.errors.full_messages
     render json: link_category
   end
 
@@ -23,6 +23,7 @@ class Api::V1::LinkCategoriesController < Api::BaseController
   end
 
   private
+
   def link_category_params
     params.require(:link_category).permit(:id, :name, :description)
   end

@@ -16,5 +16,4 @@ class LinkCategory < ApplicationRecord
   validates :slug, uniqueness: true
 
   slug :name
-
 end
