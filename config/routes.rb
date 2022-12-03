@@ -1,6 +1,9 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  namespace :links do
+    get 'link_categories/create'
+  end
   namespace :admin do
     resources :addresses
     resources :cities
@@ -22,6 +25,8 @@ Rails.application.routes.draw do
       resources :addresses, only: %i[index]
       resources :locations, only: %i[index]
       resources :links_by_category, only: %i[index]
+      resources :link_categories, only: %i[index create destroy update]
+      resources :links, only: %i[index create destroy update]
       resources :vegan_companies, only: %i[index]
       resources :farmers_markets, only: %i[index]
       resources :blog_posts_by_category, only: %i[index]

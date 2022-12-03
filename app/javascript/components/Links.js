@@ -1,12 +1,16 @@
 import React, { Component } from 'react';
 import PropTypes from "prop-types";
+import NewLink from './_new_link';
 
 export class Links extends Component {
 	static displayName = Links.name;
 
 	constructor(props) {
 		super(props);
-		this.state = {links_by_category: [], loading: true};
+		this.state = {
+			links_by_category: [],
+			loading: true
+		};
 	}
 
 	componentDidMount() {
@@ -33,6 +37,7 @@ export class Links extends Component {
 
 		return (
 			<div>
+				<NewLink/>
 				<h2>Groups & Links</h2>
 				{contents}
 			</div>
