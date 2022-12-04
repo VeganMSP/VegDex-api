@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { Button, Form, Col, FormGroup, Input, Modal, ModalBody, Label } from 'reactstrap';
+import AsyncCreatableSelect from "react-select/async-creatable";
 
 export const BlogPostStatus = {
 	DRAFT: 0,
@@ -11,10 +12,7 @@ class NewBlogPost extends Component {
 		super(props);
 		this.state = {
 			modal: false,
-			form: {
-				status: BlogPostStatus.DRAFT,
-				blog_post_category_id: 1
-			}
+			form: {}
 		};
 
 		this.toggle = this.toggle.bind(this);
@@ -29,6 +27,11 @@ class NewBlogPost extends Component {
 
 	handleChange = (e) => {
 		this.state.form[e.target.name] = e.target.value;
+	}
+
+	handleBlogPostCategorySelectChange = (e) => {
+		// TODO: handle new category creation here
+		this.state.form['blog_post_category_id'] = e.id;
 	}
 
 	submitForm = async (e) => {
@@ -94,6 +97,24 @@ class NewBlogPost extends Component {
 								</Col>
 							</FormGroup>
 							<FormGroup row>
+								<Label for="blog_post_category_id"
+								       sm={2}>
+									Category:
+								</Label>
+								<Col sm={10}>
+									<AsyncCreatableSelect id="blog_post_category_id"
+									                      name="blog_post_category_id"
+									                      cacheOptions
+									                      defaultOptions
+									                      isClearable
+									                      getOptionLabel={e => e.name}
+									                      getOptionValue={e => e.id}
+									                      loadOptions={this.populateBlogPostCategories}
+									                      onChange={this.handleBlogPostCategorySelectChange}
+									/>
+								</Col>
+							</FormGroup>
+							<FormGroup row>
 								<Label for="status"
 								       sm={2}>
 									Status
@@ -115,6 +136,12 @@ class NewBlogPost extends Component {
 				</Modal>
 			</>
 		)
+	}
+
+	async populateBlogPostCategories() {
+		const response = await fetch('api/v1/blog_post_categories');
+		const data = await response.json();
+		return data;
 	}
 }
 
