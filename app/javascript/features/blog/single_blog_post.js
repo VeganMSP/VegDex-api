@@ -15,6 +15,8 @@ class SingleBlogPost extends Component {
 
 	static propTypes = {
 		post: PropTypes.object.isRequired,
+		slug: PropTypes.string,
+		params: PropTypes.object,
 	}
 
 	componentDidMount() {
@@ -22,7 +24,7 @@ class SingleBlogPost extends Component {
 	}
 
 	static renderBlogPost(blog_post) {
-		const {title, content, created_at, status} = blog_post
+		const {title, content, created_at} = blog_post
 		console.log(blog_post);
 		return (
 			<div className='post-stub'>
@@ -33,7 +35,7 @@ class SingleBlogPost extends Component {
 						{title}
 					</span>
 				</h3>
-				<p className='post-content'>{blog_post.content}</p>
+				<p className='post-content'>{content}</p>
 			</div>
 		)
 	}
