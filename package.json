@@ -1,5 +1,11 @@
 {
-  "name": "app",
+  "name": "@VeganMSP/VegDex",
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "test:lint:js": "eslint --ext=js . --cache"
+  },
   "private": true,
   "dependencies": {
     "@babel/core": "7",
@@ -37,6 +43,10 @@
   "devDependencies": {
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.8",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
+    "eslint": "^8.29.0",
+    "eslint-plugin-import": "^2.26.0",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.31.11",
     "mini-css-extract-plugin": "^2.7.0",
     "react-refresh": "^0.14.0"
   }
