@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from 'prop-types';
 
 export class Restaurant extends Component {
@@ -42,7 +42,7 @@ export class RestaurantLink extends Component {
 			return (
 				<strong>{name}</strong>
 			);
-		} else if (!all_vegan && website !== ""){
+		} else if (!all_vegan && website !== "") {
 			return (
 				<a href={website}>{name}</a>
 			);

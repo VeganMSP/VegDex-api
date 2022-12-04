@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { City } from './City'
+import React, {Component} from 'react';
+import {City} from './City'
 
 export class Restaurants extends Component {
 	static displayName = Restaurants.name;
@@ -31,8 +31,8 @@ export class Restaurants extends Component {
 			<div>
 				Jump to city:
 				<ul>
-				{restaurants_by_city.map(city =>
-						<li key={city.slug}><a href={'#'+city.slug}>{city.name}</a></li>
+					{restaurants_by_city.map(city =>
+						<li key={city.slug}><a href={'#' + city.slug}>{city.name}</a></li>
 					)}
 				</ul>
 			</div>

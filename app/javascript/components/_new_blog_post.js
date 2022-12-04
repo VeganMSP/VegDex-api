@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Button, Form, Col, FormGroup, Input, Modal, ModalBody, Label } from 'reactstrap';
+import React, {Component} from 'react';
+import {Button, Form, Col, FormGroup, Input, Modal, ModalBody, Label} from 'reactstrap';
 import AsyncCreatableSelect from "react-select/async-creatable";
 
 export const BlogPostStatus = {
@@ -36,17 +36,17 @@ class NewBlogPost extends Component {
 	submitForm = async (e) => {
 		e.preventDefault();
 		try {
-		const response = await fetch('/api/v1/blog_posts', {
-			method: 'POST',
-			body: JSON.stringify(this.state.form),
-			headers: {
-				Accept: 'application/json',
-				'Content-Type': 'application/json',
-			},
-		});
-		if (!response.ok) throw Error(response.statusText);
-		e.target.reset();
-		this.toggle();
+			const response = await fetch('/api/v1/blog_posts', {
+				method: 'POST',
+				body: JSON.stringify(this.state.form),
+				headers: {
+					Accept: 'application/json',
+					'Content-Type': 'application/json',
+				},
+			});
+			if (!response.ok) throw Error(response.statusText);
+			e.target.reset();
+			this.toggle();
 		} catch (error) {
 			console.error(error);
 		}

@@ -1,14 +1,14 @@
-import React, { Component } from 'react';
-import { Route, Routes } from 'react-router-dom';
-import { Layout } from './components/Layout';
+import React, {Component} from 'react';
+import {Route, Routes} from 'react-router-dom';
+import {Layout} from './components/Layout';
 import './custom.scss';
 
-import { Home } from './components/Home';
-import { Restaurants } from "./components/Restaurants";
-import { Shopping } from "./components/Shopping";
-import { Links } from "./components/Links";
-import { Blog } from "./components/Blog";
-import { About } from "./components/About";
+import {Home} from './components/Home';
+import {Restaurants} from "./components/Restaurants";
+import {Shopping} from "./components/Shopping";
+import {Links} from "./components/Links";
+import {Blog} from "./components/Blog";
+import {About} from "./components/About";
 import SingleBlogPost from "./features/blog/single_blog_post";
 
 export default class App extends Component {

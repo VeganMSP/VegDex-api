@@ -1,10 +1,10 @@
-import React, { Component } from 'react';
+import React, {Component} from 'react';
 import PropTypes from "prop-types";
-import { format } from "date-fns";
+import {format} from "date-fns";
 import withRouter from '../../helpers/withRouter';
 
 class SingleBlogPost extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 		this.state = {
 			slug: this.props.params.slug,
@@ -21,8 +21,8 @@ class SingleBlogPost extends Component {
 		this.getBlogPost(this.state.slug)
 	}
 
-	static renderBlogPost(blog_post){
-		const { title, content, created_at, status } = blog_post
+	static renderBlogPost(blog_post) {
+		const {title, content, created_at, status} = blog_post
 		console.log(blog_post);
 		return (
 			<div className='post-stub'>

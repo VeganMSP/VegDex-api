@@ -1,5 +1,5 @@
-import React, { Component } from 'react';
-import { Routes, Route, Link } from 'react-router-dom';
+import React, {Component} from 'react';
+import {Routes, Route, Link} from 'react-router-dom';
 import {format} from 'date-fns';
 import PropTypes from "prop-types";
 import NewBlogPost from './_new_blog_post';
@@ -15,7 +15,7 @@ export class Blog extends Component {
 		this.handleFormSubmit = this.handleFormSubmit.bind(NewBlogPost);
 	}
 
-	handleFormSubmit(title, content, status){
+	handleFormSubmit(title, content, status) {
 		console.log(title, content, status);
 	}
 
@@ -27,7 +27,7 @@ export class Blog extends Component {
 		if (blog_posts.length > 0) {
 			return (
 				<div>
-					<NewBlogPost />
+					<NewBlogPost/>
 					<ul>
 						{blog_posts.map(post =>
 							<BlogPost
@@ -41,7 +41,7 @@ export class Blog extends Component {
 		} else {
 			return (
 				<div>
-					<NewBlogPost />
+					<NewBlogPost/>
 					<p>There are no blog posts in the database!</p>
 				</div>
 			)
@@ -69,7 +69,7 @@ export class Blog extends Component {
 }
 
 class BlogPost extends Component {
-	constructor(props){
+	constructor(props) {
 		super(props);
 	}
 

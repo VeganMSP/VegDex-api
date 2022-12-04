@@ -1,7 +1,7 @@
-import React, { Component } from 'react';
-import { Container } from 'reactstrap';
-import { NavMenu } from './NavMenu';
-import { Footer } from './Footer';
+import React, {Component} from 'react';
+import {Container} from 'reactstrap';
+import {NavMenu} from './NavMenu';
+import {Footer} from './Footer';
 
 export class Layout extends Component {
 	static displayName = Layout.name;
@@ -11,11 +11,11 @@ export class Layout extends Component {
 			<div>
 				<NavMenu/>
 				<div className='flex-shrink-0 pb-3'>
-				<Container>
-					{this.props.children}
-				</Container>
+					<Container>
+						{this.props.children}
+					</Container>
 				</div>
-			<Footer />
+				<Footer/>
 			</div>
 		);
 	}
