@@ -22,6 +22,9 @@ Metrics/CyclomaticComplexity:
 Metrics/PerceivedComplexity:
   Max: 25
 
+Layout/ArgumentAlignment:
+  EnforcedStyle: 'with_fixed_indentation'
+
 Layout/EmptyLineAfterMagicComment:
   Enabled: true
 
