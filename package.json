@@ -1,5 +1,12 @@
 {
-  "name": "app",
+  "name": "@VeganMSP/VegDex",
+  "engines": {
+    "node": ">=14"
+  },
+  "scripts": {
+    "test:lint:js": "eslint --ext=js . --cache",
+    "test:lint:sass": "stylelint \"**/*.{css,scss}\""
+  },
   "private": true,
   "dependencies": {
     "@babel/core": "7",
@@ -38,6 +45,8 @@
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.8",
     "babel-plugin-transform-react-remove-prop-types": "^0.4.24",
     "mini-css-extract-plugin": "^2.7.0",
-    "react-refresh": "^0.14.0"
+    "react-refresh": "^0.14.0",
+    "stylelint": "^14.16.0",
+    "stylelint-config-standard-scss": "^6.1.0"
   }
 }
