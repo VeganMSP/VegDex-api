@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { Routes, Route, Link } from 'react-router-dom';
 import {format} from 'date-fns';
 import PropTypes from "prop-types";
 import NewBlogPost from './_new_blog_post';
+import SingleBlogPost from "../features/blog/single_blog_post";
 
 export class Blog extends Component {
 	constructor(props) {
@@ -67,23 +69,32 @@ export class Blog extends Component {
 }
 
 class BlogPost extends Component {
+	constructor(props){
+		super(props);
+	}
+
 	static propTypes = {
-		post: PropTypes.object
+		post: PropTypes.object.isRequired,
 	}
 
 	render() {
 		const {title, slug, content, created_at} = this.props.post;
+		const date = new Date(created_at);
+		const fullDate = format(date, 'yyyy-MM-dd')
+		const year = format(date, 'yyyy');
+		const month = format(date, 'MM');
+		const day = format(date, 'dd');
 
 		return (
 			<div className='post-stub'>
 				<h3 className='post-title'>
 					<span className='date xs-hidden'>
-						{format(new Date(created_at), 'yyyy-MM-dd')}
+						{fullDate}
 						&nbsp;
 					</span>
-					<a href={`/blog/post/${slug}`}>
+					<Link to={`/blog/${year}/${month}/${day}/${slug}`}>
 						{title}
-					</a>
+					</Link>
 				</h3>
 				<p className='post-content'>{content}</p>
 			</div>
