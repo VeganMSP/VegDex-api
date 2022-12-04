@@ -14,7 +14,6 @@ class NewLink extends Component {
     }
 
     toggleLinkForm = () => {
-        console.log(this);
         this.setState(prevState => ({
             newLinkModal: !prevState.newLinkModal
         }));
@@ -67,7 +66,7 @@ class NewLink extends Component {
         return (
             <>
                 <Button id="link_form_toggle" type="primary" onClick={this.toggleLinkForm}>
-                    Create New + ({this.state.newLinkModal.toString()})
+                    Create New +
                 </Button>
 
                 <Modal

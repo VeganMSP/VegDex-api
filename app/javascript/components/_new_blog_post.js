@@ -22,7 +22,6 @@ class NewBlogPost extends Component {
 		this.setState(prevState => ({
 			modal: !prevState.modal
 		}));
-		console.log(this.state.modal);
 	}
 
 	handleChange = (e) => {
@@ -58,7 +57,7 @@ class NewBlogPost extends Component {
 		return (
 			<>
 				<Button type="primary" onClick={this.toggle}>
-					Create New + ({this.state.modal.toString()})
+					Create New +
 				</Button>
 
 				<Modal
