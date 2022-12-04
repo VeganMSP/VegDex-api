@@ -39,11 +39,11 @@ class SiteBio extends Component {
 		return (
 			<div>
 				<p className="my-0">
-					Built by <a target="_blank" rel="noopener" href="https://jrgnsn.net">Matthew Jorgensen</a>.
+					Built by <a target="_blank" rel="noreferrer" href="https://jrgnsn.net">Matthew Jorgensen</a>.
 				</p>
 				<p className="my-0">
-					Inspired by <a target="_blank" rel="noopener"
-					               href="https://veganmilwaukee.com/">https://veganmilwaukee.com</a>.
+					Inspired by <a target="_blank" rel="noreferrer"
+                         href="https://veganmilwaukee.com/">https://veganmilwaukee.com</a>.
 				</p>
 			</div>
 		)
