@@ -2,7 +2,19 @@
 
 class Api::V1::BlogPostsController < Api::BaseController
   def index
+    if params[:slug]
+      show
+      return
+    end
     render json: BlogPost.all, include: :blog_post_category
+  end
+
+  def show
+    if params[:slug]
+      post = BlogPost.find_by slug: params[:slug]
+      Rails.logger.info json: post
+      render json: post
+    end
   end
 
   def create

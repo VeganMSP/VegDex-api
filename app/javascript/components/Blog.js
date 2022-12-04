@@ -57,10 +57,6 @@ export class Blog extends Component {
 				<div>
 					{blog_posts}
 				</div>
-
-				<Routes>
-					<Route path={'/blog/:year/:month/:day/:slug'} element={<SingleBlogPost post={blog_posts}/>}/>
-				</Routes>
 			</>
 		);
 	}
