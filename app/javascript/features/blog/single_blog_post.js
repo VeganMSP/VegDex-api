@@ -25,7 +25,7 @@ class SingleBlogPost extends Component {
 
 	static renderBlogPost(blog_post) {
 		const {title, content, created_at} = blog_post
-		console.log(blog_post);
+
 		return (
 			<div className='post-stub'>
 				<h3 className='post-title'>
