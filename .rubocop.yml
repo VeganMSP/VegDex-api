@@ -6,11 +6,10 @@ AllCops:
   Exclude:
     - node_modules/**/*
     - vendor/bundle/**/*
+    - 'db/schema.rb'
 
 Metrics/BlockLength:
   Max: 55
-  Exclude:
-    - 'db/schema.rb'
 
 Metrics/MethodLength:
   CountComments: false
