@@ -112,3 +112,19 @@ class FarmersMarket extends Component {
 		);
 	}
 }
+
+class VeganCompany extends Component {
+	static propTypes = {
+		company: PropTypes.object
+	}
+
+	render() {
+		const {name, website, address, description} = this.props.company;
+
+		return (
+			<li>
+				<a href={website}>{name}</a> - {address.name} - {description}
+			</li>
+		);
+	}
+}
