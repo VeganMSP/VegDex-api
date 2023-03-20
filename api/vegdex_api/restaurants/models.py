@@ -1,12 +1,12 @@
 from django.db import models
 from django.utils.text import slugify
 
-from vegdex_api.generic.models import CustomModel, City
+from vegdex_api.common.models import CustomModel, City
 
 
 class Restaurant(CustomModel):
     name = models.CharField(max_length=200)
-    location = models.ForeignKey(City, on_delete=models.CASCADE)
+    location = models.ForeignKey(City, related_name='restaurants', on_delete=models.CASCADE)
     date_created = models.DateTimeField('date_published', auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(

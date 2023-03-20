@@ -9,7 +9,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('generic', '__first__'),
+        ('common', '__first__'),
     ]
 
     operations = [
@@ -24,7 +24,7 @@ class Migration(migrations.Migration):
                 ('website', models.CharField(blank=True, max_length=2000)),
                 ('description', models.TextField(blank=True)),
                 ('all_vegan', models.BooleanField(default=False)),
-                ('location', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='generic.city')),
+                ('location', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='common.city')),
             ],
             options={
                 'abstract': False,

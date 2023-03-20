@@ -94,7 +94,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'rest_framework',
 
-    'vegdex_api.generic',
+    'vegdex_api.common',
     'vegdex_api.restaurants',
 ]
 
