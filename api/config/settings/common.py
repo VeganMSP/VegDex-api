@@ -96,6 +96,7 @@ INSTALLED_APPS = [
 
     'vegdex_api.common',
     'vegdex_api.restaurants',
+    'vegdex_api.shopping',
 ]
 
 MIDDLEWARE = [

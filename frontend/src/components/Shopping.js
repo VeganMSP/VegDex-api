@@ -85,13 +85,13 @@ export class Shopping extends Component {
 	}
 
 	async getFarmersMarkets() {
-		const response = await fetch('api/v1/farmers_markets');
+		const response = await fetch('api/v1/shopping/farmers-markets');
 		const data = await response.json();
 		this.setState({farmers_markets: data, loading_fm: false});
 	}
 
 	async getVeganCompanies() {
-		const response = await fetch('api/v1/vegan_companies');
+		const response = await fetch('api/v1/shopping/vegan-companies');
 		const data = await response.json();
 		this.setState({vegan_companies: data, loading_vc: false});
 	}
@@ -119,11 +119,11 @@ class VeganCompany extends Component {
 	}
 
 	render() {
-		const {name, website, address, description} = this.props.company;
+		const {name, website, description} = this.props.company;
 
 		return (
 			<li>
-				<a href={website}>{name}</a> - {address.name} - {description}
+				<a href={website}>{name}</a> - {description}
 			</li>
 		);
 	}
