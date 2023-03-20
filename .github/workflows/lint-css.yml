@@ -4,25 +4,21 @@ on:
     branches-ignore:
       - 'dependabot/**'
     paths:
-      - 'package.json'
-      - 'yarn.lock'
-      - '.prettier*'
-      - 'stylelint.config.js'
-      - '**/*.css'
-      - '**/*.scss'
+      - 'frontend/**/*.css'
+      - 'frontend/**/*.scss'
       - '.github/workflows/lint-css.yml'
       - '.github/stylelint-matcher.json'
 
   pull_request:
     paths:
-      - 'package.json'
-      - 'yarn.lock'
-      - '.prettier*'
-      - 'stylelint.config.js'
-      - '**/*.css'
-      - '**/*.scss'
+      - 'frontend/**/*.css'
+      - 'frontend/**/*.scss'
       - '.github/workflows/lint-css.yml'
       - '.github/stylelint-matcher.json'
+
+defaults:
+  run:
+    working-directory: frontend
 
 jobs:
   lint:
@@ -37,6 +33,7 @@ jobs:
         with:
           node-version: 16.x
           cache: yarn
+          cache-dependency-path: frontend/yarn.lock
 
       - name: Install all yarn packages
         run: yarn --frozen-lockfile
