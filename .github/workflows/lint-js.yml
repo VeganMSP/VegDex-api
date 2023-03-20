@@ -4,21 +4,17 @@ on:
     branches-ignore:
       - 'dependabot/**'
     paths:
-      - 'package.json'
-      - 'yarn.lock'
-      - '.prettier*'
-      - '.eslint*'
-      - '**/*.js'
+      - 'frontend/**/*.js'
       - '.github/workflows/lint-js.yml'
 
   pull_request:
     paths:
-      - 'package.json'
-      - 'yarn.lock'
-      - '.prettier*'
-      - '.eslint*'
-      - '**/*.js'
+      - 'frontend/**/*.js'
       - '.github/workflows/lint-js.yml'
+
+defaults:
+  run:
+    working-directory: frontend
 
 jobs:
   lint:
@@ -33,6 +29,7 @@ jobs:
         with:
           node-version: 16.x
           cache: yarn
+          cache-dependency-path: frontend/yarn.lock
 
       - name: Install all yarn packages
         run: yarn --frozen-lockfile

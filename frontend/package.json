@@ -24,7 +24,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "test:lint:js": "eslint --ext=js . --cache",
+    "test:lint:sass": "stylelint \"**/*.{css,scss}\""
   },
   "proxy": "http://localhost:8000",
   "eslintConfig": {
@@ -44,5 +46,13 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "eslint": "^8.36.0",
+    "eslint-plugin-import": "^2.27.5",
+    "eslint-plugin-promise": "^6.1.1",
+    "eslint-plugin-react": "^7.32.2",
+    "stylelint": "^15.3.0",
+    "stylelint-config-standard-scss": "^7.0.1"
   }
 }
