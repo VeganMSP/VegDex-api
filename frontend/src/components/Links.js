@@ -45,8 +45,9 @@ export class Links extends Component {
 	}
 
 	async populateLinksByCategory() {
-		const response = await fetch('api/v1/links_by_category');
+		const response = await fetch('api/v1/links-by-category');
 		const data = await response.json();
+
 		this.setState({links_by_category: data, loading: false});
 	}
 }

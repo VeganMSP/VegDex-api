@@ -95,6 +95,7 @@ INSTALLED_APPS = [
     'rest_framework',
 
     'vegdex_api.common',
+    'vegdex_api.links',
     'vegdex_api.restaurants',
     'vegdex_api.shopping',
 ]

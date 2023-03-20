@@ -143,7 +143,7 @@ class NewLink extends Component {
   }
 
   async populateLinkCategories() {
-    const response = await fetch('api/v1/link_categories');
+    const response = await fetch('api/v1/link-categories');
     const data = await response.json();
     return data;
   }
