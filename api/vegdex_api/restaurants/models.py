@@ -6,7 +6,10 @@ from vegdex_api.common.models import CustomModel, City
 
 class Restaurant(CustomModel):
     name = models.CharField(max_length=200)
-    location = models.ForeignKey(City, related_name='restaurants', on_delete=models.CASCADE)
+    location = models.ForeignKey(
+        City, related_name='restaurants',
+        on_delete=models.CASCADE
+    )
     date_created = models.DateTimeField('date_published', auto_now_add=True)
     date_updated = models.DateTimeField(auto_now=True)
     slug = models.SlugField(
@@ -25,4 +28,3 @@ class Restaurant(CustomModel):
         value = self.name
         self.slug = slugify(value, allow_unicode=True)
         super().save(*args, **kwargs)
-

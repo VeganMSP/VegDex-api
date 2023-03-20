@@ -85,7 +85,7 @@ export class Link extends Component {
 		return (
 			<li>
 				<a
-					href={website} target={'_blank'}>{name}</a> - {description}
+					href={website} target={'_blank'} rel="noreferrer">{name}</a> - {description}
 			</li>
 		);
 	}

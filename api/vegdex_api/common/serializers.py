@@ -15,10 +15,12 @@ class CityWithRestaurantsSerializer(CitySerializer):
 
     class Meta:
         model = models.City
-        fields = ("id", "name", "slug", "date_created", "date_updated", "restaurants")
+        fields = ("id", "name", "slug",
+                  "date_created", "date_updated", "restaurants")
 
 
 class AddressSerializer(serializers.ModelSerializer):
     class Meta:
         model = models.Address
-        fields = ("id", "name", "street1", "street2", "state", "zip_code", "city")
+        fields = ("id", "name", "street1", "street2",
+                  "state", "zip_code", "city")

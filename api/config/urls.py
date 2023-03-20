@@ -32,7 +32,8 @@ if settings.DEBUG:
                        re_path(r"^403/$", default_views.permission_denied),
                        re_path(r"^404/$", default_views.page_not_found),
                        re_path(r"^500/$", default_views.server_error),
-                   ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+                   ] + static(settings.MEDIA_URL,
+                              document_root=settings.MEDIA_ROOT)
 
     if "debug_toolbar" in settings.INSTALLED_APPS:
         import debug_toolbar
