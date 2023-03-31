@@ -1,81 +1,67 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using Serilog.Events;
-using VegDex.Core.Configuration;
 using VegDex.Infrastructure.Context;
-Log.Logger = new LoggerConfiguration()
-    .MinimumLevel.Debug()
-    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
-    .MinimumLevel.Override("System", LogEventLevel.Error)
-    .WriteTo.Console(outputTemplate:
-        "{Timestamp:yyyy-MM-dd HH:mm:ss.ff zzz} [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}"
-    )
-    .CreateLogger();
 
-var builder = WebApplication.CreateBuilder(args);
-builder.Host.UseSerilog();
+namespace VegDex.Web.MVC;
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-
-builder.Services.Configure<VegDexSettings>(builder.Configuration);
-
-// Set up database
-string connectionString = builder.Configuration.GetConnectionString("Default") ??
-                          throw new InvalidOperationException("No default connection string found");
-builder.Services.AddDbContext<VegDexContext>(c =>
-    c.UseSqlite(connectionString)
-);
-
-var app = builder.Build();
-
-try
+public class Program
 {
-    Log.Information("Attempting to apply migrations");
-    using var scope = app.Services.CreateScope();
-    using var context = scope.ServiceProvider.GetRequiredService<VegDexContext>();
-    context.Database.MigrateAsync();
-}
-catch (Exception ex)
-{
-    Log.Fatal(ex, "Unable to apply migrations");
-}
-
-// Configure the HTTP request pipeline.
-if (!app.Environment.IsDevelopment())
-{
-    app.UseExceptionHandler("/Home/Error");
-}
-
-if (builder.Configuration.GetValue<bool>("HttpRedirection"))
-{
-    app.UseHttpsRedirection();
-    if (!app.Environment.IsDevelopment())
+    private static IConfiguration Configuration { get; } = new ConfigurationBuilder()
+        .AddJsonFile("appsettings.json", false, true)
+        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json",
+            false, true)
+        .AddEnvironmentVariables()
+        .Build();
+    private static IHostBuilder CreateHostBuilder(string[] args)
     {
-        // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
-        app.UseHsts();
+        return Host.CreateDefaultBuilder(args)
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseContentRoot(Directory.GetCurrentDirectory());
+                webBuilder.UseConfiguration(Configuration);
+                webBuilder.UseIISIntegration();
+                webBuilder.UseStartup<Startup>();
+            })
+            .UseSerilog();
     }
-}
-app.UseStaticFiles();
+    public static void Main(string[] args)
+    {
+        Log.Logger = new LoggerConfiguration()
+            .MinimumLevel.Debug()
+            .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+            .MinimumLevel.Override("System", LogEventLevel.Error)
+            .WriteTo.Console(outputTemplate:
+                "{Timestamp:yyyy-MM-dd HH:mm:ss.ff zzz} [{Level:u3}] [{SourceContext}] {Message:lj}{NewLine}{Exception}"
+            )
+            .CreateLogger();
 
-app.UseRouting();
+        IHost host = CreateHostBuilder(args)
+            .Build();
 
-app.UseAuthorization();
-
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Home}/{action=Index}/{id?}");
-
-try
-{
-    Log.Information("Starting application");
-    app.Run();
-}
-catch (Exception ex)
-{
-    Log.Fatal(ex, "Application terminated unexpectedly");
-}
-finally
-{
-    Log.CloseAndFlush();
+        try
+        {
+            Log.Information("Attempting to apply migrations");
+            using var scope = host.Services.CreateScope();
+            using var context = scope.ServiceProvider.GetRequiredService<VegDexContext>();
+            context.Database.MigrateAsync();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Unable to apply migrations");
+        }
+        try
+        {
+            Log.Information("Starting application");
+            host.Run();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Application terminated unexpectedly");
+        }
+        finally
+        {
+            Log.CloseAndFlush();
+        }
+    }
 }
