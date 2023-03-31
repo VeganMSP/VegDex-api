@@ -1,3 +1,4 @@
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection;
 using VegDex.Application.Interfaces;
@@ -45,6 +46,7 @@ public class Startup
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
+        app.UseAuthentication();
         app.UseSession();
         app.UseEndpoints(endpoints =>
         {
@@ -96,6 +98,18 @@ public class Startup
         
         services.AddSingleton(_configuration);
 
+        services.AddAuthentication(
+                CookieAuthenticationDefaults.AuthenticationScheme)
+            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
+            {
+                options.LoginPath = "/Account/Login";
+                options.LogoutPath = "/Account/Logout";
+            });
+        services.AddAuthentication(options =>
+        {
+            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme
+        });
+        // services.AddTransient(m => new UserManager())
         services.AddHttpContextAccessor();
         services.AddControllersWithViews();
         services.AddSession();
