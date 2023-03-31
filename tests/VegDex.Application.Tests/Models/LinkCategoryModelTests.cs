@@ -7,7 +7,7 @@ public class LinkCategoryModelTests
     public void LinkCategory_HasProperties()
     {
         // Arrange
-        var obj = new LinkCategory();
+        var obj = new LinkCategoryModel();
 
         // Assert
         Assert.AreEqual(6, obj.PropertyCount());
@@ -22,7 +22,7 @@ public class LinkCategoryModelTests
     public void LinkCategory_ToString_Name()
     {
         // Arrange
-        var obj = new LinkCategory{Name = "Other Information Sites"};
+        var obj = new LinkCategoryModel{Name = "Other Information Sites"};
         var expected = "Other Information Sites";
 
         // Assert

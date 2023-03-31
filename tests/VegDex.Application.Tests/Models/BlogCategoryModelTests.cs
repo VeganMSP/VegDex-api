@@ -7,7 +7,7 @@ public class BlogCategoryModelTests
     public void BlogCategory_HasProperties()
     {
         // Arrange
-        var obj = new BlogCategory();
+        var obj = new BlogCategoryModel();
 
         // Assert
         Assert.AreEqual(5, obj.PropertyCount());
@@ -21,7 +21,7 @@ public class BlogCategoryModelTests
     public void BlogCategory_ToString_Name()
     {
         // Arrange
-        var obj = new BlogCategory{Name = "Announcements"};
+        var obj = new BlogCategoryModel{Name = "Announcements"};
         var expected = "Announcements";
 
         // Assert

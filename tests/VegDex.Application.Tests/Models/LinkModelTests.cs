@@ -6,17 +6,17 @@ public class LinkModelTests
     [TestInitialize]
     public void Init()
     {
-        _linkCategory = new LinkCategory
+        _linkCategory = new LinkCategoryModel
         {
             Name = "Local Organizations"
         };
     }
-    private static LinkCategory _linkCategory;
+    private static LinkCategoryModel _linkCategory;
     [TestMethod]
     public void Link_HasProperties()
     {
         // Arrange
-        var obj = new Link();
+        var obj = new LinkModel();
 
         // Assert
         Assert.AreEqual(8, obj.PropertyCount());
@@ -33,7 +33,7 @@ public class LinkModelTests
     public void Link_ToString_Name()
     {
         // Arrange
-        var obj = new Link{Name = "Animal Rights Coalition", Category = _linkCategory};
+        var obj = new LinkModel{Name = "Animal Rights Coalition", Category = _linkCategory};
         var expected = "Animal Rights Coalition";
 
         // Assert

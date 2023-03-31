@@ -6,17 +6,17 @@ public class BlogPostModelTests
     [TestInitialize]
     public void Init()
     {
-        _blogCategory = new BlogCategory
+        _blogCategory = new BlogCategoryModel
         {
             Name = "Announcements"
         };
     }
-    private static BlogCategory? _blogCategory;
+    private static BlogCategoryModel? _blogCategory;
     [TestMethod]
     public void BlogPost_HasProperties()
     {
         // Arrange
-        var obj = new BlogPost();
+        var obj = new BlogPostModel();
 
         // Assert
         Assert.AreEqual(8, obj.PropertyCount());

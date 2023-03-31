@@ -6,20 +6,20 @@ public class AddressModelTests
     [TestInitialize]
     public void Init()
     {
-        _address = new Address
+        _address = new AddressModel
         {
-            City = new City
+            City = new CityModel
             {
                 Name = "Saint Paul"
             }
         };
     }
-    private static Address? _address;
+    private static AddressModel? _address;
     [TestMethod]
     public void Address_HasProperties()
     {
         // Arrange
-        var obj = new Address();
+        var obj = new AddressModel();
 
         // Assert
         Assert.AreEqual(9, obj.PropertyCount());

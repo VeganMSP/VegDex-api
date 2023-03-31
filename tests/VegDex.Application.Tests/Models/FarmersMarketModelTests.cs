@@ -6,20 +6,20 @@ public class FarmersMarketModelTests
     [TestInitialize]
     public void Init()
     {
-        _address = new Address
+        _address = new AddressModel
         {
-            City = new City
+            City = new CityModel
             {
                 Name = "Hopkins"
             }
         };
     }
-    private static Address _address;
+    private static AddressModel _address;
     [TestMethod]
     public void FarmersMarket_HasProperties()
     {
         // Arrange
-        var obj = new FarmersMarket();
+        var obj = new FarmersMarketModel();
 
         // Assert
         Assert.AreEqual(9, obj.PropertyCount());
@@ -37,7 +37,7 @@ public class FarmersMarketModelTests
     public void FarmersMarket_ToString_Name()
     {
         // Arrange
-        var obj = new FarmersMarket
+        var obj = new FarmersMarketModel
         {
             Name = "Hopkins Winter Farmers Market",
             Address = _address

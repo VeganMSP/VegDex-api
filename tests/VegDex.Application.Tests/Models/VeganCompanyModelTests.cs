@@ -7,7 +7,7 @@ public class VeganCompanyModelTests
     public void VeganCompany_HasProperties()
     {
         // Arrange
-        var obj = new VeganCompany();
+        var obj = new VeganCompanyModel();
 
         // Assert
         Assert.AreEqual(7, obj.PropertyCount());
@@ -23,7 +23,7 @@ public class VeganCompanyModelTests
     public void VeganCompany_ToString_Name()
     {
         // Arrange
-        var obj = new VeganCompany{Name = "PLNT BSD"};
+        var obj = new VeganCompanyModel{Name = "PLNT BSD"};
         var expected = "PLNT BSD";
 
         // Assert

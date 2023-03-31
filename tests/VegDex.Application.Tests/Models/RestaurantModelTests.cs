@@ -6,17 +6,17 @@ public class RestaurantModelTests
     [TestInitialize]
     public void Init()
     {
-        _city = new City
+        _city = new CityModel
         {
             Name = "Vadnais Heights"
         };
     }
-    private static City _city;
+    private static CityModel _city;
     [TestMethod]
     public void Restaurant_HasProperties()
     {
         // Arrange
-        var obj = new Restaurant();
+        var obj = new RestaurantModel();
 
         // Assert
         Assert.AreEqual(9, obj.PropertyCount());
@@ -34,7 +34,7 @@ public class RestaurantModelTests
     public void Restaurant_ToString_Name()
     {
         // Arrange
-        var obj = new Restaurant
+        var obj = new RestaurantModel
         {
             Name = "Piggy Bank",
             Location = _city
