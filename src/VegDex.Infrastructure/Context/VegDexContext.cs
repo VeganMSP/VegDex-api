@@ -9,14 +9,14 @@ public class VegDexContext : DbContext
     /// <inheritdoc />
     override protected void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Address>().ToTable("Address");
-        modelBuilder.Entity<City>().ToTable("City");
-        modelBuilder.Entity<FarmersMarket>().ToTable("FarmersMarket");
-        modelBuilder.Entity<LinkCategory>().ToTable("LinkCategory");
-        modelBuilder.Entity<Link>().ToTable("Link");
-        modelBuilder.Entity<Restaurant>().ToTable("Restaurant");
-        modelBuilder.Entity<VeganCompany>().ToTable("VeganCompany");
-        modelBuilder.Entity<BlogPost>().ToTable("BlogPost");
-        modelBuilder.Entity<BlogCategory>().ToTable("BlogCategory");
+        modelBuilder.Entity<AddressModel>().ToTable("Address");
+        modelBuilder.Entity<CityModel>().ToTable("City");
+        modelBuilder.Entity<FarmersMarketModel>().ToTable("FarmersMarket");
+        modelBuilder.Entity<LinkCategoryModel>().ToTable("LinkCategory");
+        modelBuilder.Entity<LinkModel>().ToTable("Link");
+        modelBuilder.Entity<RestaurantModel>().ToTable("Restaurant");
+        modelBuilder.Entity<VeganCompanyModel>().ToTable("VeganCompany");
+        modelBuilder.Entity<BlogPostModel>().ToTable("BlogPost");
+        modelBuilder.Entity<BlogCategoryModel>().ToTable("BlogCategory");
     }
 }

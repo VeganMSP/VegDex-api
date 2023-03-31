@@ -3,9 +3,9 @@ using VegDex.Application.Models.Base;
 
 namespace VegDex.Application.Models;
 
-public class Address : BaseModel
+public class AddressModel : BaseModel
 {
-    [Required] public City City { get; set; }
+    [Required] public CityModel City { get; set; }
     public string Name { get; set; }
     public string State { get; set; }
     public string Street1 { get; set; }

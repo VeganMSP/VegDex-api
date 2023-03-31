@@ -3,9 +3,9 @@ using VegDex.Application.Models.Base;
 
 namespace VegDex.Application.Models;
 
-public class FarmersMarket : BaseModel
+public class FarmersMarketModel : BaseModel
 {
-    [Required] public Address Address { get; set; }
+    [Required] public AddressModel Address { get; set; }
     public string Hours { get; set; }
     [Required] public string Name { get; set; }
     public string Slug { get; set; }

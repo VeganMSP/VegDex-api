@@ -3,7 +3,7 @@ using VegDex.Application.Models.Base;
 
 namespace VegDex.Application.Models;
 
-public class VeganCompany : BaseModel
+public class VeganCompanyModel : BaseModel
 {
     public string Description { get; set; }
     [Required] public string Name { get; set; }
