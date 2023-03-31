@@ -1,6 +1,5 @@
 using Microsoft.EntityFrameworkCore;
 using VegDex.Application.Models;
-using VegDex.Application.Models.Blog;
 
 namespace VegDex.Infrastructure.Context;
 
