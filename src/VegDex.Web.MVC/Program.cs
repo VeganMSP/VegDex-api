@@ -41,9 +41,20 @@ public class Program
 
         try
         {
-            Log.Information("Attempting to apply migrations");
+            Log.Information("Attempting to apply app db migrations");
             using var scope = host.Services.CreateScope();
             using var context = scope.ServiceProvider.GetRequiredService<VegDexContext>();
+            context.Database.MigrateAsync();
+        }
+        catch (Exception ex)
+        {
+            Log.Fatal(ex, "Unable to apply migrations");
+        }
+        try
+        {
+            Log.Information("Attempting to apply key db migrations");
+            using var scope = host.Services.CreateScope();
+            using var context = scope.ServiceProvider.GetRequiredService<AppKeysContext>();
             context.Database.MigrateAsync();
         }
         catch (Exception ex)
