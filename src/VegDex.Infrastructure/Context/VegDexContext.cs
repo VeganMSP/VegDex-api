@@ -5,7 +5,7 @@ namespace VegDex.Infrastructure.Context;
 
 public class VegDexContext : DbContext
 {
-    public VegDexContext(DbContextOptions options) : base(options) { }
+    public VegDexContext(DbContextOptions<VegDexContext> options) : base(options) { }
     /// <inheritdoc />
     override protected void OnModelCreating(ModelBuilder modelBuilder)
     {
