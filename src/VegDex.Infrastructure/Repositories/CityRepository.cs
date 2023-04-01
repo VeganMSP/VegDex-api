@@ -1,8 +1,20 @@
+using VegDex.Core.Entities;
 using VegDex.Core.Repositories;
+using VegDex.Core.Specifications;
+using VegDex.Infrastructure.Context;
+using VegDex.Infrastructure.Repositories.Base;
 
 namespace VegDex.Infrastructure.Repositories;
 
-public class CityRepository : ICityRepository
+public class CityRepository : Repository<City>, ICityRepository
 {
-    
+    /// <inheritdoc />
+    public CityRepository(VegDexContext dbContext) : base(dbContext) { }
+    /// <inheritdoc />
+    public async Task<IEnumerable<City>> GetCitiesWithRestaurants()
+    {
+        var spec = new CitiesWithRestaurantsSpecification();
+        var cities = await GetAsync(spec);
+        return cities;
+    }
 }

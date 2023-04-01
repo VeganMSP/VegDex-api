@@ -1,4 +1,4 @@
-@model IEnumerable<VegDex.Web.MVC.ViewModels.RestaurantViewModel>
+@model VegDex.Web.MVC.ViewModels.RestaurantViewModel
 @{
   ViewData["Title"] = "Restaurants";
 }
@@ -6,16 +6,23 @@
 <div class="text-center">
   <h1 class="display-4">Restaurants</h1>
 </div>
-@if (!Model.Any())
+@if (!Model.Cities.Any())
 {
   <p>There are no restaurants in the database!</p>
 }
 else
 {
   <ul>
-    @foreach (var item in Model)
+    @foreach (var city in Model.Cities)
     {
-      <li>@Html.DisplayFor(modelItem => item.Name)</li>
+      <h2>@city.Name</h2>
+      @if (city.Restaurants.Any())
+      {
+        @foreach (var restaurant in city.Restaurants)
+        {
+          @restaurant.Name
+        }
+      }
     }
   </ul>
 }
