@@ -1,3 +1,4 @@
+using System.Collections;
 using System.Reflection;
 using AutoMapper;
 using Serilog;
@@ -33,6 +34,13 @@ public class RestaurantPageService : IRestaurantsPageService
         var listByName = await _restaurantAppService.GetRestaurantByName(restaurantName);
         var mappedByName = _mapper.Map<IEnumerable<RestaurantViewModel>>(listByName);
         return mappedByName;
+    }
+    /// <inheritdoc />
+    public async Task<IEnumerable<CityViewModel>> GetCitiesWithRestaurants()
+    {
+        var citiesWithRestaurants = await _cityAppService.GetCitiesWithRestaurants();
+        var mapped = _mapper.Map<IEnumerable<CityViewModel>>(citiesWithRestaurants);
+        return mapped;
     }
     /// <inheritdoc />
     public async Task<IEnumerable<RestaurantViewModel>> GetRestaurants() => await GetRestaurants(null!);
