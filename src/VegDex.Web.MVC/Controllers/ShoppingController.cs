@@ -16,9 +16,10 @@ public class ShoppingController : Controller
             shoppingPageService ?? throw new ArgumentNullException(nameof(shoppingPageService));
     }
     // GET
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        return View();
+        var viewModel = await _shoppingPageService.GetPageInformation();
+        return View(viewModel);
     }
 }

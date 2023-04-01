@@ -1,15 +1,48 @@
 @{
-  ViewData["Title"] = "Restaurants";
+  ViewData["Title"] = "Shopping";
 }
 @model VegDex.Web.MVC.ViewModels.ShoppingViewModel
+
+@{
+  var veganCompanies = Model.VeganCompanies;
+  var farmersMarkets = Model.FarmersMarkets;
+}
 
 <div class="text-center">
   <h1 class="display-4">Good Vegan Companies</h1>
 </div>
 <div>
-  
+  @if (!veganCompanies.Any())
+  {
+    <p>There are no vegan companies in the database!</p>
+  }
+  else
+  {
+    <ul>
+    @foreach (var company in veganCompanies)
+    {
+      <li>@Html.DisplayFor(modelItem => company.Name)</li>
+    }
+  </ul>
+  }
+</div>
+
+<div class="text-center">
+  <h1 class="display-4">Farmers Markets</h1>
 </div>
 
 <div>
-  <p>{{ Recent Posts }}</p>
+  @if (!farmersMarkets.Any())
+  {
+    <p>There are no farmers markets in the database!</p>
+  }
+  else
+  {
+    <ul>
+      @foreach (var market in farmersMarkets)
+      {
+        <li>@Html.DisplayFor(modelItem => market.Name)</li>
+      }
+    </ul>
+  }
 </div>
