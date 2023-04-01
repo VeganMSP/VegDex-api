@@ -10,7 +10,7 @@ on:
       - '.github/**'
       - '.idea/**'
   pull_request:
-    branches: [ master ]
+    branches: [ master, 'c#-rewrite' ]
     paths-ignore:
       - 'README.md'
       - '.gitignore'
