@@ -1,22 +1,30 @@
 @{
-  ViewData["Title"] = "Restaurants";
+  ViewData["Title"] = "Blog";
 }
+@model VegDex.Web.MVC.ViewModels.BlogViewModel;
 
 <div class="text-center">
   <h1 class="display-4">Blog</h1>
 </div>
 <div>
-  <p>
-    It’s easy being vegan in Minneapolis and St. Paul, but it can be hard to
-    know where to start, or where to look for information and answers. We
-    aim to fix that.
-  </p>
-  <p>
-    At VeganMSP.com you will find restaurant and food guides, shopping
-    guides, and other information to help you on your vegan journey.
-  </p>
-</div>
-
-<div>
-  <p>{{ Recent Posts }}</p>
+  @if (!Model.BlogPosts.Any())
+  {
+    <p>There are no blog posts in the database!</p>
+  }
+  else
+  {
+    <ul>
+      @foreach (var post in Model.BlogPosts)
+      {
+        <li>
+          <li>@post.Title</li>
+          <ul>
+            <li>Category: @post.Category.Name</li>
+            <li>Status: @post.Status</li>
+            <li>Content: @post.Content</li>
+          </ul>
+        </li>
+      }
+    </ul>
+  }
 </div>

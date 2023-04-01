@@ -2,6 +2,7 @@ using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using VegDex.Web.MVC.Interfaces;
+using VegDex.Web.MVC.ViewModels;
 using ILogger = Serilog.ILogger;
 
 namespace VegDex.Web.MVC.Controllers;
@@ -16,9 +17,14 @@ public class BlogController : Controller
             blogPageService ?? throw new ArgumentNullException(nameof(blogPageService));
     }
     // GET
-    public IActionResult Index()
+    public async Task<IActionResult> Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        return View();
+        var blogPosts = await _blogPageService.GetBlogPosts();
+        var viewModel = new BlogViewModel
+        {
+            BlogPosts = blogPosts
+        };
+        return View(viewModel);
     }
 }
