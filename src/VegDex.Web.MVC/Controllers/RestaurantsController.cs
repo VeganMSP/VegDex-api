@@ -20,7 +20,11 @@ public class RestaurantsController : Controller
     public async Task<IActionResult> Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        IEnumerable<RestaurantViewModel> restaurantList = await _restaurantsPageService.GetRestaurants();
-        return View(restaurantList);
+        IEnumerable<CityViewModel> citiesWithRestaurants = await _restaurantsPageService.GetCitiesWithRestaurants();
+        var viewModel = new RestaurantViewModel
+        {
+            Cities = citiesWithRestaurants
+        };
+        return View(viewModel);
     }
 }

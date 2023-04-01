@@ -9,4 +9,5 @@ public interface ICityService
     Task<CityModel> Create(CityModel city);
     Task Update(CityModel city);
     Task Delete(CityModel city);
+    Task<IEnumerable<CityModel>> GetCitiesWithRestaurants();
 }

@@ -10,6 +10,7 @@ public class VegDexProfile : Profile
     {
         CreateMap<RestaurantModel, RestaurantViewModel>();
         CreateMap<LinkModel, LinkViewModel>();
+        CreateMap<CityModel, CityViewModel>();
     }
     
 }
