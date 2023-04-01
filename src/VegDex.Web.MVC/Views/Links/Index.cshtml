@@ -1,22 +1,29 @@
 @{
-  ViewData["Title"] = "Restaurants";
+  ViewData["Title"] = "Groups & Links";
 }
+@model IEnumerable<VegDex.Web.MVC.ViewModels.LinkViewModel>;
 
 <div class="text-center">
   <h1 class="display-4">Groups & Links</h1>
 </div>
 <div>
-  <p>
-    It’s easy being vegan in Minneapolis and St. Paul, but it can be hard to
-    know where to start, or where to look for information and answers. We
-    aim to fix that.
-  </p>
-  <p>
-    At VeganMSP.com you will find restaurant and food guides, shopping
-    guides, and other information to help you on your vegan journey.
-  </p>
-</div>
-
-<div>
-  <p>{{ Recent Posts }}</p>
+  @if (!Model.Any())
+  {
+    <p>There are no links in the database!</p>
+  }
+  else
+  {
+    <ul>
+      @foreach (var link in Model)
+      {
+        <li>
+          <a href="@link.Website" target="_blank">@link.Name</a>
+          @if (!string.IsNullOrWhiteSpace(link.Description))
+          {
+            <text> - @link.Description</text>
+          }
+        </li>
+      }
+    </ul>
+  }
 </div>
