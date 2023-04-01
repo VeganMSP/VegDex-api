@@ -20,7 +20,11 @@ public class LinksController : Controller
     public async Task<IActionResult> Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        var linkList = await _linksPageService.GetLinks();
-        return View(linkList);
+        var linkCategoriesWithLinks = await _linksPageService.GetLinkCategoriesWithLinks();
+        var viewModel = new LinkViewModel
+        {
+            LinkCategories = linkCategoriesWithLinks
+        };
+        return View(viewModel);
     }
 }

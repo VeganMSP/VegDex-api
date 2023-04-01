@@ -10,13 +10,14 @@ public class LinkCategoryModelTests
         var obj = new LinkCategoryModel();
 
         // Assert
-        Assert.AreEqual(6, obj.PropertyCount());
+        Assert.AreEqual(7, obj.PropertyCount());
         Assert.IsTrue(obj.HasProperty("DateCreated"));
         Assert.IsTrue(obj.HasProperty("DateUpdated"));
         Assert.IsTrue(obj.HasProperty("Description"));
         Assert.IsTrue(obj.HasProperty("Id"));
         Assert.IsTrue(obj.HasProperty("Name"));
         Assert.IsTrue(obj.HasProperty("Slug"));
+        Assert.IsTrue(obj.HasProperty("Links"));
     }
     [TestMethod]
     public void LinkCategory_ToString_Name()
