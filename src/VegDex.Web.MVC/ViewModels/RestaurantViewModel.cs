@@ -1,6 +1,6 @@
-using VegDex.Web.MVC.Models.Base;
+using VegDex.Web.MVC.ViewModels.Base;
 
-namespace VegDex.Web.MVC.Models;
+namespace VegDex.Web.MVC.ViewModels;
 
 public class RestaurantViewModel : BaseViewModel
 {

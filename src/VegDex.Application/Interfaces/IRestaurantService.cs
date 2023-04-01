@@ -10,5 +10,5 @@ public interface IRestaurantService
     Task<RestaurantModel> Create(RestaurantModel restaurant);
     Task Update(RestaurantModel restaurant);
     Task Delete(RestaurantModel restaurant);
-    Task<RestaurantModel> GetRestaurantByName(string restaurantName);
+    Task<RestaurantModel> GetRestaurantByName(string? restaurantName);
 }

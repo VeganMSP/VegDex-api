@@ -1,4 +1,4 @@
-namespace VegDex.Web.MVC.Models.Base;
+namespace VegDex.Web.MVC.ViewModels.Base;
 
 public class BaseViewModel
 {

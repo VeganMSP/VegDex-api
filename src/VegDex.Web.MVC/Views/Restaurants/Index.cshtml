@@ -1,0 +1,25 @@
+@model IEnumerable<VegDex.Web.MVC.ViewModels.RestaurantViewModel>
+@{
+  ViewData["Title"] = "Restaurants";
+}
+
+<div class="text-center">
+  <h1 class="display-4">Restaurants</h1>
+</div>
+@if (!Model.Any())
+{
+  <p>There are no restaurants in the database!</p>
+}
+else
+{
+  <ul>
+    @foreach (var item in Model)
+    {
+      <li>@Html.DisplayFor(modelItem => item.Name)</li>
+    }
+  </ul>
+}
+
+<div>
+  <p>{{ Recent Posts }}</p>
+</div>

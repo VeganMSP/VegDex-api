@@ -11,6 +11,10 @@ public class RestaurantService : IRestaurantService
 {
     private static readonly ILogger _logger = Log.ForContext<RestaurantService>();
     private readonly IRestaurantRepository _restaurantRepository;
+    public RestaurantService(IRestaurantRepository restaurantRepository)
+    {
+        _restaurantRepository = restaurantRepository;
+    }
     /// <inheritdoc />
     public async Task<IEnumerable<RestaurantModel>> GetRestaurantList()
     {
@@ -69,7 +73,7 @@ public class RestaurantService : IRestaurantService
         _logger.Information($"Entity successfully deleted");
     }
     /// <inheritdoc />
-    public async Task<RestaurantModel> GetRestaurantByName(string restaurantName)
+    public async Task<RestaurantModel> GetRestaurantByName(string? restaurantName)
     {
         var restaurantList = await _restaurantRepository.GetRestaurantByNameAsync(restaurantName);
         var mapped = ObjectMapper.Mapper.Map<RestaurantModel>(restaurantList);
