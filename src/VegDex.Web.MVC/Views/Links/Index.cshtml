@@ -1,29 +1,33 @@
 @{
   ViewData["Title"] = "Groups & Links";
 }
-@model IEnumerable<VegDex.Web.MVC.ViewModels.LinkViewModel>;
+@model LinkViewModel;
 
 <div class="text-center">
   <h1 class="display-4">Groups & Links</h1>
 </div>
 <div>
-  @if (!Model.Any())
+  @if (!Model.LinkCategories.Any())
   {
     <p>There are no links in the database!</p>
   }
   else
   {
-    <ul>
-      @foreach (var link in Model)
+    foreach (var category in Model.LinkCategories)
       {
-        <li>
-          <a href="@link.Website" target="_blank">@link.Name</a>
-          @if (!string.IsNullOrWhiteSpace(link.Description))
+        <h2 id="@category.Slug">@category.Name</h2>
+        <ul>
+          @foreach (var link in category.Links)
           {
-            <text> - @link.Description</text>
+            <li>
+              <a href="@link.Website" target="_blank">@link.Name</a>
+              @if (!string.IsNullOrWhiteSpace(link.Description))
+              {
+                <text> - @link.Description</text>
+              }
+            </li>
           }
-        </li>
+        </ul>
       }
-    </ul>
   }
 </div>

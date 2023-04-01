@@ -1,10 +1,19 @@
+using Serilog;
 using VegDex.Application.Interfaces;
+using VegDex.Application.Mapper;
 using VegDex.Application.Models;
+using VegDex.Core.Repositories;
 
 namespace VegDex.Application.Services;
 
 public class LinkCategoryService : ILinkCategoryService
 {
+    private static readonly ILogger _logger = Log.ForContext<LinkCategoryService>();
+    private ILinkCategoryRepository _linkCategoryRepository;
+    public LinkCategoryService(ILinkCategoryRepository linkCategoryRepository)
+    {
+        _linkCategoryRepository = linkCategoryRepository;
+    }
     /// <inheritdoc />
     public Task<IEnumerable<LinkCategoryModel>> GetLinkCategoryList() => throw new NotImplementedException();
     /// <inheritdoc />
@@ -15,4 +24,11 @@ public class LinkCategoryService : ILinkCategoryService
     public Task Update(LinkCategoryModel linkCategory) => throw new NotImplementedException();
     /// <inheritdoc />
     public Task Delete(LinkCategoryModel linkCategory) => throw new NotImplementedException();
+    /// <inheritdoc />
+    public async Task<IEnumerable<LinkCategoryModel>> GetLinkCategoriesWithLinks()
+    {
+        var linkCategoriesWithLinks = await _linkCategoryRepository.GetLinkCategoriesWithLinks();
+        var mapped = ObjectMapper.Mapper.Map<IEnumerable<LinkCategoryModel>>(linkCategoriesWithLinks);
+        return mapped;
+    }
 }
