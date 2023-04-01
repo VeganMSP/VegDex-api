@@ -2,7 +2,7 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using VegDex.Web.MVC.Models;
+using VegDex.Web.MVC.ViewModels;
 using ILogger = Serilog.ILogger;
 
 namespace VegDex.Web.MVC.Controllers;
