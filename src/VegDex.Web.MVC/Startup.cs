@@ -85,8 +85,8 @@ public class Startup
         // Web Layer
         services.AddAutoMapper(typeof(Startup));
         services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
+        services.AddScoped<IShoppingPageService, ShoppingPageService>();
         // services.AddScoped<ILinksPageService, LinksPageService>();
-        // services.AddScoped<IShoppingPageService, ShoppingPageService>();
         // services.AddScoped<IBlogPageService, BlogPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
