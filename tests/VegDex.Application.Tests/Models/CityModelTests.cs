@@ -10,12 +10,13 @@ public class CityModelTests
         var obj = new CityModel();
 
         // Assert
-        Assert.AreEqual(5, obj.PropertyCount());
+        Assert.AreEqual(6, obj.PropertyCount());
         Assert.IsTrue(obj.HasProperty("DateCreated"));
         Assert.IsTrue(obj.HasProperty("DateUpdated"));
         Assert.IsTrue(obj.HasProperty("Id"));
         Assert.IsTrue(obj.HasProperty("Name"));
         Assert.IsTrue(obj.HasProperty("Slug"));
+        Assert.IsTrue(obj.HasProperty("Restaurants"));
     }
     [TestMethod]
     public void City_ToString_Name()
