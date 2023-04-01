@@ -1,3 +1,4 @@
+using Serilog;
 using VegDex.Application.Interfaces;
 using VegDex.Application.Models;
 

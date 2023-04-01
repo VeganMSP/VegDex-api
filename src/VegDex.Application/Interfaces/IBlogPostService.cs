@@ -1,3 +1,4 @@
+using System.Collections;
 using VegDex.Application.Models;
 
 namespace VegDex.Application.Interfaces;
@@ -9,4 +10,5 @@ public interface IBlogPostService
     Task<BlogPostModel> Create(BlogPostModel blogPost);
     Task Update(BlogPostModel blogPost);
     Task Delete(BlogPostModel blogPost);
+    Task<IEnumerable<BlogPostModel>> GetBlogPosts();
 }
