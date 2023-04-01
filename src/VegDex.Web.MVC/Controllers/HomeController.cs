@@ -23,6 +23,7 @@ public class HomeController : Controller
         _logger.Information("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
         return View();
     }
+    [Route("About")]
     public IActionResult About()
     {
         _logger.Information("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
