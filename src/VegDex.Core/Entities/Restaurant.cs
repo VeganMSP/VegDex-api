@@ -6,11 +6,11 @@ public class Restaurant : Entity
 {
     public Restaurant() { }
     public bool AllVegan { get; set; }
-    public string Description { get; set; }
-    public City Location { get; set; }
+    public string? Description { get; set; }
+    public City City { get; set; }
     public string Name { get; set; }
     public string Slug { get; set; }
-    public string Website { get; set; }
+    public string? Website { get; set; }
     public static Restaurant Create(
         int restaurantId,
         string name,
@@ -23,7 +23,7 @@ public class Restaurant : Entity
         {
             Id = restaurantId,
             Name = name,
-            Location = city,
+            City = city,
             Description = description,
             Website = website,
             AllVegan = allVegan
