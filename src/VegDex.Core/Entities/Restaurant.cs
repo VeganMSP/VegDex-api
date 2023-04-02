@@ -8,6 +8,7 @@ public class Restaurant : Entity
     public bool AllVegan { get; set; }
     public string? Description { get; set; }
     public City City { get; set; }
+    public int CityId { get; set; }
     public string Name { get; set; }
     public string Slug { get; set; }
     public string? Website { get; set; }
