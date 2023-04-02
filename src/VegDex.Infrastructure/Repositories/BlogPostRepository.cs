@@ -1,4 +1,3 @@
-using Microsoft.EntityFrameworkCore;
 using VegDex.Core.Entities;
 using VegDex.Core.Repositories;
 using VegDex.Core.Specifications;
