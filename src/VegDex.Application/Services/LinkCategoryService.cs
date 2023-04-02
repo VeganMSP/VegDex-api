@@ -15,7 +15,12 @@ public class LinkCategoryService : ILinkCategoryService
         _linkCategoryRepository = linkCategoryRepository;
     }
     /// <inheritdoc />
-    public Task<IEnumerable<LinkCategoryModel>> GetLinkCategoryList() => throw new NotImplementedException();
+    public async Task<IEnumerable<LinkCategoryModel>> GetLinkCategoryList()
+    {
+        var linkCategories = await _linkCategoryRepository.GetLinkCategories();
+        var mapped = ObjectMapper.Mapper.Map<IEnumerable<LinkCategoryModel>>(linkCategories);
+        return mapped;
+    }
     /// <inheritdoc />
     public Task<LinkCategoryModel> GetLinkCategoryById(int linkCategoryId) => throw new NotImplementedException();
     /// <inheritdoc />
