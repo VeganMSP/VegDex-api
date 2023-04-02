@@ -8,7 +8,7 @@
 </div>
 
 <p>
-    <a asp-action="Create">Create New</a>
+  <a asp-action="Create">Create New</a>
 </p>
 
 @if (!Model.Cities.Any())
@@ -17,17 +17,57 @@
 }
 else
 {
-  <ul>
-    @foreach (var city in Model.Cities)
+  foreach (var city in Model.Cities)
+  {
+    <h2>@city.Name</h2>
+    if (city.Restaurants.Any())
     {
-      <h2>@city.Name</h2>
-      @if (city.Restaurants.Any())
-      {
+      <ul>
+
         @foreach (var restaurant in city.Restaurants)
         {
-          @restaurant.Name
+          <li>
+            @if (!string.IsNullOrWhiteSpace(restaurant.Website))
+            {
+              <a href="@restaurant.Website" target="_blank">
+                @if (restaurant.AllVegan)
+                {
+                  <strong>@restaurant.Name</strong>
+                }
+                else
+                {
+                  @restaurant.Name
+                }
+              </a>
+            }
+            else
+            {
+              if (restaurant.AllVegan)
+              {
+                <strong>@restaurant.Name</strong>
+              }
+              else
+              {
+                @restaurant.Name
+              }
+            }
+
+            @if (!string.IsNullOrWhiteSpace(restaurant.Description))
+            {
+              <text> - @restaurant.Description</text>
+            }
+            -
+            <a asp-action="Edit"
+               asp-route-id="@restaurant.Id">
+              Edit
+            </a> -
+            <a asp-action="Delete"
+               asp-route-id="@restaurant.Id">
+              Delete
+            </a>
+          </li>
         }
-      }
+      </ul>
     }
-  </ul>
+  }
 }
