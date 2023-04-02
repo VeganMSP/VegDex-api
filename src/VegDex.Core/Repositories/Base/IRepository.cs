@@ -19,7 +19,7 @@ public interface IRepository<T> where T : Entity
         List<Expression<Func<T, object>>> includes = null,
         bool disableTracking = true);
     Task<IReadOnlyList<T>> GetAsync(ISpecification<T> spec);
-    Task<T> GetByIdAsync(int id);
+    Task<T> GetByIdAsync(int? id);
     Task<T> AddAsync(T entity);
     Task UpdateAsync(T entity);
     Task DeleteAsync(T entity);

@@ -23,7 +23,7 @@ public class RestaurantService : IRestaurantService
         return mapped;
     }
     /// <inheritdoc />
-    public async Task<RestaurantModel> GetRestaurantById(int restaurantId)
+    public async Task<RestaurantModel> GetRestaurantById(int? restaurantId)
     {
         var restaurant = await _restaurantRepository.GetByIdAsync(restaurantId);
         var mapped = ObjectMapper.Mapper.Map<RestaurantModel>(restaurant);
