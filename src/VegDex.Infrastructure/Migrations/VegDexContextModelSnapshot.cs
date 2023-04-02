@@ -17,7 +17,7 @@ namespace VegDex.Infrastructure.Migrations
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
 
-            modelBuilder.Entity("VegDex.Application.Models.Address", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.Address", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -33,23 +33,18 @@ namespace VegDex.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("State")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Street1")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Street2")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("ZipCode")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -59,7 +54,7 @@ namespace VegDex.Infrastructure.Migrations
                     b.ToTable("Address", (string)null);
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.Blog.BlogCategory", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.BlogCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -84,7 +79,7 @@ namespace VegDex.Infrastructure.Migrations
                     b.ToTable("BlogCategory", (string)null);
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.Blog.BlogPost", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.BlogPost", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -121,7 +116,7 @@ namespace VegDex.Infrastructure.Migrations
                     b.ToTable("BlogPost", (string)null);
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.City", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.City", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -146,7 +141,7 @@ namespace VegDex.Infrastructure.Migrations
                     b.ToTable("City", (string)null);
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.FarmersMarket", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.FarmersMarket", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -162,7 +157,6 @@ namespace VegDex.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Hours")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -170,7 +164,6 @@ namespace VegDex.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Phone")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Slug")
@@ -178,7 +171,6 @@ namespace VegDex.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Website")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -188,7 +180,7 @@ namespace VegDex.Infrastructure.Migrations
                     b.ToTable("FarmersMarket", (string)null);
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.Link", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.Link", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -204,7 +196,6 @@ namespace VegDex.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -226,7 +217,7 @@ namespace VegDex.Infrastructure.Migrations
                     b.ToTable("Link", (string)null);
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.LinkCategory", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.LinkCategory", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -239,7 +230,6 @@ namespace VegDex.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -255,7 +245,7 @@ namespace VegDex.Infrastructure.Migrations
                     b.ToTable("LinkCategory", (string)null);
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.Restaurant", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.Restaurant", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -264,6 +254,9 @@ namespace VegDex.Infrastructure.Migrations
                     b.Property<bool>("AllVegan")
                         .HasColumnType("INTEGER");
 
+                    b.Property<int>("CityId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("TEXT");
 
@@ -271,11 +264,7 @@ namespace VegDex.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
-
-                    b.Property<int>("LocationId")
-                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -286,17 +275,16 @@ namespace VegDex.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Website")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("LocationId");
+                    b.HasIndex("CityId");
 
                     b.ToTable("Restaurant", (string)null);
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.VeganCompany", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.VeganCompany", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -309,7 +297,6 @@ namespace VegDex.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
@@ -321,7 +308,6 @@ namespace VegDex.Infrastructure.Migrations
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Website")
-                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
@@ -329,9 +315,9 @@ namespace VegDex.Infrastructure.Migrations
                     b.ToTable("VeganCompany", (string)null);
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.Address", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.Address", b =>
                 {
-                    b.HasOne("VegDex.Application.Models.City", "City")
+                    b.HasOne("VegDex.Core.Entities.City", "City")
                         .WithMany()
                         .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -340,9 +326,9 @@ namespace VegDex.Infrastructure.Migrations
                     b.Navigation("City");
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.Blog.BlogPost", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.BlogPost", b =>
                 {
-                    b.HasOne("VegDex.Application.Models.Blog.BlogCategory", "Category")
+                    b.HasOne("VegDex.Core.Entities.BlogCategory", "Category")
                         .WithMany()
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -351,9 +337,9 @@ namespace VegDex.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.FarmersMarket", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.FarmersMarket", b =>
                 {
-                    b.HasOne("VegDex.Application.Models.Address", "Address")
+                    b.HasOne("VegDex.Core.Entities.Address", "Address")
                         .WithMany()
                         .HasForeignKey("AddressId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -362,10 +348,10 @@ namespace VegDex.Infrastructure.Migrations
                     b.Navigation("Address");
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.Link", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.Link", b =>
                 {
-                    b.HasOne("VegDex.Application.Models.LinkCategory", "Category")
-                        .WithMany()
+                    b.HasOne("VegDex.Core.Entities.LinkCategory", "Category")
+                        .WithMany("Links")
                         .HasForeignKey("CategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -373,15 +359,25 @@ namespace VegDex.Infrastructure.Migrations
                     b.Navigation("Category");
                 });
 
-            modelBuilder.Entity("VegDex.Application.Models.Restaurant", b =>
+            modelBuilder.Entity("VegDex.Core.Entities.Restaurant", b =>
                 {
-                    b.HasOne("VegDex.Application.Models.City", "Location")
-                        .WithMany()
-                        .HasForeignKey("LocationId")
+                    b.HasOne("VegDex.Core.Entities.City", "City")
+                        .WithMany("Restaurants")
+                        .HasForeignKey("CityId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Location");
+                    b.Navigation("City");
+                });
+
+            modelBuilder.Entity("VegDex.Core.Entities.City", b =>
+                {
+                    b.Navigation("Restaurants");
+                });
+
+            modelBuilder.Entity("VegDex.Core.Entities.LinkCategory", b =>
+                {
+                    b.Navigation("Links");
                 });
 #pragma warning restore 612, 618
         }
