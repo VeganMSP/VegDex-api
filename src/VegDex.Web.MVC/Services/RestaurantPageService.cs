@@ -1,9 +1,9 @@
-using System.Collections;
 using System.Reflection;
 using AutoMapper;
 using Serilog;
 using VegDex.Application.Interfaces;
 using VegDex.Application.Models;
+using VegDex.Core.Utilities;
 using VegDex.Web.MVC.Interfaces;
 using VegDex.Web.MVC.ViewModels;
 using ILogger = Serilog.ILogger;
@@ -56,7 +56,7 @@ public class RestaurantPageService : IRestaurantsPageService
         var mapped = _mapper.Map<RestaurantModel>(restaurant);
         if (mapped == null)
             throw new Exception("Entity could not be mapped");
-
+        mapped.Slug = mapped.Name.ToUrlSlug();
         var entityDto = await _restaurantAppService.Create(mapped);
         _logger.Information("Entity successfully added: {Restaurant}", restaurant);
 
