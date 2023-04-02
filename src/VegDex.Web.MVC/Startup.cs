@@ -42,6 +42,7 @@ public class Startup
                 app.UseHsts();
             }
         }
+        app.UseStatusCodePages();
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
@@ -106,6 +107,11 @@ public class Startup
         
         services.AddDataProtection()
             .PersistKeysToDbContext<AppKeysContext>();
+
+        if (Env.IsDevelopment())
+        {
+            services.AddDatabaseDeveloperPageExceptionFilter();
+        }
     }
     public void ConfigureDatabase(IServiceCollection services)
     {
