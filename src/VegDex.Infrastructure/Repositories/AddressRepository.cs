@@ -22,7 +22,7 @@ public class AddressRepository : IAddressRepository
     /// <inheritdoc />
     public Task<IReadOnlyList<Address>> GetAsync(ISpecification<Address> spec) => throw new NotImplementedException();
     /// <inheritdoc />
-    public Task<Address> GetByIdAsync(int id) => throw new NotImplementedException();
+    public Task<Address> GetByIdAsync(int? id) => throw new NotImplementedException();
     /// <inheritdoc />
     public Task<Address> AddAsync(Address entity) => throw new NotImplementedException();
     /// <inheritdoc />

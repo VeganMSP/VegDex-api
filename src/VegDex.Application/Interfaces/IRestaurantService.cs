@@ -5,7 +5,7 @@ namespace VegDex.Application.Interfaces;
 public interface IRestaurantService
 {
     Task<IEnumerable<RestaurantModel>> GetRestaurantList();
-    Task<RestaurantModel> GetRestaurantById(int restaurantId);
+    Task<RestaurantModel> GetRestaurantById(int? restaurantId);
     Task<IEnumerable<RestaurantModel>> GetRestaurantByLocation(int locationId);
     Task<RestaurantModel> Create(RestaurantModel restaurant);
     Task Update(RestaurantModel restaurant);

@@ -15,7 +15,12 @@ public class CityService : ICityService
         _cityRepository = cityRepository;
     }
     /// <inheritdoc />
-    public Task<IEnumerable<CityModel>> GetCityList() => throw new NotImplementedException();
+    public async Task<IEnumerable<CityModel>> GetCityList()
+    {
+        var cities = await _cityRepository.GetAllAsync();
+        var mapped = ObjectMapper.Mapper.Map<IEnumerable<CityModel>>(cities);
+        return mapped;
+    }
     /// <inheritdoc />
     public Task<CityModel> GetCityById(int cityId) => throw new NotImplementedException();
     /// <inheritdoc />

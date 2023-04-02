@@ -19,13 +19,14 @@ public class RestaurantModelTests
         var obj = new RestaurantModel();
 
         // Assert
-        Assert.AreEqual(9, obj.PropertyCount());
+        Assert.AreEqual(10, obj.PropertyCount());
         Assert.IsTrue(obj.HasProperty("AllVegan"));
         Assert.IsTrue(obj.HasProperty("DateCreated"));
         Assert.IsTrue(obj.HasProperty("DateUpdated"));
         Assert.IsTrue(obj.HasProperty("Description"));
         Assert.IsTrue(obj.HasProperty("Id"));
-        Assert.IsTrue(obj.HasProperty("Location"));
+        Assert.IsTrue(obj.HasProperty("City"));
+        Assert.IsTrue(obj.HasProperty("CityId"));
         Assert.IsTrue(obj.HasProperty("Name"));
         Assert.IsTrue(obj.HasProperty("Slug"));
         Assert.IsTrue(obj.HasProperty("Website"));
@@ -37,7 +38,7 @@ public class RestaurantModelTests
         var obj = new RestaurantModel
         {
             Name = "Piggy Bank",
-            Location = _city
+            City = _city
         };
         var expected = "Piggy Bank";
 

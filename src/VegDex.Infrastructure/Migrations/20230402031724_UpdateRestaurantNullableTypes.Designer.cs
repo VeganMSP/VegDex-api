@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VegDex.Infrastructure.Context;
 
@@ -10,9 +11,11 @@ using VegDex.Infrastructure.Context;
 namespace VegDex.Infrastructure.Migrations
 {
     [DbContext(typeof(VegDexContext))]
-    partial class VegDexContextModelSnapshot : ModelSnapshot
+    [Migration("20230402031724_UpdateRestaurantNullableTypes")]
+    partial class UpdateRestaurantNullableTypes
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
@@ -254,9 +257,6 @@ namespace VegDex.Infrastructure.Migrations
                     b.Property<bool>("AllVegan")
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CityId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("TEXT");
 
@@ -265,6 +265,9 @@ namespace VegDex.Infrastructure.Migrations
 
                     b.Property<string>("Description")
                         .HasColumnType("TEXT");
+
+                    b.Property<int>("LocationId")
+                        .HasColumnType("INTEGER");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -279,7 +282,7 @@ namespace VegDex.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CityId");
+                    b.HasIndex("LocationId");
 
                     b.ToTable("Restaurant", (string)null);
                 });
@@ -361,13 +364,13 @@ namespace VegDex.Infrastructure.Migrations
 
             modelBuilder.Entity("VegDex.Core.Entities.Restaurant", b =>
                 {
-                    b.HasOne("VegDex.Core.Entities.City", "City")
+                    b.HasOne("VegDex.Core.Entities.City", "Location")
                         .WithMany("Restaurants")
-                        .HasForeignKey("CityId")
+                        .HasForeignKey("LocationId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("City");
+                    b.Navigation("Location");
                 });
 
             modelBuilder.Entity("VegDex.Core.Entities.City", b =>
