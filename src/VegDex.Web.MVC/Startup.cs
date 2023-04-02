@@ -42,6 +42,7 @@ public class Startup
                 app.UseHsts();
             }
         }
+        app.UseStatusCodePages();
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
