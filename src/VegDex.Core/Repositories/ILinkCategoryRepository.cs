@@ -6,4 +6,5 @@ namespace VegDex.Core.Repositories;
 public interface ILinkCategoryRepository : IRepository<LinkCategory>
 {
     Task<IEnumerable<LinkCategory>> GetLinkCategoriesWithLinks();
+    Task<IEnumerable<LinkCategory>> GetLinkCategories();
 }

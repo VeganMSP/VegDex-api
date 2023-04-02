@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using VegDex.Core.Entities;
 using VegDex.Core.Repositories;
 using VegDex.Core.Specifications;
@@ -15,6 +16,13 @@ public class LinkCategoryRepository : Repository<LinkCategory>, ILinkCategoryRep
     {
         var spec = new LinkCategoriesWithLinksSpecification();
         var linkCategories = await GetAsync(spec);
+        return linkCategories;
+    }
+    /// <inheritdoc />
+    public async Task<IEnumerable<LinkCategory>> GetLinkCategories()
+    {
+        var linkCategories = await _dbContext.Set<LinkCategory>()
+            .ToListAsync();
         return linkCategories;
     }
 }
