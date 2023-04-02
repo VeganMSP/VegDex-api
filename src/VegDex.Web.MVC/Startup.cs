@@ -107,6 +107,11 @@ public class Startup
         
         services.AddDataProtection()
             .PersistKeysToDbContext<AppKeysContext>();
+
+        if (Env.IsDevelopment())
+        {
+            services.AddDatabaseDeveloperPageExceptionFilter();
+        }
     }
     public void ConfigureDatabase(IServiceCollection services)
     {
