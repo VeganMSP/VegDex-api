@@ -39,10 +39,10 @@ public class RestaurantService : IRestaurantService
 
         var mappedEntity = ObjectMapper.Mapper.Map<Restaurant>(restaurantModel);
         if (mappedEntity == null)
-            throw new ApplicationException($"Entity could not be mapped.");
+            throw new ApplicationException("Entity could not be mapped.");
 
         var newEntity = await _restaurantRepository.AddAsync(mappedEntity);
-        _logger.Information($"Entity successfully added");
+        _logger.Information("Entity successfully added");
 
         var newMappedEntity = ObjectMapper.Mapper.Map<RestaurantModel>(newEntity);
         return newMappedEntity;
@@ -54,12 +54,12 @@ public class RestaurantService : IRestaurantService
 
         var editRestaurant = await _restaurantRepository.GetByIdAsync(restaurantModel.Id);
         if (editRestaurant == null)
-            throw new ApplicationException($"Entity could not be loaded.");
+            throw new ApplicationException("Entity could not be loaded.");
 
         ObjectMapper.Mapper.Map<RestaurantModel, Restaurant>(restaurantModel, editRestaurant);
 
         await _restaurantRepository.UpdateAsync(editRestaurant);
-        _logger.Information($"Entity successfully updated");
+        _logger.Information("Entity successfully updated");
     }
     /// <inheritdoc />
     public async Task Delete(RestaurantModel restaurantModel)
@@ -67,10 +67,10 @@ public class RestaurantService : IRestaurantService
         ValidateRestaurantIfNotExist(restaurantModel);
         var deletedRestaurant = await _restaurantRepository.GetByIdAsync(restaurantModel.Id);
         if (deletedRestaurant == null)
-            throw new ApplicationException($"Entity could not be loaded.");
+            throw new ApplicationException("Entity could not be loaded.");
 
         await _restaurantRepository.DeleteAsync(deletedRestaurant);
-        _logger.Information($"Entity successfully deleted");
+        _logger.Information("Entity successfully deleted");
     }
     /// <inheritdoc />
     public async Task<RestaurantModel> GetRestaurantByName(string? restaurantName)

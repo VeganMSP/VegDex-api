@@ -1,5 +1,4 @@
 using VegDex.Application.Models;
-using VegDex.Web.MVC.ViewModels;
 
 namespace VegDex.Web.MVC.Interfaces;
 

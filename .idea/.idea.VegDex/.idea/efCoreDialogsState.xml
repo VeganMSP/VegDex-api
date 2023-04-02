@@ -3,10 +3,11 @@
   <component name="EfCoreDialogsState">
     <option name="keyValueStorage">
       <map>
-        <entry key="Common:buildConfiguration" value="Debug" />
+        <entry key="Common:buildConfiguration" value="Release" />
         <entry key="Common:f2eb892d-4d19-44dd-9e29-fc3e76d69def:dbContext" value="VegDex.Infrastructure.Context.VegDexContext" />
         <entry key="Common:noBuild" value="false" />
         <entry key="Common:outputFolder" value="Migrations" />
+        <entry key="Common:useDefaultConnection" value="true" />
       </map>
     </option>
   </component>

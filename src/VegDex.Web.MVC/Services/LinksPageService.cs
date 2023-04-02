@@ -1,9 +1,7 @@
-using System.Collections;
 using System.Reflection;
 using AutoMapper;
 using Serilog;
 using VegDex.Application.Interfaces;
-using VegDex.Application.Models;
 using VegDex.Web.MVC.Interfaces;
 using VegDex.Web.MVC.ViewModels;
 using ILogger = Serilog.ILogger;
