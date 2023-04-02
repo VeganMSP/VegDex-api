@@ -37,7 +37,7 @@ public class RestaurantModelTests
         var obj = new RestaurantModel
         {
             Name = "Piggy Bank",
-            Location = _city
+            City = _city
         };
         var expected = "Piggy Bank";
 

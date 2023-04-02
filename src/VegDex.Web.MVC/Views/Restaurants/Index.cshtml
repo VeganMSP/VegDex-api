@@ -6,6 +6,11 @@
 <div class="text-center">
   <h1 class="display-4">Restaurants</h1>
 </div>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+
 @if (!Model.Cities.Any())
 {
   <p>There are no restaurants in the database!</p>
@@ -26,7 +31,3 @@ else
     }
   </ul>
 }
-
-<div>
-  <p>{{ Recent Posts }}</p>
-</div>
