@@ -64,5 +64,32 @@ public class RestaurantPageService : IRestaurantsPageService
         return mappedModel;
     }
     /// <inheritdoc />
+    public async Task<RestaurantModel> GetRestaurantById(int? id)
+    {
+        var restaurant = await _restaurantAppService.GetRestaurantById(id);
+        var mapped = _mapper.Map<RestaurantModel>(restaurant);
+        return mapped;
+    }
+    /// <inheritdoc />
+    public async Task DeleteRestaurant(RestaurantModel restaurant)
+    {
+        var mapped = _mapper.Map<RestaurantModel>(restaurant);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+
+        await _restaurantAppService.Delete(mapped);
+        _logger.Information("Entity successfully deleted: {Restaurant}", mapped);
+    }
+    /// <inheritdoc />
+    public async Task UpdateRestaurant(RestaurantModel restaurant)
+    {
+        var mapped = _mapper.Map<RestaurantModel>(restaurant);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+
+        await _restaurantAppService.Update(mapped);
+        _logger.Information("Entity successfully updated: {Restaurant}", mapped);
+    }
+    /// <inheritdoc />
     public async Task<IEnumerable<RestaurantViewModel>> GetRestaurants() => await GetRestaurants(null!);
 }
