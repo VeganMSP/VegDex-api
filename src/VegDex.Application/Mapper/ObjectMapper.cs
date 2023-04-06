@@ -22,7 +22,6 @@ public class VegDexDtoMapper : Profile
 {
     public VegDexDtoMapper()
     {
-        CreateMap<Address, AddressModel>().ReverseMap();
         CreateMap<BlogCategory, BlogCategoryModel>().ReverseMap();
         CreateMap<BlogPost, BlogPostModel>().ReverseMap();
         CreateMap<City, CityModel>().ReverseMap();
