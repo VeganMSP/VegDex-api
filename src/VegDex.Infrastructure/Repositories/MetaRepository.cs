@@ -14,13 +14,6 @@ public class MetaRepository : IMetaRepository
         _dbContext = dbContext;
     }
     /// <inheritdoc />
-    public async Task<IEnumerable<Link>> GetLinkListAsync()
-    {
-        var links = await _dbContext.Set<Link>()
-            .ToListAsync();
-        return links;
-    }
-    /// <inheritdoc />
     public async Task<AboutPage> GetAboutPage()
     {
         var page = await _dbContext.Set<AboutPage>()
@@ -35,7 +28,18 @@ public class MetaRepository : IMetaRepository
         return page;
     }
     /// <inheritdoc />
-    public Task UpdateAboutPageAsync(string content) => throw new NotImplementedException();
+    public async Task UpdatePageAsync(dynamic page)
+    {
+        var now = DateTime.Now;
+        page.DateUpdated = now;
+        _dbContext.Entry(page).State = EntityState.Modified;
+        await _dbContext.SaveChangesAsync();
+    }
     /// <inheritdoc />
-    public Task UpdateHomePageAsync(string content) => throw new NotImplementedException();
+    public async Task<IEnumerable<Link>> GetLinkListAsync()
+    {
+        var links = await _dbContext.Set<Link>()
+            .ToListAsync();
+        return links;
+    }
 }

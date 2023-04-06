@@ -28,8 +28,24 @@ public class MetaService : IMetaService
         var mapped = ObjectMapper.Mapper.Map<HomePageModel>(page);
         return mapped;
     }
-/// <inheritdoc />
-    public Task UpdateAboutPage(string content) => throw new NotImplementedException();
     /// <inheritdoc />
-    public Task UpdateHomePage(string content) => throw new NotImplementedException();
+    public async Task UpdateHomePage(string content)
+    {
+        var page = await _metaRepository.GetHomePage();
+        if (page == null)
+            throw new ApplicationException("Entity could not be loaded.");
+        page.Content = content;
+        await _metaRepository.UpdatePageAsync(page);
+        _logger.Information("Entity successfully updated");
+    }
+    /// <inheritdoc />
+    public async Task UpdateAboutPage(string content)
+    {
+        var page = await _metaRepository.GetAboutPage();
+        if (page == null)
+            throw new ApplicationException("Entity could not be loaded.");
+        page.Content = content;
+        await _metaRepository.UpdatePageAsync(page);
+        _logger.Information("Entity successfully updated");
+    }
 }

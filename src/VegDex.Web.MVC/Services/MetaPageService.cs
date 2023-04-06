@@ -10,8 +10,8 @@ namespace VegDex.Web.MVC.Services;
 public class MetaPageService : IMetaPageService
 {
     private readonly ILogger _logger = Log.ForContext<LinksPageService>();
-    private readonly IMetaService _metaAppService;
     private readonly IMapper _mapper;
+    private readonly IMetaService _metaAppService;
     public MetaPageService(IMetaService metaAppService, IMapper mapper)
     {
         _mapper = mapper;

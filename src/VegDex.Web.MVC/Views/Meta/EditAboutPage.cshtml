@@ -2,20 +2,18 @@
 @model VegDex.Web.MVC.ViewModels.Meta.AboutPageViewModel
 
 @{
-  ViewBag.Title = $"Edit About Page";
+  ViewBag.Title = "Edit About Page";
 }
 
 <h2>Edit About Page</h2>
 
-<h4>Link</h4>
-<hr/>
 <div class="row">
-  <div class="col-md-4">
+  <div class="col-12">
     <form method="post">
       <div asp-validation-summary="ModelOnly" class="text-danger"></div>
       <div class="form-group">
         <label asp-for="Content" class="control-label"></label>
-        <textarea asp-for="Content" class="form-control"></textarea>
+        <textarea asp-for="Content" class="form-control" rows="15"></textarea>
         <span asp-validation-for="Content" class="text-danger"></span>
       </div>
       <div class="form-group">
