@@ -1,3 +1,8 @@
+using VegDex.Core.Entities;
+
 namespace VegDex.Core.Repositories;
 
-public class IBlogCategoryRepository { }
+public interface IBlogCategoryRepository
+{
+    Task<IEnumerable<BlogCategory>> GetBlogCategories();
+}

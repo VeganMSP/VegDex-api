@@ -6,7 +6,7 @@ public interface IBlogCategoryService
 {
     Task<BlogCategoryModel> Create(BlogCategoryModel blogCategory);
     Task Delete(BlogCategoryModel blogCategory);
+    Task<IEnumerable<BlogCategoryModel>> GetBlogCategories();
     Task<BlogCategoryModel> GetBlogCategoryById(int blogCategoryId);
-    Task<IEnumerable<BlogCategoryModel>> GetBlogCategoryList();
     Task Update(BlogCategoryModel blogCategory);
 }
