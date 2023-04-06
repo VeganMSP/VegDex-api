@@ -1,4 +1,3 @@
-using System.Collections;
 using VegDex.Application.Models;
 using VegDex.Web.MVC.ViewModels;
 
