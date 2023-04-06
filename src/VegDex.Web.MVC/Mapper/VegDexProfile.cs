@@ -15,5 +15,6 @@ public class VegDexProfile : Profile
         CreateMap<CityModel, CityViewModel>();
         CreateMap<AboutPageModel, AboutPageViewModel>();
         CreateMap<HomePageModel, HomePageViewModel>();
+        CreateMap<BlogCategoryModel, BlogCategoryViewModel>();
     }
 }

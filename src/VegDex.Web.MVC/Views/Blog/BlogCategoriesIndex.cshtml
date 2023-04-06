@@ -10,12 +10,12 @@
 
   <p>
     <a asp-action="CreateBlogCategory">Create New</a> |
-    <a asp-action="Index">Back to Links</a>
+    <a asp-action="Index">Back to Blog</a>
   </p>
 
   @if (!Model.Any())
   {
-    <p>There are no link categories in the database!</p>
+    <p>There are no blog categories in the database!</p>
   }
   else
   {
