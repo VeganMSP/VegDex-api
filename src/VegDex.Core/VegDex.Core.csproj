@@ -8,6 +8,7 @@
         <Authors>prplecake</Authors>
         <PackageProjectUrl>https://github.com/VeganMSP/VegDex</PackageProjectUrl>
         <RepositoryUrl>https://github.com/VeganMSP/VegDex</RepositoryUrl>
+        <RestorePackagesWithLockFile>true</RestorePackagesWithLockFile>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">
