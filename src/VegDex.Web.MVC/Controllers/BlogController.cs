@@ -16,6 +16,12 @@ public class BlogController : Controller
         _blogPageService =
             blogPageService ?? throw new ArgumentNullException(nameof(blogPageService));
     }
+    public async Task<IActionResult> BlogCategoriesIndex()
+    {
+        _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
+        var blogCategories = await _blogPageService.GetBlogCategories();
+        return View(blogCategories);
+    }
     // GET
     public async Task<IActionResult> Index()
     {
@@ -27,4 +33,5 @@ public class BlogController : Controller
         };
         return View(viewModel);
     }
+    public IActionResult Create() => throw new NotImplementedException();
 }
