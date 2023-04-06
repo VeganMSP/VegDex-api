@@ -5,7 +5,7 @@ namespace VegDex.Web.MVC.ViewModels;
 
 public class LinkCategoryViewModel : BaseViewModel
 {
+    public IEnumerable<LinkModel> Links { get; set; }
     public string Name { get; set; }
     public string Slug { get; set; }
-    public IEnumerable<LinkModel> Links { get; set; }
 }

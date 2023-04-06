@@ -8,8 +8,8 @@ public class FarmersMarket : Entity
     public Address Address { get; set; }
     public string? Hours { get; set; }
     public string Name { get; set; }
-    public string Slug { get; set; }
     public string? Phone { get; set; }
+    public string Slug { get; set; }
     public string? Website { get; set; }
     public static FarmersMarket Create(
         int farmersMarketId,

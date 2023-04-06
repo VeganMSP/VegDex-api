@@ -5,6 +5,6 @@ namespace VegDex.Web.MVC.ViewModels;
 
 public class ShoppingViewModel : BaseViewModel
 {
-    public IEnumerable<VeganCompanyModel> VeganCompanies { get; set; }
     public IEnumerable<FarmersMarketModel> FarmersMarkets { get; set; }
+    public IEnumerable<VeganCompanyModel> VeganCompanies { get; set; }
 }

@@ -1,5 +1,5 @@
-using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.EntityFrameworkCore;
 using VegDex.Application.Interfaces;
 using VegDex.Application.Services;
 using VegDex.Core;
@@ -54,11 +54,19 @@ public class Startup
                 "{controller=Meta}/{action=Index}");
         });
     }
+    public void ConfigureDatabase(IServiceCollection services)
+    {
+        // use sqlite
+        string connectionString = _configuration.GetConnectionString("Default") ??
+                                  throw new InvalidOperationException("No default connection string found");
+        services.AddDbContext<VegDexContext>(c =>
+            c.UseSqlite(connectionString)
+        );
+    }
     public void ConfigureServices(IServiceCollection services)
     {
-        
         services.Configure<VegDexSettings>(_configuration);
-        
+
         // Set up database
         ConfigureDatabase(services);
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
@@ -72,7 +80,7 @@ public class Startup
         services.AddScoped<IRestaurantRepository, RestaurantRepository>();
         services.AddScoped<IVeganCompanyRepository, VeganCompanyRepository>();
         services.AddScoped<IMetaRepository, MetaRepository>();
-        
+
         // Application Layer
         services.AddScoped<IAddressService, AddressService>();
         services.AddScoped<IBlogCategoryService, BlogCategoryService>();
@@ -84,7 +92,7 @@ public class Startup
         services.AddScoped<IRestaurantService, RestaurantService>();
         services.AddScoped<IVeganCompanyService, VeganCompanyService>();
         services.AddScoped<IMetaService, MetaService>();
-        
+
         // Web Layer
         services.AddAutoMapper(typeof(Startup));
         services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
@@ -97,17 +105,17 @@ public class Startup
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
-        
+
         services.AddSingleton(_configuration);
 
         services.AddHttpContextAccessor();
         services.AddControllersWithViews();
         services.AddSession();
-        
+
         services.AddDbContext<AppKeysContext>(c =>
             c.UseSqlite("Data Source=../keys.sqlite3")
         );
-        
+
         services.AddDataProtection()
             .PersistKeysToDbContext<AppKeysContext>();
 
@@ -115,14 +123,5 @@ public class Startup
         {
             services.AddDatabaseDeveloperPageExceptionFilter();
         }
-    }
-    public void ConfigureDatabase(IServiceCollection services)
-    {
-        // use sqlite
-        string connectionString = _configuration.GetConnectionString("Default") ??
-                                  throw new InvalidOperationException("No default connection string found");
-        services.AddDbContext<VegDexContext>(c =>
-            c.UseSqlite(connectionString)
-        );
     }
 }

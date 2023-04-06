@@ -16,8 +16,8 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\VegDex.Application\VegDex.Application.csproj" />
-      <ProjectReference Include="..\VegDex.TestHelpers\VegDex.TestHelpers.csproj" />
+        <ProjectReference Include="..\..\src\VegDex.Application\VegDex.Application.csproj" />
+        <ProjectReference Include="..\VegDex.TestHelpers\VegDex.TestHelpers.csproj" />
     </ItemGroup>
 
 </Project>

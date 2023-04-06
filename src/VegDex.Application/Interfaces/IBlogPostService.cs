@@ -4,10 +4,10 @@ namespace VegDex.Application.Interfaces;
 
 public interface IBlogPostService
 {
-    Task<IEnumerable<BlogPostModel>> GetBlogCategoryList();
-    Task<BlogPostModel> GetBlogCategoryById(int blogCategoryId);
     Task<BlogPostModel> Create(BlogPostModel blogPost);
-    Task Update(BlogPostModel blogPost);
     Task Delete(BlogPostModel blogPost);
+    Task<BlogPostModel> GetBlogCategoryById(int blogCategoryId);
+    Task<IEnumerable<BlogPostModel>> GetBlogCategoryList();
     Task<IEnumerable<BlogPostModel>> GetBlogPosts();
+    Task Update(BlogPostModel blogPost);
 }

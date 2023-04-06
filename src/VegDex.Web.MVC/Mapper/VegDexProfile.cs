@@ -16,5 +16,4 @@ public class VegDexProfile : Profile
         CreateMap<AboutPageModel, AboutPageViewModel>();
         CreateMap<HomePageModel, HomePageViewModel>();
     }
-    
 }

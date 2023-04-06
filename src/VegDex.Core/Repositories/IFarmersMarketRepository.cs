@@ -1,6 +1,3 @@
 namespace VegDex.Core;
 
-public class IFarmersMarketRepository
-{
-    
-}
+public class IFarmersMarketRepository { }

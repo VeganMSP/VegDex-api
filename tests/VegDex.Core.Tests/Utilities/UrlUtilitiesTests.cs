@@ -14,5 +14,4 @@ public class UrlUtilitiesTests
     {
         Assert.AreEqual(expected, input.ToUrlSlug());
     }
-    
 }
