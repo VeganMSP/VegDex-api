@@ -27,8 +27,8 @@ public class ShoppingPageService : IShoppingPageService
     /// <inheritdoc />
     public async Task<ShoppingViewModel> GetPageInformation()
     {
-        var farmersMarkets = await _farmersMarketAppService.GetFarmersMarketList();
-        var veganCompanies = await _veganCompanyAppService.GetVeganCompanyList();
+        var farmersMarkets = await _farmersMarketAppService.GetFarmersMarkets();
+        var veganCompanies = await _veganCompanyAppService.GetVeganCompanies();
         var viewModel = new ShoppingViewModel
         {
             FarmersMarkets = farmersMarkets,
