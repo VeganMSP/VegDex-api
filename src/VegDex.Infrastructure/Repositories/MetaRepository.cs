@@ -21,20 +21,18 @@ public class MetaRepository : IMetaRepository
         return links;
     }
     /// <inheritdoc />
-    public async Task<string> GetAboutPage()
+    public async Task<AboutPage> GetAboutPage()
     {
-        string content = await _dbContext.Set<Meta>()
-            .Select(m => m.AboutPage)
+        var page = await _dbContext.Set<AboutPage>()
             .FirstAsync();
-        return content;
+        return page;
     }
     /// <inheritdoc />
-    public async Task<string> GetHomePage()
+    public async Task<HomePage> GetHomePage()
     {
-        string content = await _dbContext.Set<Meta>()
-            .Select(m => m.HomePage)
+        var page = await _dbContext.Set<HomePage>()
             .FirstAsync();
-        return content;
+        return page;
     }
     /// <inheritdoc />
     public Task UpdateAboutPageAsync(string content) => throw new NotImplementedException();

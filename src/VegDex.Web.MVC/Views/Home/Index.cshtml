@@ -1,4 +1,5 @@
-﻿@{
+﻿@model VegDex.Web.MVC.ViewModels.Meta.HomePageViewModel
+@{
   ViewData["Title"] = "Home Page";
 }
 
@@ -6,7 +7,7 @@
   <h1 class="display-4">Welcome to VeganMSP.com!</h1>
 </div>
 <div>
-  @Html.Raw(ViewBag.Content)
+  @Html.Raw(Model.Content)
 </div>
 
 <div>

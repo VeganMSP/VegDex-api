@@ -1,9 +1,11 @@
+using VegDex.Core.Entities;
+
 namespace VegDex.Core.Repositories;
 
 public interface IMetaRepository
 {
-    Task<string> GetAboutPage();
-    Task<string> GetHomePage();
+    Task<AboutPage> GetAboutPage();
+    Task<HomePage> GetHomePage();
     Task UpdateAboutPageAsync(string content);
     Task UpdateHomePageAsync(string content);
 }

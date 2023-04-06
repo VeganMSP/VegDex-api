@@ -1,6 +1,5 @@
 ﻿using System.Diagnostics;
 using System.Reflection;
-using Markdig;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using VegDex.Web.MVC.Interfaces;
@@ -26,16 +25,14 @@ public class HomeController : Controller
     public async Task<IActionResult> Index()
     {
         _logger.Information("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        string content = await _metaPageService.GetHomePage();
-        ViewData["content"] = Markdown.ToHtml(content);
-        return View();
+        var pageViewModel = await _metaPageService.GetHomePage();
+        return View(pageViewModel);
     }
     [Route("About")]
     public async Task<IActionResult> About()
     {
         _logger.Information("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        string content = await _metaPageService.GetAboutPage();
-        ViewData["content"] = Markdown.ToHtml(content);
-        return View();
+        var pageViewModel = await _metaPageService.GetAboutPage();
+        return View(pageViewModel);
     }
 }
