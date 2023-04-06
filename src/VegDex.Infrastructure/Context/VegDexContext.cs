@@ -20,7 +20,7 @@ public class VegDexContext : DbContext
         modelBuilder.Entity<BlogPost>().ToTable("BlogPost");
         modelBuilder.Entity<BlogCategory>().ToTable("BlogCategory");
         modelBuilder.Entity<Meta>().ToTable("Meta")
-            .HasData(new Meta()
+            .HasData(new Meta
             {
                 Id = 1,
                 HomePage = """
@@ -37,7 +37,11 @@ by <a href="https://veganmilwaukee.com/" target="_blank">VeganMKE.com</a>, this 
 guide to being vegan in and around the Minneapolis/St. Paul area. But
 we're always welcome to suggestions! Find something wrong? Feel free to
 <a href="https://github.com/VeganMSP/VeganMSP.com/issues">open a ticket</a> on our tracker.
-"""
+""",
+                HomePageCreated = DateTime.Now,
+                HomePageLastUpdated = DateTime.Now,
+                AboutPageCreated = DateTime.Now,
+                AboutPageLastUpdated = DateTime.Now
             });
     }
 }
