@@ -1,13 +1,13 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model VegDex.Application.Models.LinkModel
+@model VegDex.Application.Models.VeganCompanyModel
 
 @{
-  ViewBag.Title = "Create Link";
+  ViewBag.Title = $"Edit {Model.Name}";
 }
 
-<h2>Create Link</h2>
+<h2>Edit @Model.Name</h2>
 
-<h4>Link</h4>
+<h4>Vegan Company</h4>
 <hr/>
 <div class="row">
   <div class="col-md-4">
@@ -28,12 +28,12 @@
         <input asp-for="Website" class="form-control"/>
         <span asp-validation-for="Website" class="text-danger"></span>
       </div>
+      <input type="hidden" asp-for="Id"/>
+      <input type="hidden" asp-for="DateCreated"/>
+      <input type="hidden" asp-for="DateUpdated"/>
+      <input type="hidden" asp-for="Slug"/>
       <div class="form-group">
-        <label asp-for="LinkCategoryId" class="control-label"></label>
-        <select asp-for="LinkCategoryId" class="form-control" asp-items="ViewBag.LinkCategoryId"></select>
-      </div>
-      <div class="form-group">
-        <input type="submit" value="Create" class="btn btn-primary"/>
+        <input type="submit" value="Update" class="btn btn-primary"/>
       </div>
     </form>
   </div>

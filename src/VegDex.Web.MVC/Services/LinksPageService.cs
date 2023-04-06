@@ -40,13 +40,6 @@ public class LinksPageService : ILinksPageService
         return mapped;
     }
     /// <inheritdoc />
-    public async Task<IEnumerable<LinkCategoryModel>> GetLinkCategories()
-    {
-        var linkCategories = await _linkCategoryAppService.GetLinkCategoryList();
-        var mapped = _mapper.Map<IEnumerable<LinkCategoryModel>>(linkCategories);
-        return mapped;
-    }
-    /// <inheritdoc />
     public async Task<LinkModel> CreateLink(LinkModel link)
     {
         var mapped = _mapper.Map<LinkModel>(link);
@@ -80,6 +73,51 @@ public class LinksPageService : ILinksPageService
         _logger.Information("Entity successfully updated: {Restaurant}", mapped);
     }
     /// <inheritdoc />
+    public async Task<LinkCategoryModel> CreateLinkCategory(LinkCategoryModel linkCategoryModel)
+    {
+        var mapped = _mapper.Map<LinkCategoryModel>(linkCategoryModel);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        mapped.Slug = mapped.Name.ToUrlSlug();
+        var entityDto = await _linkCategoryAppService.Create(mapped);
+        _logger.Information("Entity successfully created: {LinkCategory}", linkCategoryModel);
+
+        var mappedModel = _mapper.Map<LinkCategoryModel>(entityDto);
+        return mappedModel;
+    }
+    /// <inheritdoc />
+    public async Task<LinkCategoryModel> GetLinkCategoryById(int id)
+    {
+        var linkCategory = await _linkCategoryAppService.GetLinkCategoryById(id);
+        var mapped = _mapper.Map<LinkCategoryModel>(linkCategory);
+        return mapped;
+    }
+    /// <inheritdoc />
+    public async Task DeleteLinkCategory(LinkCategoryModel linkCategory)
+    {
+        var mapped = _mapper.Map<LinkCategoryModel>(linkCategory);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        await _linkCategoryAppService.Delete(mapped);
+        _logger.Information("Entity successfully deleted: {LinkCategory}", mapped);
+    }
+    /// <inheritdoc />
+    public async Task UpdateLinkCategory(LinkCategoryModel linkCategoryViewModel)
+    {
+        var mapped = _mapper.Map<LinkCategoryModel>(linkCategoryViewModel);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        await _linkCategoryAppService.Update(mapped);
+        _logger.Information("Entity successfully updated: {LinkCategory}", mapped);
+    }
+    /// <inheritdoc />
+    public async Task<LinkCategoryViewModel> GetLinkCategoryWithLinksById(int id)
+    {
+        var linkCategoryWithLinks = await _linkCategoryAppService.GetLinkCategoryWithLinksById(id);
+        var mapped = _mapper.Map<LinkCategoryViewModel>(linkCategoryWithLinks);
+        return mapped;
+    }
+    /// <inheritdoc />
     public async Task<IEnumerable<LinkViewModel>> GetLinks(string? linkName)
     {
         if (string.IsNullOrWhiteSpace(linkName))
@@ -92,5 +130,12 @@ public class LinksPageService : ILinksPageService
         var listByName = await _linkAppService.GetLinkByName(linkName);
         var mappedByName = _mapper.Map<IEnumerable<LinkViewModel>>(listByName);
         return mappedByName;
+    }
+    /// <inheritdoc />
+    public async Task<IEnumerable<LinkCategoryViewModel>> GetLinkCategories()
+    {
+        var linkCategories = await _linkCategoryAppService.GetLinkCategoryList();
+        var mapped = _mapper.Map<IEnumerable<LinkCategoryViewModel>>(linkCategories);
+        return mapped;
     }
 }
