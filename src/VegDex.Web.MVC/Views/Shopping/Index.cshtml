@@ -21,7 +21,13 @@
     <ul>
       @foreach (var company in veganCompanies)
       {
-        <li>@Html.DisplayFor(modelItem => company.Name)</li>
+        <li>
+          @Html.DisplayFor(modelItem => company.Name) - 
+          <a asp-action="EditVeganCompany"
+             asp-route-id="@company.Id">Edit</a> -
+          <a asp-action="DeleteVeganCompany"
+             asp-route-id="@company.Id">Delete</a>
+        </li>
       }
     </ul>
   }

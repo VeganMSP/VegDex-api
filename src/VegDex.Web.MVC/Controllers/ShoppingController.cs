@@ -22,4 +22,12 @@ public class ShoppingController : Controller
         var viewModel = await _shoppingPageService.GetPageInformation();
         return View(viewModel);
     }
+    public IActionResult EditVeganCompany()
+    {
+        throw new NotImplementedException();
+    }
+    public IActionResult DeleteVeganCompany()
+    {
+        throw new NotImplementedException();
+    }
 }
