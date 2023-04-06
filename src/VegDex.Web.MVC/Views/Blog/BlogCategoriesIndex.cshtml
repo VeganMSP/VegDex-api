@@ -1,0 +1,39 @@
+@{
+  ViewData["Title"] = "Blog Categories";
+}
+@model IEnumerable<BlogCategoryViewModel>;
+
+<div class="text-center">
+  <h1 class="display-4">Blog Categories</h1>
+</div>
+<div>
+
+  <p>
+    <a asp-action="CreateBlogCategory">Create New</a> |
+    <a asp-action="Index">Back to Links</a>
+  </p>
+
+  @if (!Model.Any())
+  {
+    <p>There are no link categories in the database!</p>
+  }
+  else
+  {
+    <ul>
+      @foreach (var category in Model)
+      {
+        <li>
+          @category.Name -
+          <a asp-action="EditBlogCategory"
+             asp-route-id="@category.Id">
+            Edit
+          </a> -
+          <a asp-action="DeleteBlogCategory"
+             asp-route-id="@category.Id">
+            Delete
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</div>
