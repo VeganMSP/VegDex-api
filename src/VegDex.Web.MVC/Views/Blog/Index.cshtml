@@ -1,6 +1,8 @@
 @{
   ViewData["Title"] = "Blog";
 }
+@using Markdig
+@using Microsoft.AspNetCore.Mvc.TagHelpers
 @model BlogViewModel;
 
 <div class="text-center">
@@ -23,16 +25,23 @@
       @foreach (var post in Model.BlogPosts)
       {
         <li>
-          <li>@post.Title</li>
+          @post.Title
           <ul>
             <li>Category: @post.Category.Name</li>
             <li>Status: @post.Status</li>
-            <li>Content: @post.Content</li>
+            <li>
+              Content:<br/>
+              @Html.Raw(Markdown.ToHtml(post.Content))
+            </li>
           </ul> -
           <a asp-action="Edit"
-             asp-route-id="@post.Id">Edit</a> -
+             asp-route-id="@post.Id">
+            Edit
+          </a> -
           <a asp-action="Delete"
-             asp-route-id="@post.Id">Delete</a>
+             asp-route-id="@post.Id">
+            Delete
+          </a>
         </li>
       }
     </ul>

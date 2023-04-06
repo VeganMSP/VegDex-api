@@ -40,7 +40,14 @@ public class BlogController : Controller
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
         var blogCategories = await _blogPageService.GetBlogCategories();
+        var postStatuses = from PostStatus s in Enum.GetValues(typeof(PostStatus))
+            select new
+            {
+                Id = (int)s,
+                Name = s.ToString()
+            };
         ViewData["BlogCategoryId"] = new SelectList(blogCategories, "Id", "Name");
+        ViewData["PostStatus"] = new SelectList(postStatuses, "Id", "Name");
         return View();
     }
     [HttpPost]
@@ -53,7 +60,14 @@ public class BlogController : Controller
             return RedirectToAction("Index");
         }
         var blogCategories = await _blogPageService.GetBlogCategories();
+        var postStatuses = from PostStatus s in Enum.GetValues(typeof(PostStatus))
+            select new
+            {
+                Id = (int)s,
+                Name = s.ToString()
+            };
         ViewData["BlogCategoryId"] = new SelectList(blogCategories, "Id", "Name");
+        ViewData["PostStatus"] = new SelectList(postStatuses, "Id", "Name");
         return View(blogPostModel);
     }
     [Route("Blog/Category/Create")]
@@ -122,6 +136,15 @@ public class BlogController : Controller
         var blogPost = await _blogPageService.GetBlogPostById(id.Value);
         if (blogPost == null)
             return NotFound();
+        var blogCategories = await _blogPageService.GetBlogCategories();
+        var postStatuses = from PostStatus s in Enum.GetValues(typeof(PostStatus))
+            select new
+            {
+                Id = (int)s,
+                Name = s.ToString()
+            };
+        ViewData["BlogCategoryId"] = new SelectList(blogCategories, "Id", "Name");
+        ViewData["PostStatus"] = new SelectList(postStatuses, "Id", "Name");
         return View(blogPost);
     }
     [HttpPost]
@@ -144,6 +167,15 @@ public class BlogController : Controller
             }
             return RedirectToAction("Index");
         }
+        var blogCategories = await _blogPageService.GetBlogCategories();
+        var postStatuses = from PostStatus s in Enum.GetValues(typeof(PostStatus))
+            select new
+            {
+                Id = (int)s,
+                Name = s.ToString()
+            };
+        ViewData["BlogCategoryId"] = new SelectList(blogCategories, "Id", "Name");
+        ViewData["PostStatus"] = new SelectList(postStatuses, "Id", "Name");
         return View(blogPostModel);
     }
     [Route("Blog/Category/Edit")]

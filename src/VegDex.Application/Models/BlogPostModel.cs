@@ -3,6 +3,11 @@ using VegDex.Application.Models.Base;
 
 namespace VegDex.Application.Models;
 
+public enum PostStatus
+{
+    DRAFT,
+    PUBLISHED
+}
 public class BlogPostModel : BaseModel
 {
     // public User Author { get; set; }
@@ -10,6 +15,6 @@ public class BlogPostModel : BaseModel
     public BlogCategoryModel? Category { get; set; }
     public string Content { get; set; }
     public string? Slug { get; set; }
-    public int Status { get; set; }
+    public PostStatus Status { get; set; }
     public string Title { get; set; }
 }
