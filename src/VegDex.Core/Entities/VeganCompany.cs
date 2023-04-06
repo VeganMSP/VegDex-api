@@ -9,7 +9,11 @@ public class VeganCompany : Entity
     public string Name { get; set; }
     public string Slug { get; set; }
     public string? Website { get; set; }
-    public static VeganCompany Create(int veganCompanyId, string name, string? description = null, string? website = null)
+    public static VeganCompany Create(
+        int veganCompanyId,
+        string name,
+        string? description = null,
+        string? website = null)
     {
         var veganCompany = new VeganCompany
         {

@@ -54,15 +54,20 @@ public class Repository<T> : IRepository<T> where T : Entity
             return await orderBy(query).ToListAsync();
         return await query.ToListAsync();
     }
-    public async virtual Task<T> GetByIdAsync(int id) => await _dbContext.Set<T>().FindAsync(id);
+    public async virtual Task<T> GetByIdAsync(int? id) => await _dbContext.Set<T>().FindAsync(id);
     public async Task<T> AddAsync(T entity)
     {
+        var now = DateTime.Now;
+        entity.DateCreated = now;
+        entity.DateUpdated = now;
         _dbContext.Set<T>().Add(entity);
         await _dbContext.SaveChangesAsync();
         return entity;
     }
     public async Task UpdateAsync(T entity)
     {
+        var now = DateTime.Now;
+        entity.DateUpdated = now;
         _dbContext.Entry(entity).State = EntityState.Modified;
         await _dbContext.SaveChangesAsync();
     }

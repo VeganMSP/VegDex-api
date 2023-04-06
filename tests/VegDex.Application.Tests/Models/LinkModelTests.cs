@@ -19,8 +19,9 @@ public class LinkModelTests
         var obj = new LinkModel();
 
         // Assert
-        Assert.AreEqual(8, obj.PropertyCount());
+        Assert.AreEqual(9, obj.PropertyCount());
         Assert.IsTrue(obj.HasProperty("Category"));
+        Assert.IsTrue(obj.HasProperty("LinkCategoryId"));
         Assert.IsTrue(obj.HasProperty("DateCreated"));
         Assert.IsTrue(obj.HasProperty("DateUpdated"));
         Assert.IsTrue(obj.HasProperty("Description"));
@@ -33,7 +34,11 @@ public class LinkModelTests
     public void Link_ToString_Name()
     {
         // Arrange
-        var obj = new LinkModel{Name = "Animal Rights Coalition", Category = _linkCategory};
+        var obj = new LinkModel
+        {
+            Name = "Animal Rights Coalition",
+            Category = _linkCategory
+        };
         var expected = "Animal Rights Coalition";
 
         // Assert

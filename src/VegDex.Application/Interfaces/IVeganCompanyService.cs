@@ -4,9 +4,9 @@ namespace VegDex.Application.Interfaces;
 
 public interface IVeganCompanyService
 {
-    Task<IEnumerable<VeganCompanyModel>> GetVeganCompanyList();
-    Task<VeganCompanyModel> GetVeganCompanyById(int restaurantId);
     Task<VeganCompanyModel> Create(VeganCompanyModel veganCompany);
-    Task Update(VeganCompanyModel veganCompany);
     Task Delete(VeganCompanyModel veganCompany);
+    Task<VeganCompanyModel> GetVeganCompanyById(int restaurantId);
+    Task<IEnumerable<VeganCompanyModel>> GetVeganCompanies();
+    Task Update(VeganCompanyModel veganCompany);
 }

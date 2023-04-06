@@ -1,6 +1,11 @@
+using VegDex.Core.Entities;
+using VegDex.Core.Repositories.Base;
+
 namespace VegDex.Core.Repositories;
 
-public class ILinkCategoryRepository
+public interface ILinkCategoryRepository : IRepository<LinkCategory>
 {
-    
+    Task<IEnumerable<LinkCategory>> GetLinkCategories();
+    Task<IEnumerable<LinkCategory>> GetLinkCategoriesWithLinks();
+    Task<LinkCategory> GetLinkCategoryWithLinksById(int id);
 }

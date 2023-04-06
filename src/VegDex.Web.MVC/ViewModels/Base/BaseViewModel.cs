@@ -1,8 +1,8 @@
-namespace VegDex.Web.MVC.Models.Base;
+namespace VegDex.Web.MVC.ViewModels.Base;
 
 public class BaseViewModel
 {
-    public int Id { get; set; }
-    public DateTime DateUpdated { get; set; }
     public DateTime DateCreated { get; set; }
+    public DateTime DateUpdated { get; set; }
+    public int Id { get; set; }
 }

@@ -2,9 +2,8 @@ namespace VegDex.Core.Entities.Base;
 
 public abstract class EntityBase<TId> : IEntityBase<TId>
 {
-    public virtual TId Id { get; protected set; }
     private int? _requestedHashCode;
-    public bool IsTransient() => Id.Equals(default(TId));
+    public virtual TId Id { get; protected set; }
     public override bool Equals(object obj)
     {
         if (obj == null || !(obj is EntityBase<TId>)) return false;
@@ -24,12 +23,8 @@ public abstract class EntityBase<TId> : IEntityBase<TId>
         }
         return base.GetHashCode();
     }
-    public static bool operator ==(EntityBase<TId>? left, EntityBase<TId> right)
-    {
-        return left?.Equals(right) ?? Equals(right, null);
-    }
-    public static bool operator !=(EntityBase<TId> left, EntityBase<TId> right)
-    {
-        return !(left == right);
-    }
+    public bool IsTransient() => Id.Equals(default(TId));
+    public static bool operator ==(EntityBase<TId>? left, EntityBase<TId> right) =>
+        left?.Equals(right) ?? Equals(right, null);
+    public static bool operator !=(EntityBase<TId> left, EntityBase<TId> right) => !(left == right);
 }
