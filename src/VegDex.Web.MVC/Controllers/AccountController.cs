@@ -5,10 +5,10 @@ namespace VegDex.Web.MVC.Controllers;
 
 public class AccountController : Controller
 {
-    private UserManager _userManager;
-    public AccountController(UserManager userManager)
+    private IUserService _userService;
+    public AccountController(IUserService userService)
     {
-        _userManager = userManager;
+        _userService = userService;
     }
     [HttpPost]
     public IActionResult Login(LoginViewModel model)
@@ -25,7 +25,7 @@ public class AccountController : Controller
                 Username = model.Username,
                 Password = model.Password
             };
-            _userManager.SupportsUserAuthenticatorKey(this.HttpContext, user);
+            _userService.SupportsUserAuthenticatorKey(this.HttpContext, user);
             return RedirectToAction("Index", "Home");
         }
         catch (Exception ex)
