@@ -10,7 +10,7 @@ public interface ILinksPageService
     Task DeleteLink(LinkModel link);
     Task DeleteLinkCategory(LinkCategoryModel linkCategoryModel);
     Task<LinkModel> GetLinkById(int? id);
-    Task<IEnumerable<LinkCategoryModel>> GetLinkCategories();
+    Task<IEnumerable<LinkCategoryViewModel>> GetLinkCategories();
     Task<IEnumerable<LinkCategoryViewModel>> GetLinkCategoriesWithLinks();
     Task<LinkCategoryModel> GetLinkCategoryById(int id);
     Task<LinkCategoryViewModel> GetLinkCategoryWithLinksById(int id);
