@@ -10,7 +10,8 @@ public class AddressRepository : IAddressRepository
     /// <inheritdoc />
     public Task<IReadOnlyList<Address>> GetAllAsync() => throw new NotImplementedException();
     /// <inheritdoc />
-    public Task<IReadOnlyList<Address>> GetAsync(Expression<Func<Address, bool>> predicate) => throw new NotImplementedException();
+    public Task<IReadOnlyList<Address>> GetAsync(Expression<Func<Address, bool>> predicate) =>
+        throw new NotImplementedException();
     /// <inheritdoc />
     public Task<IReadOnlyList<Address>> GetAsync(
         Expression<Func<Address, bool>> predicate = null,
@@ -18,7 +19,11 @@ public class AddressRepository : IAddressRepository
         string includeString = null,
         bool disableTracking = true) => throw new NotImplementedException();
     /// <inheritdoc />
-    public Task<IReadOnlyList<Address>> GetAsync(Expression<Func<Address, bool>> predicate = null, Func<IQueryable<Address>, IOrderedQueryable<Address>> orderBy = null, List<Expression<Func<Address, object>>> includes = null, bool disableTracking = true) => throw new NotImplementedException();
+    public Task<IReadOnlyList<Address>> GetAsync(
+        Expression<Func<Address, bool>> predicate = null,
+        Func<IQueryable<Address>, IOrderedQueryable<Address>> orderBy = null,
+        List<Expression<Func<Address, object>>> includes = null,
+        bool disableTracking = true) => throw new NotImplementedException();
     /// <inheritdoc />
     public Task<IReadOnlyList<Address>> GetAsync(ISpecification<Address> spec) => throw new NotImplementedException();
     /// <inheritdoc />

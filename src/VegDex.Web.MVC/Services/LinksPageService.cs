@@ -40,13 +40,6 @@ public class LinksPageService : ILinksPageService
         return mapped;
     }
     /// <inheritdoc />
-    public async Task<IEnumerable<LinkCategoryViewModel>> GetLinkCategories()
-    {
-        var linkCategories = await _linkCategoryAppService.GetLinkCategoryList();
-        var mapped = _mapper.Map<IEnumerable<LinkCategoryViewModel>>(linkCategories);
-        return mapped;
-    }
-    /// <inheritdoc />
     public async Task<LinkModel> CreateLink(LinkModel link)
     {
         var mapped = _mapper.Map<LinkModel>(link);
@@ -137,5 +130,12 @@ public class LinksPageService : ILinksPageService
         var listByName = await _linkAppService.GetLinkByName(linkName);
         var mappedByName = _mapper.Map<IEnumerable<LinkViewModel>>(listByName);
         return mappedByName;
+    }
+    /// <inheritdoc />
+    public async Task<IEnumerable<LinkCategoryViewModel>> GetLinkCategories()
+    {
+        var linkCategories = await _linkCategoryAppService.GetLinkCategoryList();
+        var mapped = _mapper.Map<IEnumerable<LinkCategoryViewModel>>(linkCategories);
+        return mapped;
     }
 }

@@ -96,7 +96,7 @@ public class LinksController : Controller
     {
         if (id == null)
             return NotFound();
-        var linkCategory = await  _linksPageService.GetLinkCategoryById(id.Value);
+        var linkCategory = await _linksPageService.GetLinkCategoryById(id.Value);
         if (linkCategory == null)
             return NotFound();
         await _linksPageService.DeleteLinkCategory(linkCategory);

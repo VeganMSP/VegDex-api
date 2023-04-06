@@ -21,7 +21,10 @@ public class BlogCategoryModelTests
     public void BlogCategory_ToString_Name()
     {
         // Arrange
-        var obj = new BlogCategoryModel{Name = "Announcements"};
+        var obj = new BlogCategoryModel
+        {
+            Name = "Announcements"
+        };
         var expected = "Announcements";
 
         // Assert

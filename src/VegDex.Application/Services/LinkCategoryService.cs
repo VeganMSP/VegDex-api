@@ -44,12 +44,6 @@ public class LinkCategoryService : ILinkCategoryService
         var newMappedEntity = ObjectMapper.Mapper.Map<LinkCategoryModel>(newEntity);
         return newMappedEntity;
     }
-    async private Task ValidateLinkCategoryIfExist(LinkCategoryModel linkCategoryModel)
-    {
-        var existingEntity = await _linkCategoryRepository.GetByIdAsync(linkCategoryModel.Id);
-        if (existingEntity != null)
-            throw new ApplicationException($"{linkCategoryModel} with this Id exists already");
-    }
     /// <inheritdoc />
     public async Task Update(LinkCategoryModel linkCategoryModel)
     {
@@ -60,12 +54,6 @@ public class LinkCategoryService : ILinkCategoryService
         ObjectMapper.Mapper.Map(linkCategoryModel, editLinkCategory);
         await _linkCategoryRepository.UpdateAsync(editLinkCategory);
         _logger.Information("Entity successfully updated");
-    }
-    private void ValidateLinkCategoryIfNotExist(LinkCategoryModel linkCategoryModel)
-    {
-        var existingEntity = _linkCategoryRepository.GetByIdAsync(linkCategoryModel.Id);
-        if (existingEntity == null)
-            throw new ApplicationException($"{linkCategoryModel} with this Id does not exist");
     }
     /// <inheritdoc />
     public async Task Delete(LinkCategoryModel linkCategoryModel)
@@ -90,5 +78,17 @@ public class LinkCategoryService : ILinkCategoryService
         var linkCategoryWithLinks = await _linkCategoryRepository.GetLinkCategoryWithLinksById(id);
         var mapped = ObjectMapper.Mapper.Map<LinkCategoryModel>(linkCategoryWithLinks);
         return mapped;
+    }
+    async private Task ValidateLinkCategoryIfExist(LinkCategoryModel linkCategoryModel)
+    {
+        var existingEntity = await _linkCategoryRepository.GetByIdAsync(linkCategoryModel.Id);
+        if (existingEntity != null)
+            throw new ApplicationException($"{linkCategoryModel} with this Id exists already");
+    }
+    private void ValidateLinkCategoryIfNotExist(LinkCategoryModel linkCategoryModel)
+    {
+        var existingEntity = _linkCategoryRepository.GetByIdAsync(linkCategoryModel.Id);
+        if (existingEntity == null)
+            throw new ApplicationException($"{linkCategoryModel} with this Id does not exist");
     }
 }

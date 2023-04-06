@@ -36,7 +36,7 @@ public class Program
             )
             .CreateLogger();
 
-        IHost host = CreateHostBuilder(args)
+        var host = CreateHostBuilder(args)
             .Build();
 
         try

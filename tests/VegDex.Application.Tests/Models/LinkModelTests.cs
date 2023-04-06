@@ -34,7 +34,11 @@ public class LinkModelTests
     public void Link_ToString_Name()
     {
         // Arrange
-        var obj = new LinkModel{Name = "Animal Rights Coalition", Category = _linkCategory};
+        var obj = new LinkModel
+        {
+            Name = "Animal Rights Coalition",
+            Category = _linkCategory
+        };
         var expected = "Animal Rights Coalition";
 
         // Assert

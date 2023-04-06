@@ -1,6 +1,3 @@
 namespace VegDex.Core.Repositories;
 
-public class IVeganCompanyRepository
-{
-    
-}
+public class IVeganCompanyRepository { }

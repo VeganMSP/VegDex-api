@@ -4,9 +4,9 @@ namespace VegDex.Application.Interfaces;
 
 public interface IFarmersMarketService
 {
-    Task<IEnumerable<FarmersMarketModel>> GetFarmersMarketList();
-    Task<FarmersMarketModel> GetFarmersMarketById(int restaurantId);
     Task<FarmersMarketModel> Create(FarmersMarketModel farmersMarket);
-    Task Update(FarmersMarketModel farmersMarket);
     Task Delete(FarmersMarketModel farmersMarket);
+    Task<FarmersMarketModel> GetFarmersMarketById(int restaurantId);
+    Task<IEnumerable<FarmersMarketModel>> GetFarmersMarketList();
+    Task Update(FarmersMarketModel farmersMarket);
 }

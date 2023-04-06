@@ -1,7 +1,7 @@
 @{
   ViewData["Title"] = "Shopping";
 }
-@model VegDex.Web.MVC.ViewModels.ShoppingViewModel
+@model ShoppingViewModel
 
 @{
   var veganCompanies = Model.VeganCompanies;
@@ -19,11 +19,11 @@
   else
   {
     <ul>
-    @foreach (var company in veganCompanies)
-    {
-      <li>@Html.DisplayFor(modelItem => company.Name)</li>
-    }
-  </ul>
+      @foreach (var company in veganCompanies)
+      {
+        <li>@Html.DisplayFor(modelItem => company.Name)</li>
+      }
+    </ul>
   }
 </div>
 

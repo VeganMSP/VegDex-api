@@ -23,7 +23,10 @@ public class VeganCompanyModelTests
     public void VeganCompany_ToString_Name()
     {
         // Arrange
-        var obj = new VeganCompanyModel{Name = "PLNT BSD"};
+        var obj = new VeganCompanyModel
+        {
+            Name = "PLNT BSD"
+        };
         var expected = "PLNT BSD";
 
         // Assert

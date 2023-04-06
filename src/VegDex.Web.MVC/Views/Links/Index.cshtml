@@ -7,12 +7,12 @@
   <h1 class="display-4">Groups & Links</h1>
 </div>
 <div>
-  
+
   <p>
     <a asp-action="Create">Create New</a> |
     <a asp-action="LinkCategoriesIndex">Link Categories</a>
   </p>
-  
+
   @if (!Model.LinkCategories.Any())
   {
     <p>There are no links in the database!</p>

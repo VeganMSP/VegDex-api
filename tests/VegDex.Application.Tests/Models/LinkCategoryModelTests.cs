@@ -23,7 +23,10 @@ public class LinkCategoryModelTests
     public void LinkCategory_ToString_Name()
     {
         // Arrange
-        var obj = new LinkCategoryModel{Name = "Other Information Sites"};
+        var obj = new LinkCategoryModel
+        {
+            Name = "Other Information Sites"
+        };
         var expected = "Other Information Sites";
 
         // Assert
