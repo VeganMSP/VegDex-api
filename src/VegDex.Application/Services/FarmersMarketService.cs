@@ -23,11 +23,56 @@ public class FarmersMarketService : IFarmersMarketService
         return mapped;
     }
     /// <inheritdoc />
-    public Task<FarmersMarketModel> GetFarmersMarketById(int restaurantId) => throw new NotImplementedException();
+    public async Task<FarmersMarketModel> GetFarmersMarketById(int farmersMarketId)
+    {
+        var farmersMarket = await _farmersMarketRepository.GetByIdAsync(farmersMarketId);
+        var mapped = ObjectMapper.Mapper.Map<FarmersMarketModel>(farmersMarket);
+        return mapped;
+    }
     /// <inheritdoc />
-    public Task<FarmersMarketModel> Create(FarmersMarketModel farmersMarket) => throw new NotImplementedException();
+    public async Task<FarmersMarketModel> Create(FarmersMarketModel farmersMarketModel)
+    {
+        await ValidateFarmersMarketIfExist(farmersMarketModel);
+        var mappedEntity = ObjectMapper.Mapper.Map<FarmersMarket>(farmersMarketModel);
+        if (mappedEntity == null)
+            throw new ApplicationException("Entity could not be mapped");
+        var newEntity = await _farmersMarketRepository.AddAsync(mappedEntity);
+        _logger.Information("Entity successfully added: {@FarmersMarket}", newEntity);
+
+        var newMappedEntity = ObjectMapper.Mapper.Map<FarmersMarketModel>(newEntity);
+        return newMappedEntity;
+    }
+    async private Task ValidateFarmersMarketIfExist(FarmersMarketModel farmersMarket)
+    {
+        var existingEntity = await _farmersMarketRepository.GetByIdAsync(farmersMarket.Id);
+        if (existingEntity != null)
+            throw new ApplicationException($"{farmersMarket} with this Id exists already");
+    }
     /// <inheritdoc />
-    public Task Update(FarmersMarketModel farmersMarket) => throw new NotImplementedException();
+    public async Task Update(FarmersMarketModel farmersMarketModel)
+    {
+        ValidateFarmersMarketIfNotExist(farmersMarketModel);
+        var editFarmersMarket = await _farmersMarketRepository.GetByIdAsync(farmersMarketModel.Id);
+        if (editFarmersMarket == null)
+            throw new ApplicationException("Entity could not be loaded");
+        ObjectMapper.Mapper.Map(farmersMarketModel, editFarmersMarket);
+        await _farmersMarketRepository.UpdateAsync(editFarmersMarket);
+        _logger.Information("Entity successfully updated");
+    }
+    private void ValidateFarmersMarketIfNotExist(FarmersMarketModel farmersMarketModel)
+    {
+        var existingEntity = _farmersMarketRepository.GetByIdAsync(farmersMarketModel.Id);
+        if (existingEntity == null)
+            throw new ApplicationException($"{farmersMarketModel} with this Id does not exist");
+    }
     /// <inheritdoc />
-    public Task Delete(FarmersMarketModel farmersMarket) => throw new NotImplementedException();
+    public async Task Delete(FarmersMarketModel farmersMarketModel)
+    {
+        ValidateFarmersMarketIfNotExist(farmersMarketModel);
+        var deletedFarmersMarket = await _farmersMarketRepository.GetByIdAsync(farmersMarketModel.Id);
+        if (deletedFarmersMarket == null)
+            throw new ApplicationException("Entity could not be loaded");
+        await _farmersMarketRepository.DeleteAsync(deletedFarmersMarket);
+        _logger.Information("Entity successfully deleted");
+    }
 }

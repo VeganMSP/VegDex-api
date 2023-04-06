@@ -64,6 +64,19 @@ public class ShoppingPageService : IShoppingPageService
         _logger.Information("Entity successfully deleted: {VeganCompany}", mapped);
     }
     /// <inheritdoc />
+    public async Task<FarmersMarketModel> CreateFarmersMarket(FarmersMarketModel farmersMarketModel)
+    {
+        var mapped = _mapper.Map<FarmersMarketModel>(farmersMarketModel);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        mapped.Slug = mapped.Name.ToUrlSlug();
+        var entityDto = await _farmersMarketAppService.Create(mapped);
+        _logger.Information("Entity successfully created: {FarmersMarket}", farmersMarketModel);
+
+        var mappedModel = _mapper.Map<FarmersMarketModel>(entityDto);
+        return mappedModel;
+    }
+    /// <inheritdoc />
     public async Task<VeganCompanyModel> CreateVeganCompany(VeganCompanyModel veganCompanyModel)
     {
         var mapped = _mapper.Map<VeganCompanyModel>(veganCompanyModel);
@@ -75,5 +88,30 @@ public class ShoppingPageService : IShoppingPageService
 
         var mappedModel = _mapper.Map<VeganCompanyModel>(entityDto);
         return mappedModel;
+    }
+    /// <inheritdoc />
+    public async Task<FarmersMarketModel> GetFarmersMarketById(int id)
+    {
+        var farmersMarket = await _farmersMarketAppService.GetFarmersMarketById(id);
+        var mapped = _mapper.Map<FarmersMarketModel>(farmersMarket);
+        return mapped;
+    }
+    /// <inheritdoc />
+    public async Task DeleteFarmersMarket(FarmersMarketModel farmersMarket)
+    {
+        var mapped = _mapper.Map<FarmersMarketModel>(farmersMarket);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        await _farmersMarketAppService.Delete(mapped);
+        _logger.Information("Entity successfully deleted: {FarmersMarket}", mapped);
+    }
+    /// <inheritdoc />
+    public async Task UpdateFarmersMarket(FarmersMarketModel farmersMarketModel)
+    {
+        var mapped = _mapper.Map<FarmersMarketModel>(farmersMarketModel);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        await _farmersMarketAppService.Update(mapped);
+        _logger.Information("Entity successfully updated: {FarmersMarket}", mapped);
     }
 }
