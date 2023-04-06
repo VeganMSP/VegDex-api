@@ -33,12 +33,19 @@ public class BlogPageService : IBlogPageService
         return mapped;
     }
     /// <inheritdoc />
-    public async Task<IEnumerable<BlogPostModel>> GetBlogPosts()
+    public async Task<IEnumerable<BlogPostModel>> GetPublishedBlogPosts()
     {
         var posts = await _blogPostAppService.GetBlogPosts();
         var mapped = _mapper.Map<IEnumerable<BlogPostModel>>(posts);
         return mapped
             .Where(p => p.Status == PostStatus.PUBLISHED);
+    }
+    /// <inheritdoc />
+    public async Task<IEnumerable<BlogPostModel>> GetAllBlogPosts()
+    {
+        var posts = await _blogPostAppService.GetBlogPosts();
+        var mapped = _mapper.Map<IEnumerable<BlogPostModel>>(posts);
+        return mapped;
     }
     /// <inheritdoc />
     public async Task UpdateBlogCategory(BlogCategoryModel blogCategoryModel)

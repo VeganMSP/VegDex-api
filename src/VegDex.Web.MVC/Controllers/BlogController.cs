@@ -215,7 +215,7 @@ public class BlogController : Controller
     public async Task<IActionResult> Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        var blogPosts = await _blogPageService.GetBlogPosts();
+        var blogPosts = await _blogPageService.GetPublishedBlogPosts();
         var viewModel = new BlogViewModel
         {
             BlogPosts = blogPosts
