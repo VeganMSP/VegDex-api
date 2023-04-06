@@ -9,8 +9,13 @@ public interface ILinksPageService
     Task<IEnumerable<LinkViewModel>> GetLinks();
     Task<IEnumerable<LinkCategoryViewModel>> GetLinkCategoriesWithLinks();
     Task<LinkModel> GetLinkById(int? id);
-    Task<IEnumerable<LinkCategoryModel>> GetLinkCategories();
+    Task<IEnumerable<LinkCategoryViewModel>> GetLinkCategories();
     Task<LinkModel> CreateLink(LinkModel link);
     Task DeleteLink(LinkModel link);
     Task UpdateLink(LinkModel link);
+    Task<LinkCategoryModel> CreateLinkCategory(LinkCategoryModel linkCategoryModel);
+    Task<LinkCategoryModel> GetLinkCategoryById(int id);
+    Task DeleteLinkCategory(LinkCategoryModel linkCategoryModel);
+    Task UpdateLinkCategory(LinkCategoryModel linkCategoryModel);
+    Task<LinkCategoryViewModel> GetLinkCategoryWithLinksById(int id);
 }

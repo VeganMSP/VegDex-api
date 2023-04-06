@@ -7,4 +7,5 @@ public interface ILinkCategoryRepository : IRepository<LinkCategory>
 {
     Task<IEnumerable<LinkCategory>> GetLinkCategoriesWithLinks();
     Task<IEnumerable<LinkCategory>> GetLinkCategories();
+    Task<LinkCategory> GetLinkCategoryWithLinksById(int id);
 }

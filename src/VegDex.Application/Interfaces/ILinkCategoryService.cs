@@ -10,4 +10,5 @@ public interface ILinkCategoryService
     Task Update(LinkCategoryModel linkCategory);
     Task Delete(LinkCategoryModel linkCategory);
     Task<IEnumerable<LinkCategoryModel>> GetLinkCategoriesWithLinks();
+    Task<LinkCategoryModel> GetLinkCategoryWithLinksById(int id);
 }
