@@ -12,6 +12,10 @@
   <h1 class="display-4">Good Vegan Companies</h1>
 </div>
 <div>
+  
+  <p>
+    <a asp-action="CreateVeganCompany">Create Vegan Company</a>
+  </p>
   @if (!veganCompanies.Any())
   {
     <p>There are no vegan companies in the database!</p>
@@ -21,7 +25,13 @@
     <ul>
       @foreach (var company in veganCompanies)
       {
-        <li>@Html.DisplayFor(modelItem => company.Name)</li>
+        <li>
+          @Html.DisplayFor(modelItem => company.Name) -
+          <a asp-action="EditVeganCompany"
+             asp-route-id="@company.Id">Edit</a> -
+          <a asp-action="DeleteVeganCompany"
+             asp-route-id="@company.Id">Delete</a>
+        </li>
       }
     </ul>
   }
