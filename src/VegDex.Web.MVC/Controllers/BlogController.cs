@@ -1,5 +1,6 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using VegDex.Application.Models;
@@ -30,7 +31,31 @@ public class BlogController : Controller
         var blogCategory = _blogPageService.GetBlogCategoryById(id);
         return blogCategory != null;
     }
-    public IActionResult Create() => throw new NotImplementedException();
+    private bool BlogPostExists(int id)
+    {
+        var blogPost = _blogPageService.GetBlogPostById(id);
+        return blogPost != null;
+    }
+    public async Task<IActionResult> Create()
+    {
+        _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
+        var blogCategories = await _blogPageService.GetBlogCategories();
+        ViewData["BlogCategoryId"] = new SelectList(blogCategories, "Id", "Name");
+        return View();
+    }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Create(BlogPostModel blogPostModel)
+    {
+        if (ModelState.IsValid)
+        {
+            await _blogPageService.CreateBlogPost(blogPostModel);
+            return RedirectToAction("Index");
+        }
+        var blogCategories = await _blogPageService.GetBlogCategories();
+        ViewData["BlogCategoryId"] = new SelectList(blogCategories, "Id", "Name");
+        return View(blogPostModel);
+    }
     [Route("Blog/Category/Create")]
     public async Task<IActionResult> CreateBlogCategory()
     {
@@ -45,6 +70,15 @@ public class BlogController : Controller
         if (!ModelState.IsValid) return View(blogCategoryModel);
         _blogPageService.CreateBlogCategory(blogCategoryModel);
         return RedirectToAction("BlogCategoriesIndex");
+    }
+    public async Task<IActionResult> Delete(int? id)
+    {
+        if (id == null)
+            return NotFound();
+        var blogPost = await _blogPageService.GetBlogPostById(id.Value);
+        if (blogPost == null)
+            return NotFound();
+        return View(blogPost);
     }
     [Route("Blog/Category/Delete")]
     public async Task<IActionResult> DeleteBlogCategory(int? id)
@@ -68,6 +102,49 @@ public class BlogController : Controller
             return NotFound();
         await _blogPageService.DeleteBlogCategory(blogCategory);
         return RedirectToAction("BlogCategoriesIndex");
+    }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> DeleteConfirmed(int? id)
+    {
+        if (id == null)
+            return NotFound();
+        var blogPost = await _blogPageService.GetBlogPostById(id.Value);
+        if (blogPost == null)
+            return NotFound();
+        await _blogPageService.DeleteBlogPost(blogPost);
+        return RedirectToAction("Index");
+    }
+    public async Task<IActionResult> Edit(int? id)
+    {
+        if (id == null)
+            return NotFound();
+        var blogPost = await _blogPageService.GetBlogPostById(id.Value);
+        if (blogPost == null)
+            return NotFound();
+        return View(blogPost);
+    }
+    [HttpPost]
+    [ValidateAntiForgeryToken]
+    public async Task<IActionResult> Edit(int? id, BlogPostModel blogPostModel)
+    {
+        if (id != blogPostModel.Id)
+            return NotFound();
+        if (ModelState.IsValid)
+        {
+            try
+            {
+                await _blogPageService.UpdateBlogPost(blogPostModel);
+            }
+            catch (DbUpdateConcurrencyException)
+            {
+                if (!BlogPostExists(blogPostModel.Id))
+                    return NotFound();
+                throw;
+            }
+            return RedirectToAction("Index");
+        }
+        return View(blogPostModel);
     }
     [Route("Blog/Category/Edit")]
     public async Task<IActionResult> EditBlogCategory(int? id)

@@ -28,7 +28,11 @@
             <li>Category: @post.Category.Name</li>
             <li>Status: @post.Status</li>
             <li>Content: @post.Content</li>
-          </ul>
+          </ul> -
+          <a asp-action="Edit"
+             asp-route-id="@post.Id">Edit</a> -
+          <a asp-action="Delete"
+             asp-route-id="@post.Id">Delete</a>
         </li>
       }
     </ul>

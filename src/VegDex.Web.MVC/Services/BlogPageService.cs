@@ -49,6 +49,44 @@ public class BlogPageService : IBlogPageService
         _logger.Information("Entity successfully updated: {BlogCategory}", mapped);
     }
     /// <inheritdoc />
+    public async Task<BlogPostModel> GetBlogPostById(int id)
+    {
+        var post = await _blogPostAppService.GetBlogPostById(id);
+        var mapped = _mapper.Map<BlogPostModel>(post);
+        return mapped;
+    }
+    /// <inheritdoc />
+    public async Task DeleteBlogPost(BlogPostModel blogPostModel)
+    {
+        var mapped = _mapper.Map<BlogPostModel>(blogPostModel);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        await _blogPostAppService.Delete(mapped);
+        _logger.Information("Entity successfully deleted: {BlogPost}", mapped);
+    }
+    /// <inheritdoc />
+    public async Task UpdateBlogPost(BlogPostModel blogPostModel)
+    {
+        var mapped = _mapper.Map<BlogPostModel>(blogPostModel);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        await _blogPostAppService.Update(mapped);
+        _logger.Information("Entity successfully updated: {BlogPost}", mapped);
+    }
+    /// <inheritdoc />
+    public async Task<BlogPostModel> CreateBlogPost(BlogPostModel blogPostModel)
+    {
+        var mapped = _mapper.Map<BlogPostModel>(blogPostModel);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        mapped.Slug = mapped.Title.ToUrlSlug();
+        var entityDto = await _blogPostAppService.Create(mapped);
+        _logger.Information("Entity successfully created: {BlogPost}", blogPostModel);
+
+        var mappedModel = _mapper.Map<BlogPostModel>(entityDto);
+        return mappedModel;
+    }
+    /// <inheritdoc />
     public async Task<BlogCategoryModel> CreateBlogCategory(BlogCategoryModel blogCategoryModel)
     {
         var mapped = _mapper.Map<BlogCategoryModel>(blogCategoryModel);
