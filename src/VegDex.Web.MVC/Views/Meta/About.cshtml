@@ -1,0 +1,16 @@
+﻿@using Markdig
+@using Microsoft.AspNetCore.Mvc.TagHelpers
+@model VegDex.Web.MVC.ViewModels.Meta.AboutPageViewModel
+@{
+  ViewData["Title"] = "About";
+}
+
+<div class="text-center">
+  <h1 class="display-4">About VeganMSP.com</h1>
+</div>
+<div>
+  <a asp-action="EditAboutPage">Edit</a>
+</div>
+<div>
+  @Html.Raw(Markdown.ToHtml(Model.Content))
+</div>

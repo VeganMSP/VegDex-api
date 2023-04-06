@@ -2,6 +2,7 @@
 using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using VegDex.Infrastructure.Context;
 
@@ -10,42 +11,14 @@ using VegDex.Infrastructure.Context;
 namespace VegDex.Infrastructure.Migrations
 {
     [DbContext(typeof(VegDexContext))]
-    partial class VegDexContextModelSnapshot : ModelSnapshot
+    [Migration("20230406011902_AddMetaPagesDateInformation")]
+    partial class AddMetaPagesDateInformation
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
-
-            modelBuilder.Entity("VegDex.Core.Entities.AboutPage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("AboutPage", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = "VeganMSP.com is a new project from <a href=\"https://jrgnsn.net\" target=\"_blank\">Matthew Jorgensen</a>. Inspired\nby <a href=\"https://veganmilwaukee.com/\" target=\"_blank\">VeganMKE.com</a>, this site aims to be a complete-as-possible\nguide to being vegan in and around the Minneapolis/St. Paul area. But\nwe're always welcome to suggestions! Find something wrong? Feel free to\n<a href=\"https://github.com/VeganMSP/VeganMSP.com/issues\">open a ticket</a> on our tracker.",
-                            DateCreated = new DateTime(2023, 4, 5, 20, 42, 0, 720, DateTimeKind.Local).AddTicks(4900),
-                            DateUpdated = new DateTime(2023, 4, 5, 20, 42, 0, 720, DateTimeKind.Local).AddTicks(4920)
-                        });
-                });
 
             modelBuilder.Entity("VegDex.Core.Entities.Address", b =>
                 {
@@ -210,36 +183,6 @@ namespace VegDex.Infrastructure.Migrations
                     b.ToTable("FarmersMarket", (string)null);
                 });
 
-            modelBuilder.Entity("VegDex.Core.Entities.HomePage", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("INTEGER");
-
-                    b.Property<string>("Content")
-                        .IsRequired()
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DateCreated")
-                        .HasColumnType("TEXT");
-
-                    b.Property<DateTime>("DateUpdated")
-                        .HasColumnType("TEXT");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("HomePage", (string)null);
-
-                    b.HasData(
-                        new
-                        {
-                            Id = 1,
-                            Content = "It’s easy being vegan in Minneapolis and St. Paul, but it can be hard to\nknow where to start, or where to look for information and answers. We\naim to fix that.\n\nAt VeganMSP.com you will find restaurant and food guides, shopping\nguides, and other information to help you on your vegan journey.",
-                            DateCreated = new DateTime(2023, 4, 5, 20, 42, 0, 720, DateTimeKind.Local).AddTicks(100),
-                            DateUpdated = new DateTime(2023, 4, 5, 20, 42, 0, 720, DateTimeKind.Local).AddTicks(160)
-                        });
-                });
-
             modelBuilder.Entity("VegDex.Core.Entities.Link", b =>
                 {
                     b.Property<int>("Id")
@@ -303,6 +246,49 @@ namespace VegDex.Infrastructure.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("LinkCategory", (string)null);
+                });
+
+            modelBuilder.Entity("VegDex.Core.Entities.Meta", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("AboutPage")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("AboutPageCreated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("AboutPageLastUpdated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("HomePage")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("HomePageCreated")
+                        .HasColumnType("TEXT");
+
+                    b.Property<DateTime>("HomePageLastUpdated")
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Meta", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AboutPage = "VeganMSP.com is a new project from <a href=\"https://jrgnsn.net\" target=\"_blank\">Matthew Jorgensen</a>. Inspired\nby <a href=\"https://veganmilwaukee.com/\" target=\"_blank\">VeganMKE.com</a>, this site aims to be a complete-as-possible\nguide to being vegan in and around the Minneapolis/St. Paul area. But\nwe're always welcome to suggestions! Find something wrong? Feel free to\n<a href=\"https://github.com/VeganMSP/VeganMSP.com/issues\">open a ticket</a> on our tracker.",
+                            AboutPageCreated = new DateTime(2023, 4, 5, 20, 19, 1, 971, DateTimeKind.Local).AddTicks(5660),
+                            AboutPageLastUpdated = new DateTime(2023, 4, 5, 20, 19, 1, 971, DateTimeKind.Local).AddTicks(5670),
+                            HomePage = "It’s easy being vegan in Minneapolis and St. Paul, but it can be hard to\nknow where to start, or where to look for information and answers. We\naim to fix that.\n\nAt VeganMSP.com you will find restaurant and food guides, shopping\nguides, and other information to help you on your vegan journey.",
+                            HomePageCreated = new DateTime(2023, 4, 5, 20, 19, 1, 971, DateTimeKind.Local).AddTicks(5600),
+                            HomePageLastUpdated = new DateTime(2023, 4, 5, 20, 19, 1, 971, DateTimeKind.Local).AddTicks(5660)
+                        });
                 });
 
             modelBuilder.Entity("VegDex.Core.Entities.Restaurant", b =>

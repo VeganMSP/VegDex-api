@@ -51,7 +51,7 @@ public class Startup
         {
             endpoints.MapControllerRoute(
                 "default",
-                "{controller=Home}/{action=Index}");
+                "{controller=Meta}/{action=Index}");
         });
     }
     public void ConfigureServices(IServiceCollection services)
@@ -71,6 +71,7 @@ public class Startup
         services.AddScoped<ILinkRepository, LinkRepository>();
         services.AddScoped<IRestaurantRepository, RestaurantRepository>();
         services.AddScoped<IVeganCompanyRepository, VeganCompanyRepository>();
+        services.AddScoped<IMetaRepository, MetaRepository>();
         
         // Application Layer
         services.AddScoped<IAddressService, AddressService>();
@@ -82,6 +83,7 @@ public class Startup
         services.AddScoped<ILinkService, LinkService>();
         services.AddScoped<IRestaurantService, RestaurantService>();
         services.AddScoped<IVeganCompanyService, VeganCompanyService>();
+        services.AddScoped<IMetaService, MetaService>();
         
         // Web Layer
         services.AddAutoMapper(typeof(Startup));
@@ -89,6 +91,7 @@ public class Startup
         services.AddScoped<ILinksPageService, LinksPageService>();
         services.AddScoped<IShoppingPageService, ShoppingPageService>();
         services.AddScoped<IBlogPageService, BlogPageService>();
+        services.AddScoped<IMetaPageService, MetaPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
