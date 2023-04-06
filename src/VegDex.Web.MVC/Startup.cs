@@ -70,7 +70,6 @@ public class Startup
         // Set up database
         ConfigureDatabase(services);
         services.AddScoped(typeof(IRepository<>), typeof(Repository<>));
-        services.AddScoped<IAddressRepository, AddressRepository>();
         services.AddScoped<IBlogCategoryRepository, BlogCategoryRepository>();
         services.AddScoped<IBlogPostRepository, BlogPostRepository>();
         services.AddScoped<ICityRepository, CityRepository>();
@@ -82,7 +81,6 @@ public class Startup
         services.AddScoped<IMetaRepository, MetaRepository>();
 
         // Application Layer
-        services.AddScoped<IAddressService, AddressService>();
         services.AddScoped<IBlogCategoryService, BlogCategoryService>();
         services.AddScoped<IBlogPostService, BlogPostService>();
         services.AddScoped<ICityService, CityService>();

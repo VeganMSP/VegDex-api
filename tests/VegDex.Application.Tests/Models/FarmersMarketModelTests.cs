@@ -6,15 +6,7 @@ public class FarmersMarketModelTests
     [TestInitialize]
     public void Init()
     {
-        _address = new AddressModel
-        {
-            City = new CityModel
-            {
-                Name = "Hopkins"
-            }
-        };
     }
-    private static AddressModel _address;
     [TestMethod]
     public void FarmersMarket_HasProperties()
     {
@@ -40,7 +32,7 @@ public class FarmersMarketModelTests
         var obj = new FarmersMarketModel
         {
             Name = "Hopkins Winter Farmers Market",
-            Address = _address
+            Address = "Hopkins"
         };
         var expected = "Hopkins Winter Farmers Market";
 
