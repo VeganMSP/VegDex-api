@@ -22,4 +22,12 @@ public class ShoppingController : Controller
         var viewModel = await _shoppingPageService.GetPageInformation();
         return View(viewModel);
     }
+    public IActionResult EditFarmersMarket()
+    {
+        throw new NotImplementedException();
+    }
+    public IActionResult DeleteFarmersMarket()
+    {
+        throw new NotImplementedException();
+    }
 }

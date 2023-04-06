@@ -41,7 +41,17 @@
     <ul>
       @foreach (var market in farmersMarkets)
       {
-        <li>@Html.DisplayFor(modelItem => market.Name)</li>
+        <li>
+          @Html.DisplayFor(modelItem => market.Name) -
+          <a asp-action="EditFarmersMarket"
+             asp-route-id="@market.Id">
+            Edit
+          </a> -
+          <a asp-action="DeleteFarmersMarket"
+             asp-route-id="@market.Id">
+            Delete
+          </a>
+        </li>
       }
     </ul>
   }
