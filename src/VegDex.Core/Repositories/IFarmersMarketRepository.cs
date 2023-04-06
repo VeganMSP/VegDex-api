@@ -1,3 +1,9 @@
+using VegDex.Core.Entities;
+using VegDex.Core.Repositories.Base;
+
 namespace VegDex.Core;
 
-public class IFarmersMarketRepository { }
+public interface IFarmersMarketRepository : IRepository<FarmersMarket>
+{
+    Task<IEnumerable<FarmersMarket>> GetFarmersMarkets();
+}
