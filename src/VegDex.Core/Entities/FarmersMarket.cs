@@ -5,7 +5,7 @@ namespace VegDex.Core.Entities;
 public class FarmersMarket : Entity
 {
     public FarmersMarket() { }
-    public Address Address { get; set; }
+    public string? Address { get; set; }
     public string? Hours { get; set; }
     public string Name { get; set; }
     public string? Phone { get; set; }
@@ -14,7 +14,7 @@ public class FarmersMarket : Entity
     public static FarmersMarket Create(
         int farmersMarketId,
         string name,
-        Address address,
+        string? address,
         string? hours = null,
         string? phone = null,
         string? website = null)

@@ -10,7 +10,6 @@ public class VegDexContext : DbContext
     /// <inheritdoc />
     override protected void OnModelCreating(ModelBuilder modelBuilder)
     {
-        modelBuilder.Entity<Address>().ToTable("Address");
         modelBuilder.Entity<City>().ToTable("City");
         modelBuilder.Entity<FarmersMarket>().ToTable("FarmersMarket");
         modelBuilder.Entity<LinkCategory>().ToTable("LinkCategory");

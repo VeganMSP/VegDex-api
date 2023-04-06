@@ -5,7 +5,7 @@ namespace VegDex.Application.Models;
 
 public class FarmersMarketModel : BaseModel
 {
-    [Required] public AddressModel Address { get; set; }
+    [Required] public string Address { get; set; }
     public string Hours { get; set; }
     [Required] public string Name { get; set; }
     public string Phone { get; set; }
