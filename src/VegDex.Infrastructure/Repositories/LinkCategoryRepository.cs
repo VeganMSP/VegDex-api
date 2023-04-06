@@ -25,4 +25,11 @@ public class LinkCategoryRepository : Repository<LinkCategory>, ILinkCategoryRep
             .ToListAsync();
         return linkCategories;
     }
+    /// <inheritdoc />
+    public async Task<LinkCategory> GetLinkCategoryWithLinksById(int id)
+    {
+        var spec = new LinkCategoryWithLinksByIdSpecification(id);
+        var linkCategory = await GetAsync(spec);
+        return linkCategory.First();
+    }
 }

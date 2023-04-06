@@ -1,13 +1,13 @@
 @using Microsoft.AspNetCore.Mvc.TagHelpers
-@model VegDex.Application.Models.LinkModel
+@model VegDex.Application.Models.LinkCategoryModel
 
 @{
-  ViewBag.Title = "Create Link";
+  ViewBag.Title = "Create Link Category";
 }
 
-<h2>Create Link</h2>
+<h2>Create Link Category</h2>
 
-<h4>Link</h4>
+<h4>Link Category</h4>
 <hr/>
 <div class="row">
   <div class="col-md-4">
@@ -22,15 +22,6 @@
         <label asp-for="Description" class="control-label"></label>
         <input asp-for="Description" class="form-control"/>
         <span asp-validation-for="Description" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="Website" class="control-label"></label>
-        <input asp-for="Website" class="form-control"/>
-        <span asp-validation-for="Website" class="text-danger"></span>
-      </div>
-      <div class="form-group">
-        <label asp-for="LinkCategoryId" class="control-label"></label>
-        <select asp-for="LinkCategoryId" class="form-control" asp-items="ViewBag.LinkCategoryId"></select>
       </div>
       <div class="form-group">
         <input type="submit" value="Create" class="btn btn-primary"/>

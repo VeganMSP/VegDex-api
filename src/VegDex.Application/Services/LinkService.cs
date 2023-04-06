@@ -77,6 +77,6 @@ public class LinkService : ILinkService
     {
         var existingEntity = _linkRepository.GetByIdAsync(linkModel.Id);
         if (existingEntity == null)
-            throw new ApplicationException($"{linkModel} this this Id does not exist");
+            throw new ApplicationException($"{linkModel} with this Id does not exist");
     }
 }
