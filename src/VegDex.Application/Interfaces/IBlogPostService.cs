@@ -10,4 +10,5 @@ public interface IBlogPostService
     Task<IEnumerable<BlogPostModel>> GetBlogCategoryList();
     Task<IEnumerable<BlogPostModel>> GetBlogPosts();
     Task Update(BlogPostModel blogPost);
+    Task<BlogPostModel> GetBlogPostById(int id);
 }
