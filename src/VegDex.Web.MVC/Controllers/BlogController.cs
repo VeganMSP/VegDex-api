@@ -22,6 +22,9 @@ public class BlogController : Controller
         var blogCategories = await _blogPageService.GetBlogCategories();
         return View(blogCategories);
     }
+    public IActionResult CreateBlogCategory() => throw new NotImplementedException();
+    public IActionResult DeleteBlogCategory() => throw new NotImplementedException();
+    public IActionResult EditBlogCategory() => throw new NotImplementedException();
     // GET
     public async Task<IActionResult> Index()
     {
