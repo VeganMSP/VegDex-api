@@ -51,7 +51,7 @@ public class Startup
         {
             endpoints.MapControllerRoute(
                 "default",
-                "{controller=Home}/{action=Index}");
+                "{controller=Meta}/{action=Index}");
         });
     }
     public void ConfigureServices(IServiceCollection services)

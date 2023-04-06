@@ -8,12 +8,12 @@ using ILogger = Serilog.ILogger;
 
 namespace VegDex.Web.MVC.Controllers;
 
-public class HomeController : Controller
+public class MetaController : Controller
 {
-    private static readonly ILogger _logger = Log.ForContext<HomeController>();
+    private static readonly ILogger _logger = Log.ForContext<MetaController>();
     private readonly IMetaPageService _metaPageService;
 
-    public HomeController(IMetaPageService metaPageService)
+    public MetaController(IMetaPageService metaPageService)
     {
         _metaPageService = metaPageService;
     }
