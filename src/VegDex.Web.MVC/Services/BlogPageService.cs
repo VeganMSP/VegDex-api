@@ -9,9 +9,9 @@ namespace VegDex.Web.MVC.Services;
 
 public class BlogPageService : IBlogPageService
 {
+    private readonly IBlogPostService _blogPostAppService;
     private readonly ILogger _logger = Log.ForContext<BlogPageService>();
     private readonly IMapper _mapper;
-    private readonly IBlogPostService _blogPostAppService;
     public BlogPageService(IBlogPostService blogPostAppService, IMapper mapper)
     {
         _blogPostAppService = blogPostAppService ?? throw new ArgumentNullException(nameof(blogPostAppService));

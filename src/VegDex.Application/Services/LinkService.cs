@@ -46,12 +46,6 @@ public class LinkService : ILinkService
         var newMappedEntity = ObjectMapper.Mapper.Map<LinkModel>(newEntity);
         return newMappedEntity;
     }
-    async private Task ValidateLinkIfExist(LinkModel linkModel)
-    {
-        var existingEntity = await _linkRepository.GetByIdAsync(linkModel.Id);
-        if (existingEntity != null)
-            throw new ApplicationException($"{linkModel} with this Id exists already");
-    }
     /// <inheritdoc />
     public async Task Update(LinkModel linkModel)
     {
@@ -72,6 +66,12 @@ public class LinkService : ILinkService
             throw new ApplicationException("Entity could not be loaded.");
         await _linkRepository.DeleteAsync(deletedLink);
         _logger.Information("Entity successfully deleted");
+    }
+    async private Task ValidateLinkIfExist(LinkModel linkModel)
+    {
+        var existingEntity = await _linkRepository.GetByIdAsync(linkModel.Id);
+        if (existingEntity != null)
+            throw new ApplicationException($"{linkModel} with this Id exists already");
     }
     private void ValidateLinkIfNotExist(LinkModel linkModel)
     {

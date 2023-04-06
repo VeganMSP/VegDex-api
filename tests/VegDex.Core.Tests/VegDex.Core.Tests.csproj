@@ -16,7 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <ProjectReference Include="..\..\src\VegDex.Core\VegDex.Core.csproj" />
+        <ProjectReference Include="..\..\src\VegDex.Core\VegDex.Core.csproj" />
     </ItemGroup>
 
 </Project>

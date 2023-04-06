@@ -22,7 +22,10 @@ public class CityModelTests
     public void City_ToString_Name()
     {
         // Arrange
-        var obj = new CityModel{Name = "Hopkins"};
+        var obj = new CityModel
+        {
+            Name = "Hopkins"
+        };
         var expected = "Hopkins";
 
         // Assert
