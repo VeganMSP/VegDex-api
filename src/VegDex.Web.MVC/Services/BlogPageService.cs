@@ -114,7 +114,7 @@ public class BlogPageService : IBlogPageService
         if (mapped == null)
             throw new Exception("Entity could not be mapped");
         await _blogCategoryAppService.Delete(mapped);
-        _logger.Information("Entity successfully deleted: {Blogcategory}", mapped);
+        _logger.Information("Entity successfully deleted: {BlogCategory}", mapped);
     }
     /// <inheritdoc />
     public async Task<IEnumerable<BlogCategoryViewModel>> GetBlogCategories()
