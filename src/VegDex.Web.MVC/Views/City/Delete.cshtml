@@ -18,6 +18,21 @@
     <dd class="col-sm-10">
       @Html.DisplayFor(model => model.Name)
     </dd>
+    @if (Model.Restaurants.Any())
+    {
+      <dt class="col-sm-2">
+        @Html.DisplayNameFor(model => model.Restaurants)
+      </dt>
+      <dd class="col-sm-10">
+        <strong>This will also delete the following restaurants!</strong>
+        <ul>
+          @foreach (var restaurant in Model.Restaurants)
+          {
+            <li>@restaurant.Name</li>
+          }
+        </ul>
+      </dd>
+    }
   </dl>
 
   <form method="post">

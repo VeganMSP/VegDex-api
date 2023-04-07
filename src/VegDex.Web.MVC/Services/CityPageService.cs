@@ -13,11 +13,13 @@ namespace VegDex.Web.MVC.Services;
 public class CityPageService : ICityPageService
 {
     private readonly ICityService _cityAppService;
+    private readonly IRestaurantService _restaurantAppService;
     private readonly ILogger _logger = Log.ForContext<CityPageService>();
     private readonly IMapper _mapper;
-    public CityPageService(ICityService cityAppService, IMapper mapper)
+    public CityPageService(ICityService cityAppService, IRestaurantService restaurantAppService, IMapper mapper)
     {
         _cityAppService = cityAppService ?? throw new ArgumentNullException(nameof(cityAppService));
+        _restaurantAppService = restaurantAppService ?? throw new ArgumentNullException(nameof(restaurantAppService));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
     /// <inheritdoc />
@@ -80,5 +82,12 @@ public class CityPageService : ICityPageService
 
         await _cityAppService.Update(mapped);
         _logger.Information("Entity successfully updated: {City}", mapped);
+    }
+    /// <inheritdoc />
+    public async Task<IEnumerable<RestaurantModel>> GetRestaurantsInCityById(int id)
+    {
+        var restaurants = await _restaurantAppService.GetRestaurantsByLocation(id);
+        var mapped = _mapper.Map<IEnumerable<RestaurantModel>>(restaurants);
+        return mapped;
     }
 }
