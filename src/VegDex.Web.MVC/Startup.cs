@@ -98,7 +98,7 @@ public class Startup
         services.AddScoped<IShoppingPageService, ShoppingPageService>();
         services.AddScoped<IBlogPageService, BlogPageService>();
         services.AddScoped<IMetaPageService, MetaPageService>();
-        // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
+        services.AddScoped<ICityPageService, CityPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
