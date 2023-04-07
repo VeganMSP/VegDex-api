@@ -19,8 +19,11 @@ public class RestaurantRepository : Repository<Restaurant>, IRestaurantRepositor
         return restaurants;
     }
     /// <inheritdoc />
-    public Task<IEnumerable<Restaurant>> GetProductByNameAsync(string productName) =>
-        throw new NotImplementedException();
-    /// <inheritdoc />
-    public Task<IEnumerable<Restaurant>> GetProductListAsync() => throw new NotImplementedException();
+    public async Task<IEnumerable<Restaurant>> GetRestaurantsByCityListAsync(int locationId)
+    {
+        var restaurants = await _dbContext.Set<Restaurant>()
+            .Where(r => r.City.Id == locationId)
+            .ToListAsync();
+        return restaurants;
+    }
 }

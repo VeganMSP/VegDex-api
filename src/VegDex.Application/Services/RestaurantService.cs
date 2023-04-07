@@ -30,8 +30,12 @@ public class RestaurantService : IRestaurantService
         return mapped;
     }
     /// <inheritdoc />
-    public Task<IEnumerable<RestaurantModel>> GetRestaurantByLocation(int locationId) =>
-        throw new NotImplementedException();
+    public async Task<IEnumerable<RestaurantModel>> GetRestaurantsByLocation(int locationId)
+    {
+        var restaurants = await _restaurantRepository.GetRestaurantsByCityListAsync(locationId);
+        var mapped = ObjectMapper.Mapper.Map<IEnumerable<RestaurantModel>>(restaurants);
+        return mapped;
+    }
     /// <inheritdoc />
     public async Task<RestaurantModel> Create(RestaurantModel restaurantModel)
     {

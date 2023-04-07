@@ -1,3 +1,4 @@
+using Microsoft.EntityFrameworkCore;
 using VegDex.Core.Entities;
 using VegDex.Core.Repositories;
 using VegDex.Core.Specifications;
@@ -16,5 +17,13 @@ public class CityRepository : Repository<City>, ICityRepository
         var spec = new CitiesWithRestaurantsSpecification();
         var cities = await GetAsync(spec);
         return cities;
+    }
+    /// <inheritdoc />
+    public async Task<City> GetByNameAsync(string cityName)
+    {
+        var city = await _dbContext.Set<City>()
+            .Where(c => c.Name == cityName)
+            .FirstAsync();
+        return city;
     }
 }
