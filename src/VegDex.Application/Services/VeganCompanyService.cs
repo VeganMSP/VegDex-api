@@ -1,4 +1,3 @@
-using System.Runtime.Serialization;
 using Serilog;
 using VegDex.Application.Interfaces;
 using VegDex.Application.Mapper;

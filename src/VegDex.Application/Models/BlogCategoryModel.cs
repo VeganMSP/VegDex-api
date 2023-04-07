@@ -1,4 +1,3 @@
-using System.ComponentModel.DataAnnotations;
 using VegDex.Application.Models.Base;
 
 namespace VegDex.Application.Models;
