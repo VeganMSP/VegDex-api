@@ -15,20 +15,32 @@ public class CityService : ICityService
         _cityRepository = cityRepository;
     }
     /// <inheritdoc />
-    public async Task<IEnumerable<CityModel>> GetCityList()
+    public async Task<IEnumerable<CityModel>> GetCities()
     {
         var cities = await _cityRepository.GetAllAsync();
         var mapped = ObjectMapper.Mapper.Map<IEnumerable<CityModel>>(cities);
         return mapped;
     }
     /// <inheritdoc />
-    public Task<CityModel> GetCityById(int cityId) => throw new NotImplementedException();
+    public async Task<CityModel> GetCityById(int cityId)
+    {
+        var city = await _cityRepository.GetByIdAsync(cityId);
+        var mapped = ObjectMapper.Mapper.Map<CityModel>(city);
+        return mapped;
+    }
     /// <inheritdoc />
-    public Task<CityModel> Create(CityModel city) => throw new NotImplementedException();
+    public async Task<CityModel> Create(CityModel city) => throw new NotImplementedException();
     /// <inheritdoc />
-    public Task Update(CityModel city) => throw new NotImplementedException();
+    public async Task Update(CityModel city) => throw new NotImplementedException();
     /// <inheritdoc />
-    public Task Delete(CityModel city) => throw new NotImplementedException();
+    public async Task<CityModel> GetCityByName(string cityName)
+    {
+        var city = await _cityRepository.GetByNameAsync(cityName);
+        var mapped = ObjectMapper.Mapper.Map<CityModel>(city);
+        return mapped;
+    }
+    /// <inheritdoc />
+    public async Task Delete(CityModel city) => throw new NotImplementedException();
     /// <inheritdoc />
     public async Task<IEnumerable<CityModel>> GetCitiesWithRestaurants()
     {

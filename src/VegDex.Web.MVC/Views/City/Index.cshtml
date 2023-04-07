@@ -1,25 +1,23 @@
-@model RestaurantViewModel
+@model IEnumerable<CityViewModel>
 @{
-  ViewData["Title"] = "Restaurants";
+  ViewData["Title"] = "Cities";
 }
 
 <div class="text-center">
-  <h1 class="display-4">Restaurants</h1>
+  <h1 class="display-4">Cities</h1>
 </div>
 
 <p>
-  <a asp-action="Create">Create New</a> |
-  <a asp-controller="City"
-     asp-action="Index">Cities</a>
+  <a asp-action="Create">Create New</a>
 </p>
 
-@if (!Model.Cities.Any())
+@if (!Model.Any())
 {
   <p>There are no restaurants in the database!</p>
 }
 else
 {
-  foreach (var city in Model.Cities)
+  foreach (var city in Model)
   {
     <h2>@city.Name</h2>
     if (city.Restaurants.Any())

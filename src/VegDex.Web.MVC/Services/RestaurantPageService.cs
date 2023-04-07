@@ -46,7 +46,7 @@ public class RestaurantPageService : IRestaurantsPageService
     /// <inheritdoc />
     public async Task<IEnumerable<CityModel>> GetCities()
     {
-        var list = await _cityAppService.GetCityList();
+        var list = await _cityAppService.GetCities();
         var mapped = _mapper.Map<IEnumerable<CityModel>>(list);
         return mapped;
     }
