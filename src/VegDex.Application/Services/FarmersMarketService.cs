@@ -1,5 +1,3 @@
-using VegDex.Core;
-
 namespace VegDex.Application.Services;
 
 public class FarmersMarketService : IFarmersMarketService
