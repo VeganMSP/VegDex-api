@@ -1,9 +1,4 @@
 using System.Linq.Expressions;
-using Microsoft.EntityFrameworkCore;
-using VegDex.Core.Entities.Base;
-using VegDex.Core.Repositories.Base;
-using VegDex.Core.Specifications.Base;
-using VegDex.Infrastructure.Context;
 
 namespace VegDex.Infrastructure.Repositories.Base;
 

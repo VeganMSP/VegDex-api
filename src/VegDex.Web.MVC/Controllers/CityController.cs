@@ -5,7 +5,6 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using VegDex.Application.Models;
 using VegDex.Web.MVC.Interfaces;
-using ILogger = Serilog.ILogger;
 
 namespace VegDex.Web.MVC.Controllers;
 

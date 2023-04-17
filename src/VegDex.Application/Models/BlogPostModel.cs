@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using VegDex.Application.Models.Base;
 
 namespace VegDex.Application.Models;
 

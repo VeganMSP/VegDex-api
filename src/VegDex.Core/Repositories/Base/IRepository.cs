@@ -1,6 +1,4 @@
 using System.Linq.Expressions;
-using VegDex.Core.Entities.Base;
-using VegDex.Core.Specifications.Base;
 
 namespace VegDex.Core.Repositories.Base;
 

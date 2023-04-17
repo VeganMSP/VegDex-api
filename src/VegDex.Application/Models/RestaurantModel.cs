@@ -1,5 +1,3 @@
-using VegDex.Application.Models.Base;
-
 namespace VegDex.Application.Models;
 
 public class RestaurantModel : BaseModel

@@ -1,6 +1,4 @@
 using AutoMapper;
-using VegDex.Application.Models;
-using VegDex.Core.Entities;
 
 namespace VegDex.Application.Mapper;
 

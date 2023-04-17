@@ -5,7 +5,6 @@ using Serilog;
 using VegDex.Web.MVC.Interfaces;
 using VegDex.Web.MVC.ViewModels;
 using VegDex.Web.MVC.ViewModels.Meta;
-using ILogger = Serilog.ILogger;
 
 namespace VegDex.Web.MVC.Controllers;
 

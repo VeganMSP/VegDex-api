@@ -1,6 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using VegDex.Core.Entities;
-
 namespace VegDex.Infrastructure.Context;
 
 public class VegDexContext : DbContext
