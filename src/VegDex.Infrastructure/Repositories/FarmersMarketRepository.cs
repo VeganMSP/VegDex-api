@@ -1,7 +1,7 @@
 using Microsoft.EntityFrameworkCore;
 using Serilog;
-using VegDex.Core;
 using VegDex.Core.Entities;
+using VegDex.Core.Repositories;
 using VegDex.Infrastructure.Context;
 using VegDex.Infrastructure.Repositories.Base;
 
