@@ -1,9 +1,4 @@
-using Serilog;
-using VegDex.Application.Interfaces;
-using VegDex.Application.Mapper;
-using VegDex.Application.Models;
 using VegDex.Core;
-using VegDex.Core.Entities;
 
 namespace VegDex.Application.Services;
 

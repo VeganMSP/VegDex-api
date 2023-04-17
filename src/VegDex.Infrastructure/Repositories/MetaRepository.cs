@@ -1,8 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using VegDex.Core.Entities;
-using VegDex.Core.Repositories;
-using VegDex.Infrastructure.Context;
-
 namespace VegDex.Infrastructure.Repositories;
 
 public class MetaRepository : IMetaRepository

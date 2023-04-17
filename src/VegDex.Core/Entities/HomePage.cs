@@ -1,5 +1,3 @@
-using VegDex.Core.Entities.Base;
-
 namespace VegDex.Core.Entities;
 
 public class HomePage : Entity

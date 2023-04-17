@@ -1,10 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using Serilog;
-using VegDex.Core;
-using VegDex.Core.Entities;
-using VegDex.Infrastructure.Context;
-using VegDex.Infrastructure.Repositories.Base;
-
 namespace VegDex.Infrastructure.Repositories;
 
 public class FarmersMarketRepository : Repository<FarmersMarket>, IFarmersMarketRepository
