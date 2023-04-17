@@ -2,7 +2,6 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using VegDex.Application.Interfaces;
 using VegDex.Application.Services;
-using VegDex.Core;
 using VegDex.Core.Configuration;
 using VegDex.Core.Repositories;
 using VegDex.Core.Repositories.Base;
