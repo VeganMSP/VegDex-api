@@ -1,13 +1,15 @@
-﻿using System.Diagnostics;
+﻿using System.Net;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using VegDex.Web.MVC.Interfaces;
-using VegDex.Web.MVC.ViewModels;
 using VegDex.Web.MVC.ViewModels.Meta;
 
 namespace VegDex.Web.MVC.Controllers;
 
+[ApiVersion("1")]
+[Route("api/v{version:apiVersion}/[controller]")]
+[ApiController]
 public class MetaController : Controller
 {
     private static readonly ILogger _logger = Log.ForContext<MetaController>();
@@ -16,52 +18,34 @@ public class MetaController : Controller
     {
         _metaPageService = metaPageService;
     }
+    [HttpGet]
     [Route("About")]
-    public async Task<IActionResult> About()
+    public AboutPageViewModel About()
     {
         _logger.Information("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        var pageViewModel = await _metaPageService.GetAboutPage();
-        return View(pageViewModel);
-    }
-    [Route("About/Edit")]
-    public async Task<IActionResult> EditAboutPage()
-    {
-        var page = await _metaPageService.GetAboutPage();
-        return View(page);
+        var pageViewModel = _metaPageService.GetAboutPage().Result;
+        return pageViewModel;
     }
     [HttpPost]
-    [Route("About/Edit")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditAboutPage(AboutPageViewModel page)
+    [Route("About")]
+    public StatusCodeResult EditAboutPage(AboutPageViewModel page)
     {
-        if (!ModelState.IsValid) return View(page);
-        await _metaPageService.UpdateAboutPage(page.Content);
-        return RedirectToAction("Index");
-    }
-    [Route("Home/Edit")]
-    public async Task<IActionResult> EditHomePage()
-    {
-        var page = await _metaPageService.GetHomePage();
-        return View(page);
+        if (!ModelState.IsValid) return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+        _metaPageService.UpdateAboutPage(page.Content);
+        return new StatusCodeResult((int)HttpStatusCode.OK);
     }
     [HttpPost]
-    [Route("Home/Edit")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditHomePage(HomePageViewModel page)
+    public StatusCodeResult EditHomePage(HomePageViewModel page)
     {
-        if (!ModelState.IsValid) return View(page);
-        await _metaPageService.UpdateHomePage(page.Content);
-        return RedirectToAction("Index");
+        if (!ModelState.IsValid) return new StatusCodeResult((int)HttpStatusCode.BadRequest);
+        _metaPageService.UpdateHomePage(page.Content);
+        return new StatusCodeResult((int)HttpStatusCode.OK);
     }
-    [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
-    public IActionResult Error() => View(new ErrorViewModel
-    {
-        RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier
-    });
-    public async Task<IActionResult> Index()
+    [HttpGet]
+    public HomePageViewModel Index()
     {
         _logger.Information("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        var pageViewModel = await _metaPageService.GetHomePage();
-        return View(pageViewModel);
+        var pageViewModel = _metaPageService.GetHomePage().Result;
+        return pageViewModel;
     }
 }

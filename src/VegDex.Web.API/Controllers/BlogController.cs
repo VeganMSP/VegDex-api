@@ -19,6 +19,7 @@ public class BlogController : Controller
             blogPageService ?? throw new ArgumentNullException(nameof(blogPageService));
     }
     [Route("Blog/Categories")]
+    [HttpGet]
     public async Task<IActionResult> BlogCategoriesIndex()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
@@ -70,6 +71,7 @@ public class BlogController : Controller
         return View(blogPostModel);
     }
     [Route("Blog/Category/Create")]
+    [HttpGet]
     public async Task<IActionResult> CreateBlogCategory()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
@@ -84,6 +86,7 @@ public class BlogController : Controller
         _blogPageService.CreateBlogCategory(blogCategoryModel);
         return RedirectToAction("BlogCategoriesIndex");
     }
+    [HttpGet]
     public async Task<IActionResult> Delete(int? id)
     {
         if (id == null)
@@ -94,6 +97,7 @@ public class BlogController : Controller
         return View(blogPost);
     }
     [Route("Blog/Category/Delete")]
+    [HttpGet]
     public async Task<IActionResult> DeleteBlogCategory(int? id)
     {
         if (id == null)
@@ -178,6 +182,7 @@ public class BlogController : Controller
         return View(blogPostModel);
     }
     [Route("Blog/Category/Edit")]
+    [HttpGet]
     public async Task<IActionResult> EditBlogCategory(int? id)
     {
         if (id == null)
@@ -211,6 +216,7 @@ public class BlogController : Controller
         return View(blogCategoryModel);
     }
     // GET
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);

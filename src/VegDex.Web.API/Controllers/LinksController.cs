@@ -37,6 +37,7 @@ public class LinksController : Controller
         return View(link);
     }
     [Route("Links/LinkCategory/Create")]
+    [HttpGet]
     public async Task<IActionResult> CreateLinkCategory()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
@@ -80,6 +81,7 @@ public class LinksController : Controller
         return RedirectToAction("Index");
     }
     [Route("Links/LinkCategory/Delete")]
+    [HttpGet]
     public async Task<IActionResult> DeleteLinkCategory(int? id)
     {
         if (id == null)
@@ -101,6 +103,7 @@ public class LinksController : Controller
         await _linksPageService.DeleteLinkCategory(linkCategory);
         return RedirectToAction("LinkCategoriesIndex");
     }
+    [HttpGet]
     public async Task<IActionResult> Edit(int? id)
     {
         if (id == null)
@@ -148,6 +151,7 @@ public class LinksController : Controller
         return View(link);
     }
     [Route("Links/LinkCategory/Edit")]
+    [HttpGet]
     public async Task<IActionResult> EditLinkCategory(int? id)
     {
         if (id == null)
@@ -181,6 +185,7 @@ public class LinksController : Controller
         return View(linkCategoryModel);
     }
     // GET
+    [HttpGet]
     public async Task<IActionResult> Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
@@ -191,6 +196,7 @@ public class LinksController : Controller
         };
         return View(viewModel);
     }
+    [HttpGet]
     [Route("Links/LinkCategories")]
     public async Task<IActionResult> LinkCategoriesIndex()
     {

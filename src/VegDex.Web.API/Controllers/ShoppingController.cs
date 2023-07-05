@@ -16,6 +16,7 @@ public class ShoppingController : Controller
         _shoppingPageService =
             shoppingPageService ?? throw new ArgumentNullException(nameof(shoppingPageService));
     }
+    [HttpGet]
     [Route("Shopping/FarmersMarket/Create")]
     public async Task<IActionResult> CreateFarmersMarket()
     {
@@ -32,6 +33,7 @@ public class ShoppingController : Controller
         _shoppingPageService.CreateFarmersMarket(farmersMarketModel);
         return RedirectToAction("Index");
     }
+    [HttpGet]
     [Route("Shopping/VeganCompany/Create")]
     public async Task<IActionResult> CreateVeganCompany()
     {
@@ -48,6 +50,7 @@ public class ShoppingController : Controller
         _shoppingPageService.CreateVeganCompany(veganCompanyModel);
         return RedirectToAction("Index");
     }
+    [HttpGet]
     [Route("Shopping/FarmersMarket/Delete")]
     public async Task<IActionResult> DeleteFarmersMarket(int id)
     {
@@ -73,6 +76,7 @@ public class ShoppingController : Controller
         await _shoppingPageService.DeleteFarmersMarket(farmersMarket);
         return RedirectToAction("Index");
     }
+    [HttpGet]
     [Route("Shopping/VeganCompany/Delete")]
     public async Task<IActionResult> DeleteVeganCompany(int id)
     {
@@ -98,6 +102,7 @@ public class ShoppingController : Controller
         await _shoppingPageService.DeleteVeganCompany(veganCompany);
         return RedirectToAction("Index");
     }
+    [HttpGet]
     [Route("Shopping/FarmersMarket/Edit")]
     public async Task<IActionResult> EditFarmersMarket(int id)
     {
@@ -131,6 +136,7 @@ public class ShoppingController : Controller
         }
         return View(farmersMarketModel);
     }
+    [HttpGet]
     [Route("Shopping/VeganCompany/Edit")]
     public async Task<IActionResult> EditVeganCompany(int id)
     {
