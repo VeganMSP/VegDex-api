@@ -26,7 +26,7 @@ public class MetaController : Controller
         var pageViewModel = _metaPageService.GetAboutPage().Result;
         return pageViewModel;
     }
-    [HttpPost]
+    [HttpPut]
     [Route("About")]
     public StatusCodeResult EditAboutPage(AboutPageViewModel page)
     {
@@ -34,7 +34,7 @@ public class MetaController : Controller
         _metaPageService.UpdateAboutPage(page.Content);
         return new StatusCodeResult((int)HttpStatusCode.OK);
     }
-    [HttpPost]
+    [HttpPut]
     public StatusCodeResult EditHomePage(HomePageViewModel page)
     {
         if (!ModelState.IsValid) return new StatusCodeResult((int)HttpStatusCode.BadRequest);
