@@ -42,8 +42,8 @@ namespace VegDex.Infrastructure.Migrations
                         {
                             Id = 1,
                             Content = "VeganMSP.com is a new project from <a href=\"https://jrgnsn.net\" target=\"_blank\">Matthew Jorgensen</a>. Inspired\nby <a href=\"https://veganmilwaukee.com/\" target=\"_blank\">VeganMKE.com</a>, this site aims to be a complete-as-possible\nguide to being vegan in and around the Minneapolis/St. Paul area. But\nwe're always welcome to suggestions! Find something wrong? Feel free to\n<a href=\"https://github.com/VeganMSP/VeganMSP.com/issues\">open a ticket</a> on our tracker.",
-                            DateCreated = new DateTime(2023, 4, 6, 9, 55, 22, 405, DateTimeKind.Local).AddTicks(866),
-                            DateUpdated = new DateTime(2023, 4, 6, 9, 55, 22, 405, DateTimeKind.Local).AddTicks(883)
+                            DateCreated = new DateTime(2023, 4, 6, 11, 47, 25, 900, DateTimeKind.Local).AddTicks(6009),
+                            DateUpdated = new DateTime(2023, 4, 6, 11, 47, 25, 900, DateTimeKind.Local).AddTicks(6024)
                         });
                 });
 
@@ -78,7 +78,7 @@ namespace VegDex.Infrastructure.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int>("CategoryId")
+                    b.Property<int>("BlogCategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Content")
@@ -104,7 +104,7 @@ namespace VegDex.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("CategoryId");
+                    b.HasIndex("BlogCategoryId");
 
                     b.ToTable("BlogPost", (string)null);
                 });
@@ -196,8 +196,8 @@ namespace VegDex.Infrastructure.Migrations
                         {
                             Id = 1,
                             Content = "It’s easy being vegan in Minneapolis and St. Paul, but it can be hard to\nknow where to start, or where to look for information and answers. We\naim to fix that.\n\nAt VeganMSP.com you will find restaurant and food guides, shopping\nguides, and other information to help you on your vegan journey.",
-                            DateCreated = new DateTime(2023, 4, 6, 9, 55, 22, 404, DateTimeKind.Local).AddTicks(1201),
-                            DateUpdated = new DateTime(2023, 4, 6, 9, 55, 22, 404, DateTimeKind.Local).AddTicks(1246)
+                            DateCreated = new DateTime(2023, 4, 6, 11, 47, 25, 900, DateTimeKind.Local).AddTicks(113),
+                            DateUpdated = new DateTime(2023, 4, 6, 11, 47, 25, 900, DateTimeKind.Local).AddTicks(162)
                         });
                 });
 
@@ -340,7 +340,7 @@ namespace VegDex.Infrastructure.Migrations
                 {
                     b.HasOne("VegDex.Core.Entities.BlogCategory", "Category")
                         .WithMany()
-                        .HasForeignKey("CategoryId")
+                        .HasForeignKey("BlogCategoryId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 

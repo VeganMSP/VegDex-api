@@ -1,5 +1,3 @@
-using VegDex.Application.Models;
-
 namespace VegDex.Application.Interfaces;
 
 public interface IVeganCompanyService

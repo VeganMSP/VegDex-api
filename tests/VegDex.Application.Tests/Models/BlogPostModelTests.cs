@@ -19,7 +19,8 @@ public class BlogPostModelTests
         var obj = new BlogPostModel();
 
         // Assert
-        Assert.AreEqual(8, obj.PropertyCount());
+        Assert.AreEqual(9, obj.PropertyCount());
+        Assert.IsTrue(obj.HasProperty("BlogCategoryId"));
         Assert.IsTrue(obj.HasProperty("Category"));
         Assert.IsTrue(obj.HasProperty("Content"));
         Assert.IsTrue(obj.HasProperty("DateCreated"));

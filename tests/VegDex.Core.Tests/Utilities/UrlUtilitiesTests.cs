@@ -1,6 +1,6 @@
 using VegDex.Core.Utilities;
 
-namespace VegDex.Application.Tests.Utilities;
+namespace VegDex.Core.Tests.Utilities;
 
 [TestClass]
 public class UrlUtilitiesTests

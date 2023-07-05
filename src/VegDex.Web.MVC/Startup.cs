@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.EntityFrameworkCore;
 using VegDex.Application.Interfaces;
 using VegDex.Application.Services;
-using VegDex.Core;
 using VegDex.Core.Configuration;
 using VegDex.Core.Repositories;
 using VegDex.Core.Repositories.Base;
@@ -49,6 +48,7 @@ public class Startup
         app.UseAuthorization();
         app.UseAuthentication();
         app.UseSession();
+        app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:8080"));
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(
@@ -100,7 +100,7 @@ public class Startup
         services.AddScoped<IShoppingPageService, ShoppingPageService>();
         services.AddScoped<IBlogPageService, BlogPageService>();
         services.AddScoped<IMetaPageService, MetaPageService>();
-        // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
+        services.AddScoped<ICityPageService, CityPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
         // services.AddScoped<IRestaurantsPageService, RestaurantPageService>();
@@ -123,6 +123,7 @@ public class Startup
         services.AddHttpContextAccessor();
         services.AddControllersWithViews();
         services.AddSession();
+        services.AddCors();
 
         services.AddDbContext<AppKeysContext>(c =>
             c.UseSqlite("Data Source=../keys.sqlite3")

@@ -1,5 +1,3 @@
-using VegDex.Core.Entities;
-
 namespace VegDex.Core.Repositories;
 
 public interface IMetaRepository

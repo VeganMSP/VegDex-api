@@ -1,5 +1,4 @@
 using Microsoft.AspNetCore.DataProtection.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore;
 
 namespace VegDex.Infrastructure.Context;
 

@@ -1,7 +1,3 @@
-using Microsoft.EntityFrameworkCore;
-using VegDex.Core.Entities.Base;
-using VegDex.Core.Specifications.Base;
-
 namespace VegDex.Infrastructure.Repositories.Base;
 
 public class SpecificationEvaluator<T> where T : Entity

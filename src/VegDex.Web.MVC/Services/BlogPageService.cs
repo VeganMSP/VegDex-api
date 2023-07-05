@@ -5,7 +5,6 @@ using VegDex.Application.Models;
 using VegDex.Core.Utilities;
 using VegDex.Web.MVC.Interfaces;
 using VegDex.Web.MVC.ViewModels;
-using ILogger = Serilog.ILogger;
 
 namespace VegDex.Web.MVC.Services;
 
@@ -33,7 +32,15 @@ public class BlogPageService : IBlogPageService
         return mapped;
     }
     /// <inheritdoc />
-    public async Task<IEnumerable<BlogPostModel>> GetBlogPosts()
+    public async Task<IEnumerable<BlogPostModel>> GetPublishedBlogPosts()
+    {
+        var posts = await _blogPostAppService.GetBlogPosts();
+        var mapped = _mapper.Map<IEnumerable<BlogPostModel>>(posts);
+        return mapped
+            .Where(p => p.Status == PostStatus.PUBLISHED);
+    }
+    /// <inheritdoc />
+    public async Task<IEnumerable<BlogPostModel>> GetAllBlogPosts()
     {
         var posts = await _blogPostAppService.GetBlogPosts();
         var mapped = _mapper.Map<IEnumerable<BlogPostModel>>(posts);
@@ -47,6 +54,44 @@ public class BlogPageService : IBlogPageService
             throw new Exception("Entity could not be mapped");
         await _blogCategoryAppService.Update(mapped);
         _logger.Information("Entity successfully updated: {BlogCategory}", mapped);
+    }
+    /// <inheritdoc />
+    public async Task<BlogPostModel> GetBlogPostById(int id)
+    {
+        var post = await _blogPostAppService.GetBlogPostById(id);
+        var mapped = _mapper.Map<BlogPostModel>(post);
+        return mapped;
+    }
+    /// <inheritdoc />
+    public async Task DeleteBlogPost(BlogPostModel blogPostModel)
+    {
+        var mapped = _mapper.Map<BlogPostModel>(blogPostModel);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        await _blogPostAppService.Delete(mapped);
+        _logger.Information("Entity successfully deleted: {BlogPost}", mapped);
+    }
+    /// <inheritdoc />
+    public async Task UpdateBlogPost(BlogPostModel blogPostModel)
+    {
+        var mapped = _mapper.Map<BlogPostModel>(blogPostModel);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        await _blogPostAppService.Update(mapped);
+        _logger.Information("Entity successfully updated: {BlogPost}", mapped);
+    }
+    /// <inheritdoc />
+    public async Task<BlogPostModel> CreateBlogPost(BlogPostModel blogPostModel)
+    {
+        var mapped = _mapper.Map<BlogPostModel>(blogPostModel);
+        if (mapped == null)
+            throw new Exception("Entity could not be mapped");
+        mapped.Slug = mapped.Title.ToUrlSlug();
+        var entityDto = await _blogPostAppService.Create(mapped);
+        _logger.Information("Entity successfully created: {BlogPost}", blogPostModel);
+
+        var mappedModel = _mapper.Map<BlogPostModel>(entityDto);
+        return mappedModel;
     }
     /// <inheritdoc />
     public async Task<BlogCategoryModel> CreateBlogCategory(BlogCategoryModel blogCategoryModel)
@@ -68,7 +113,7 @@ public class BlogPageService : IBlogPageService
         if (mapped == null)
             throw new Exception("Entity could not be mapped");
         await _blogCategoryAppService.Delete(mapped);
-        _logger.Information("Entity successfully deleted: {Blogcategory}", mapped);
+        _logger.Information("Entity successfully deleted: {BlogCategory}", mapped);
     }
     /// <inheritdoc />
     public async Task<IEnumerable<BlogCategoryViewModel>> GetBlogCategories()

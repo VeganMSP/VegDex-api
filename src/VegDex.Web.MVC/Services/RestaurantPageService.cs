@@ -6,7 +6,6 @@ using VegDex.Application.Models;
 using VegDex.Core.Utilities;
 using VegDex.Web.MVC.Interfaces;
 using VegDex.Web.MVC.ViewModels;
-using ILogger = Serilog.ILogger;
 
 namespace VegDex.Web.MVC.Services;
 
@@ -46,7 +45,7 @@ public class RestaurantPageService : IRestaurantsPageService
     /// <inheritdoc />
     public async Task<IEnumerable<CityModel>> GetCities()
     {
-        var list = await _cityAppService.GetCityList();
+        var list = await _cityAppService.GetCities();
         var mapped = _mapper.Map<IEnumerable<CityModel>>(list);
         return mapped;
     }
