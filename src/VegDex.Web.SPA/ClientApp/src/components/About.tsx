@@ -1,9 +1,9 @@
 import React, {Component} from 'react';
 
-export class About extends Component {
+export class About extends Component<any, any> {
 	static displayName = About.name;
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {restaurants: [], loading: true};
 	}
@@ -11,7 +11,7 @@ export class About extends Component {
 	render() {
 		return (
 			<div>
-				<h2>{this.displayName}</h2>
+				<h2>{About.displayName}</h2>
 				TODO
 			</div>
 		);

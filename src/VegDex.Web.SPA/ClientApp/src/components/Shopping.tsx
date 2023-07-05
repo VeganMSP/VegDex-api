@@ -1,10 +1,19 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
+import {IFarmersMarket} from '../models/IFarmersMarket';
+import {IVeganCompany} from '../models/IVeganCompany';
 
-export class Shopping extends Component {
+interface IState {
+	farmers_markets: IFarmersMarket[];
+	vegan_companies: IVeganCompany[];
+	loading_vc: boolean;
+	loading_fm: boolean;
+}
+
+export class Shopping extends Component<any, IState> {
 	static displayName = Shopping.name;
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 			farmers_markets: [],
@@ -19,7 +28,7 @@ export class Shopping extends Component {
 		this.getFarmersMarkets();
 	}
 
-	static renderVeganCompaniesList(vegan_companies) {
+	static renderVeganCompaniesList(vegan_companies: IVeganCompany[]) {
 		if (vegan_companies.length > 0) {
 			return (
 				<div>
@@ -41,7 +50,7 @@ export class Shopping extends Component {
 		}
 	}
 
-	static renderFarmersMarketsList(farmers_markets) {
+	static renderFarmersMarketsList(farmers_markets: IFarmersMarket[]) {
 		if (farmers_markets.length > 0) {
 			return (
 				<div>
@@ -97,7 +106,7 @@ export class Shopping extends Component {
 	}
 }
 
-class FarmersMarket extends Component {
+class FarmersMarket extends Component<{ market: IFarmersMarket }> {
 	static propTypes = {
 		market: PropTypes.object
 	}
@@ -113,7 +122,7 @@ class FarmersMarket extends Component {
 	}
 }
 
-class VeganCompany extends Component {
+class VeganCompany extends Component<{ company: IVeganCompany }> {
 	static propTypes = {
 		company: PropTypes.object
 	}

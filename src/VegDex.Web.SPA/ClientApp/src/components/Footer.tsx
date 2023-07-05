@@ -1,9 +1,15 @@
 import React, {Component} from 'react';
+import {IRestaurant} from '../models/IRestaurant';
 
-export class Footer extends Component {
+interface IState {
+	restaurants: IRestaurant[];
+	loading: boolean;
+}
+
+export class Footer extends Component<any, IState> {
 	static displayName = Footer.name;
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {restaurants: [], loading: true};
 	}

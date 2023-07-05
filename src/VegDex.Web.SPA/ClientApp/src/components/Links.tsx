@@ -1,11 +1,18 @@
 import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import NewLink from './_new_link';
+import {ILinkCategory} from '../models/ILinkCategory';
+import {ILink} from '../models/ILink';
 
-export class Links extends Component {
+interface IState {
+	links_by_category: ILinkCategory[];
+	loading: boolean;
+}
+
+export class Links extends Component<any, IState> {
 	static displayName = Links.name;
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {
 			links_by_category: [],
@@ -17,7 +24,7 @@ export class Links extends Component {
 		this.populateLinksByCategory();
 	}
 
-	static renderLinksList(links_by_category) {
+	static renderLinksList(links_by_category: ILinkCategory[]) {
 		return (
 			<div>
 				{links_by_category.map(category =>
@@ -52,7 +59,7 @@ export class Links extends Component {
 	}
 }
 
-export class LinkCategory extends Component {
+export class LinkCategory extends Component<{ category: ILinkCategory, links: ILink[]}> {
 	static propTypes = {
 		category: PropTypes.object,
 		links: PropTypes.array
@@ -74,7 +81,7 @@ export class LinkCategory extends Component {
 	}
 }
 
-export class Link extends Component {
+export class Link extends Component<{ link: ILink }> {
 	static propTypes = {
 		link: PropTypes.object,
 	}

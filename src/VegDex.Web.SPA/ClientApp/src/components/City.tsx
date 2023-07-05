@@ -1,8 +1,15 @@
 import React, {Component} from 'react';
 import PropTypes from 'prop-types';
+import {ICity} from '../models/ICity';
+import {IRestaurant} from '../models/IRestaurant';
 import {Restaurant} from './Restaurant';
 
-export class City extends Component {
+interface IProps {
+	city: ICity;
+	restaurants: IRestaurant[];
+}
+
+export class City extends Component<IProps> {
 	static propTypes = {
 		city: PropTypes.object,
 		restaurants: PropTypes.array

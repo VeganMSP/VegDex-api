@@ -1,9 +1,16 @@
-import React, {Component} from 'react';
-import {Button, Form, Col, FormGroup, Input, Modal, ModalBody, Label} from 'reactstrap';
+import React, {ChangeEvent, Component, FormEvent} from 'react';
+import {Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody} from 'reactstrap';
 import AsyncCreatableSelect from 'react-select/async-creatable';
+import {ILinkCategory} from '../models/ILinkCategory';
 
-class NewLink extends Component {
-  constructor(props) {
+interface IState {
+  link_categories: string[],
+  newLinkModal: boolean,
+  form: { [key: string]: string }
+}
+
+class NewLink extends Component<any, IState> {
+  constructor(props: any) {
     super(props);
     this.state = {
       link_categories: [],
@@ -19,17 +26,23 @@ class NewLink extends Component {
     }));
   }
 
-  handleChange = (e) => {
-    this.state.form[e.target.name] = e.target.value;
-  }
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    this.setState(state => {
+      state.form[e.target.name] = e.target.value;
+    });
+  };
 
-  handleLinkCategorySelectChange = (e) => {
+  handleLinkCategorySelectChange = (e: any) => {
+    console.log(typeof(e));
     // TODO: handle creating new categories here
-    this.state.form['link_category_id'] = e.id;
-  }
+    this.setState(state => {
+      state.form['link_category_id'] = e.id;
+    });
+  };
 
-  submitForm = async (e) => {
+  submitForm = async (e: FormEvent) => {
     e.preventDefault();
+    const target = e.target as HTMLFormElement;
     try {
       const response = await fetch('/api/v1/links', {
         method: 'POST',
@@ -40,7 +53,7 @@ class NewLink extends Component {
         },
       });
       if (!response.ok) throw Error(response.statusText);
-      e.target.reset();
+      target.reset();
       this.toggleLinkForm();
     } catch (error) {
       console.error(error);
@@ -51,11 +64,11 @@ class NewLink extends Component {
     this.populateLinkCategories();
   }
 
-  static renderLinkCategoryOptions(link_categories) {
+  static renderLinkCategoryOptions(link_categories: ILinkCategory[]) {
     return (
       <>
         {link_categories.map(category =>
-          <option value={category.id}>{category.name}</option>
+          <option key={category.id} value={category.id}>{category.name}</option>
         )}
       </>
     )
@@ -65,7 +78,7 @@ class NewLink extends Component {
 
     return (
       <>
-        <Button id="link_form_toggle" type="primary" onClick={this.toggleLinkForm}>
+        <Button id="link_form_toggle" className={'primary'} onClick={this.toggleLinkForm}>
           Create New +
         </Button>
 

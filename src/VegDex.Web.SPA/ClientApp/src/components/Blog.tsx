@@ -3,9 +3,16 @@ import {Link} from 'react-router-dom';
 import {format} from 'date-fns';
 import PropTypes from "prop-types";
 import NewBlogPost from './_new_blog_post';
+import {BASE_API_URL} from '../config';
+import {IBlogPost} from '../models/IBlogPost';
 
-export class Blog extends Component {
-  constructor(props) {
+interface IState {
+  blog_posts: IBlogPost[];
+  loading: boolean
+}
+
+export class Blog extends Component<any, IState> {
+  constructor(props: any) {
     super(props);
     this.state = {
       blog_posts: [],
@@ -14,7 +21,7 @@ export class Blog extends Component {
     this.handleFormSubmit = this.handleFormSubmit.bind(NewBlogPost);
   }
 
-  handleFormSubmit(title, content, status) {
+  handleFormSubmit(title: string, content: string, status: string) {
     console.log(title, content, status);
   }
 
@@ -22,7 +29,7 @@ export class Blog extends Component {
     this.getBlogPosts();
   }
 
-  static renderBlogPosts(blog_posts) {
+  static renderBlogPosts(blog_posts: IBlogPost[]) {
     if (blog_posts.length > 0) {
       return (
         <div>
@@ -61,14 +68,14 @@ export class Blog extends Component {
   }
 
   async getBlogPosts() {
-    const response = await fetch('/api/v1/blog_posts');
+    const response = await fetch(`${BASE_API_URL}/blog_posts`);
     const data = await response.json();
     this.setState({blog_posts: data, loading: false});
   }
 }
 
-class BlogPost extends Component {
-  constructor(props) {
+class BlogPost extends Component<{ post: IBlogPost }> {
+  constructor(props: { post: IBlogPost }) {
     super(props);
   }
 

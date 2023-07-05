@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {Button, Form, Col, FormGroup, Input, Modal, ModalBody, Label} from 'reactstrap';
+import React, {ChangeEvent, Component, FormEvent} from 'react';
+import {Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody} from 'reactstrap';
 import AsyncCreatableSelect from "react-select/async-creatable";
 
 export const BlogPostStatus = {
@@ -7,8 +7,13 @@ export const BlogPostStatus = {
   PUBLISHED: 1
 };
 
-class NewBlogPost extends Component {
-  constructor(props) {
+interface IState {
+  modal: boolean,
+  form: { [key: string]: string }
+}
+
+class NewBlogPost extends Component<any, IState> {
+  constructor(props: any) {
     super(props);
     this.state = {
       modal: false,
@@ -24,17 +29,22 @@ class NewBlogPost extends Component {
     }));
   }
 
-  handleChange = (e) => {
-    this.state.form[e.target.name] = e.target.value;
+  handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    this.setState(state => {
+      state.form[e.target.name] = e.target.value;
+    });
   }
 
-  handleBlogPostCategorySelectChange = (e) => {
+  handleBlogPostCategorySelectChange = (e: any /*ChangeEvent<HTMLInputElement>*/) => {
     // TODO: handle new category creation here
-    this.state.form['blog_post_category_id'] = e.id;
+    this.setState(state => {
+      state.form['blog_post_category_id'] = e.id;
+    });
   }
 
-  submitForm = async (e) => {
+  submitForm = async (e: FormEvent) => {
     e.preventDefault();
+    const target = e.target as HTMLFormElement;
     try {
       const response = await fetch('/api/v1/blog_posts', {
         method: 'POST',
@@ -45,7 +55,7 @@ class NewBlogPost extends Component {
         },
       });
       if (!response.ok) throw Error(response.statusText);
-      e.target.reset();
+      target.reset();
       this.toggle();
     } catch (error) {
       console.error(error);
@@ -56,7 +66,7 @@ class NewBlogPost extends Component {
 
     return (
       <>
-        <Button type="primary" onClick={this.toggle}>
+        <Button class={'primary'} onClick={this.toggle}>
           Create New +
         </Button>
 
@@ -139,8 +149,7 @@ class NewBlogPost extends Component {
 
   async populateBlogPostCategories() {
     const response = await fetch('api/v1/blog_post_categories');
-    const data = await response.json();
-    return data;
+    return await response.json();
   }
 }
 

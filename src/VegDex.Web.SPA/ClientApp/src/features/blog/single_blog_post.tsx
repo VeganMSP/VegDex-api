@@ -2,24 +2,42 @@ import React, {Component} from 'react';
 import PropTypes from "prop-types";
 import {format} from "date-fns";
 import withRouter from '../../helpers/withRouter';
+import {IBlogPost} from '../../models/IBlogPost';
 
-class SingleBlogPost extends Component {
+interface IState {
+  slug: string;
+  blog_post: IBlogPost;
+  loading: boolean;
+}
+
+const emptyBlogPost = (): IBlogPost => ({
+  title: '',
+  slug: '',
+  content: '',
+  created_at: new Date()
+});
+
+const createEmptyBlogPost = <T extends Partial<IBlogPost>>(initialValues: T): IBlogPost & T => {
+  return Object.assign(emptyBlogPost(), initialValues);
+}
+
+class SingleBlogPost extends Component<any, IState> {
   static propTypes = {
     post: PropTypes.object.isRequired,
     slug: PropTypes.string,
     params: PropTypes.object,
   }
 
-  constructor(props) {
+  constructor(props: any) {
     super(props);
     this.state = {
       slug: this.props.params.slug,
-      blog_post: {},
+      blog_post: createEmptyBlogPost({}),
       loading: true
     }
   }
 
-  static renderBlogPost(blog_post) {
+  static renderBlogPost(blog_post: IBlogPost) {
     const {title, content, created_at} = blog_post
 
     return (
@@ -51,7 +69,7 @@ class SingleBlogPost extends Component {
     );
   }
 
-  async getBlogPost(slug) {
+  async getBlogPost(slug: string) {
     const reponse = await fetch('/api/v1/blog_posts?' + new URLSearchParams({
       slug: slug
     }));

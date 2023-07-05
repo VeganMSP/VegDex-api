@@ -138,6 +138,7 @@ module.exports = {
 		"no-extra-bind": "error",
 		"no-extra-label": "off",
 		"no-extra-parens": "off",
+		"no-extra-semi": "off",
 		"no-floating-decimal": "error",
 		"no-implicit-coercion": [
 			"error",
@@ -296,6 +297,7 @@ module.exports = {
 		"wrap-regex": "off",
 		"yield-star-spacing": "error",
 		"yoda": "off",
-		"@typescript-eslint/no-empty-function": "off"
+		"@typescript-eslint/no-empty-function": "off",
+		"@typescript-eslint/no-extra-semi": "off",
 	}
 };

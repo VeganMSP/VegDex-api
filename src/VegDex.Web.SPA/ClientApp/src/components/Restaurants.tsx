@@ -1,10 +1,16 @@
 import React, {Component} from 'react';
 import {City} from './City'
+import {ICity} from '../models/ICity';
 
-export class Restaurants extends Component {
+interface IState {
+	restaurants_by_city: ICity[];
+	loading: boolean;
+}
+
+export class Restaurants extends Component<any, IState> {
 	static displayName = Restaurants.name;
 
-	constructor(props) {
+	constructor(props: any) {
 		super(props);
 		this.state = {restaurants_by_city: [], loading: true};
 	}
@@ -13,7 +19,7 @@ export class Restaurants extends Component {
 		this.populateRestaurantsByCity();
 	}
 
-	static renderRestaurantsList(restaurants_by_city) {
+	static renderRestaurantsList(restaurants_by_city: ICity[]) {
 		return (
 			<div>
 				{restaurants_by_city.map(city =>
@@ -26,7 +32,7 @@ export class Restaurants extends Component {
 		);
 	}
 
-	static renderCityList(restaurants_by_city) {
+	static renderCityList(restaurants_by_city: ICity[]) {
 		return (
 			<div>
 				Jump to city:
