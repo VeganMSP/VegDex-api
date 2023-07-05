@@ -1,6 +1,5 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using VegDex.Application.Models;
@@ -9,6 +8,9 @@ using VegDex.Web.MVC.ViewModels;
 
 namespace VegDex.Web.MVC.Controllers;
 
+[ApiController]
+[ApiVersion("1")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class RestaurantsController : Controller
 {
     private static readonly ILogger _logger = Log.ForContext<RestaurantsController>();
@@ -18,71 +20,35 @@ public class RestaurantsController : Controller
         _restaurantsPageService =
             restaurantsPageService ?? throw new ArgumentNullException(nameof(restaurantsPageService));
     }
-    public async Task<IActionResult> Create()
-    {
-        var cities = await _restaurantsPageService.GetCities();
-        ViewData["CityId"] = new SelectList(cities, "Id", "Name");
-        return View();
-    }
     [HttpPost]
-    public async Task<IActionResult> Create(RestaurantModel restaurant)
+    public StatusCodeResult Create(RestaurantModel restaurant)
     {
         if (ModelState.IsValid)
         {
             _restaurantsPageService.CreateRestaurant(restaurant);
-            return RedirectToAction("Index");
+            return Ok();
         }
-        var cities = await _restaurantsPageService.GetCities();
-        ViewData["CityId"] = new SelectList(cities, "Id", "Name");
-        return View(restaurant);
+        return BadRequest();
     }
-    public async Task<IActionResult> Delete(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-        var restaurant = await _restaurantsPageService.GetRestaurantById(id.Value);
-        if (restaurant == null)
-        {
-            return NotFound();
-        }
-        return View(restaurant);
-    }
-    [HttpPost]
+    [HttpDelete]
     [ActionName("Delete")]
-    public async Task<IActionResult> DeleteConfirmed(int? id)
+    public StatusCodeResult DeleteConfirmed(int? id)
     {
         if (id == null)
         {
             return NotFound();
         }
-        var restaurant = await _restaurantsPageService.GetRestaurantById(id);
+        var restaurant = _restaurantsPageService.GetRestaurantById(id).Result;
         if (restaurant == null)
         {
             return NotFound();
         }
-        await _restaurantsPageService.DeleteRestaurant(restaurant);
-        return RedirectToAction("Index");
+        _restaurantsPageService.DeleteRestaurant(restaurant);
+        return Ok();
     }
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-        var restaurant = await _restaurantsPageService.GetRestaurantById(id);
-        if (restaurant == null)
-        {
-            return NotFound();
-        }
-        ViewData["CityId"] = new SelectList(
-            await _restaurantsPageService.GetCities(), "Id", "Name", restaurant.CityId);
-        return View(restaurant);
-    }
-    [HttpPost]
+    [HttpPut]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int? id, RestaurantModel restaurant)
+    public StatusCodeResult Edit(int? id, RestaurantModel restaurant)
     {
         if (id != restaurant.Id)
         {
@@ -92,7 +58,7 @@ public class RestaurantsController : Controller
         {
             try
             {
-                await _restaurantsPageService.UpdateRestaurant(restaurant);
+                _restaurantsPageService.UpdateRestaurant(restaurant);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -105,21 +71,20 @@ public class RestaurantsController : Controller
                     throw;
                 }
             }
-            return RedirectToAction("Index");
+            return Ok();
         }
-        ViewData["LocationId"] = new SelectList(
-            await _restaurantsPageService.GetCities(), "Id", "Name", restaurant.CityId);
-        return View(restaurant);
+        return BadRequest();
     }
-    public async Task<IActionResult> Index()
+    [HttpGet]
+    public RestaurantViewModel Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        IEnumerable<CityViewModel> citiesWithRestaurants = await _restaurantsPageService.GetCitiesWithRestaurants();
+        var citiesWithRestaurants = _restaurantsPageService.GetCitiesWithRestaurants().Result;
         var viewModel = new RestaurantViewModel
         {
             Cities = citiesWithRestaurants
         };
-        return View(viewModel);
+        return viewModel;
     }
     private bool RestaurantExists(int? id)
     {
