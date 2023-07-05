@@ -9,6 +9,7 @@
         <Authors>prplecake</Authors>
         <PackageProjectUrl>https://github.com/VeganMSP/VegDex</PackageProjectUrl>
         <RepositoryUrl>https://github.com/VeganMSP/VegDex</RepositoryUrl>
+        <RootNamespace>VegDex.Web.MVC</RootNamespace>
     </PropertyGroup>
 
     <PropertyGroup Condition=" '$(Configuration)' == 'Release' ">

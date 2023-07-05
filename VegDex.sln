@@ -22,13 +22,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Core", "src\VegDex.C
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Infrastructure", "src\VegDex.Infrastructure\VegDex.Infrastructure.csproj", "{F2EB892D-4D19-44DD-9E29-FC3E76D69DEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Web.MVC", "src\VegDex.Web.MVC\VegDex.Web.MVC.csproj", "{DC40AFEC-686E-4143-BE0E-09CC4BC11261}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Web.API", "src\VegDex.Web.API\VegDex.Web.API.csproj", "{DC40AFEC-686E-4143-BE0E-09CC4BC11261}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Core.Tests", "tests\VegDex.Core.Tests\VegDex.Core.Tests.csproj", "{1720A7CE-4D8E-474B-9290-B0954FE05EC9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Infrastructure.Tests", "tests\VegDex.Infrastructure.Tests\VegDex.Infrastructure.Tests.csproj", "{FF6CC23B-21AE-4488-A850-3A3B3597B54A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Web.MVC.Tests", "tests\VegDex.Web.MVC.Tests\VegDex.Web.MVC.Tests.csproj", "{CBC406F5-676B-4EE7-A89A-7DCC93FDA282}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Web.API.Tests", "tests\VegDex.Web.API.Tests\VegDex.Web.API.Tests.csproj", "{CBC406F5-676B-4EE7-A89A-7DCC93FDA282}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Application.Tests", "tests\VegDex.Application.Tests\VegDex.Application.Tests.csproj", "{461E70F5-3415-46DA-A267-AE966E06080D}"
 EndProject
