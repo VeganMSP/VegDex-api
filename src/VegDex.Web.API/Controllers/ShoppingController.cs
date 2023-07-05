@@ -4,9 +4,13 @@ using Microsoft.EntityFrameworkCore;
 using Serilog;
 using VegDex.Application.Models;
 using VegDex.Web.MVC.Interfaces;
+using VegDex.Web.MVC.ViewModels;
 
 namespace VegDex.Web.MVC.Controllers;
 
+[ApiController]
+[ApiVersion("1")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class ShoppingController : Controller
 {
     private static readonly ILogger _logger = Log.ForContext<ShoppingController>();
@@ -16,107 +20,53 @@ public class ShoppingController : Controller
         _shoppingPageService =
             shoppingPageService ?? throw new ArgumentNullException(nameof(shoppingPageService));
     }
-    [HttpGet]
-    [Route("Shopping/FarmersMarket/Create")]
-    public async Task<IActionResult> CreateFarmersMarket()
-    {
-        _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        return View();
-    }
     [HttpPost]
-    [Route("Shopping/FarmersMarket/Create")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateFarmersMarket(FarmersMarketModel farmersMarketModel)
+    [Route("FarmersMarket/Create")]
+    public StatusCodeResult CreateFarmersMarket(FarmersMarketModel farmersMarketModel)
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        if (!ModelState.IsValid) return View(farmersMarketModel);
+        if (!ModelState.IsValid) return BadRequest();
         _shoppingPageService.CreateFarmersMarket(farmersMarketModel);
-        return RedirectToAction("Index");
-    }
-    [HttpGet]
-    [Route("Shopping/VeganCompany/Create")]
-    public async Task<IActionResult> CreateVeganCompany()
-    {
-        _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        return View();
+        return Ok();
     }
     [HttpPost]
-    [Route("Shopping/VeganCompany/Create")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateVeganCompany(VeganCompanyModel veganCompanyModel)
+    [Route("VeganCompany/Create")]
+    public StatusCodeResult CreateVeganCompany(VeganCompanyModel veganCompanyModel)
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        if (!ModelState.IsValid) return View(veganCompanyModel);
+        if (!ModelState.IsValid) return BadRequest();
         _shoppingPageService.CreateVeganCompany(veganCompanyModel);
-        return RedirectToAction("Index");
+        return Ok();
     }
-    [HttpGet]
-    [Route("Shopping/FarmersMarket/Delete")]
-    public async Task<IActionResult> DeleteFarmersMarket(int id)
+    [HttpDelete]
+    [Route("FarmersMarket/Delete")]
+    public StatusCodeResult DeleteFarmersMarketConfirmed(int id)
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
         if (id == null)
             return NotFound();
-        var farmersMarket = await _shoppingPageService.GetFarmersMarketById(id);
+        var farmersMarket = _shoppingPageService.GetFarmersMarketById(id).Result;
         if (farmersMarket == null)
             return NotFound();
-        return View(farmersMarket);
+        _shoppingPageService.DeleteFarmersMarket(farmersMarket);
+        return Ok();
     }
-    [HttpPost]
-    [Route("Shopping/FarmersMarket/Delete")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteFarmersMarketConfirmed(int id)
+    [HttpDelete]
+    [Route("VeganCompany/Delete")]
+    public StatusCodeResult DeleteVeganCompanyConfirmed(int id)
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
         if (id == null)
             return NotFound();
-        var farmersMarket = await _shoppingPageService.GetFarmersMarketById(id);
-        if (farmersMarket == null)
-            return NotFound();
-        await _shoppingPageService.DeleteFarmersMarket(farmersMarket);
-        return RedirectToAction("Index");
-    }
-    [HttpGet]
-    [Route("Shopping/VeganCompany/Delete")]
-    public async Task<IActionResult> DeleteVeganCompany(int id)
-    {
-        _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        if (id == null)
-            return NotFound();
-        var veganCompany = await _shoppingPageService.GetVeganCompanyById(id);
+        var veganCompany = _shoppingPageService.GetVeganCompanyById(id).Result;
         if (veganCompany == null)
             return NotFound();
-        return View(veganCompany);
+        _shoppingPageService.DeleteVeganCompany(veganCompany);
+        return Ok();
     }
     [HttpPost]
-    [Route("Shopping/VeganCompany/Delete")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteVeganCompanyConfirmed(int id)
-    {
-        _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        if (id == null)
-            return NotFound();
-        var veganCompany = await _shoppingPageService.GetVeganCompanyById(id);
-        if (veganCompany == null)
-            return NotFound();
-        await _shoppingPageService.DeleteVeganCompany(veganCompany);
-        return RedirectToAction("Index");
-    }
-    [HttpGet]
-    [Route("Shopping/FarmersMarket/Edit")]
-    public async Task<IActionResult> EditFarmersMarket(int id)
-    {
-        if (id == null)
-            return NotFound();
-        var farmersMarket = await _shoppingPageService.GetFarmersMarketById(id);
-        if (farmersMarket == null)
-            return NotFound();
-        return View(farmersMarket);
-    }
-    [HttpPost]
-    [Route("Shopping/FarmersMarket/Edit")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditFarmersMarket(int? id, FarmersMarketModel farmersMarketModel)
+    [Route("FarmersMarket/Edit")]
+    public StatusCodeResult EditFarmersMarket(int? id, FarmersMarketModel farmersMarketModel)
     {
         if (id != farmersMarketModel.Id)
             return NotFound();
@@ -124,7 +74,7 @@ public class ShoppingController : Controller
         {
             try
             {
-                await _shoppingPageService.UpdateFarmersMarket(farmersMarketModel);
+                _shoppingPageService.UpdateFarmersMarket(farmersMarketModel);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -132,25 +82,14 @@ public class ShoppingController : Controller
                     return NotFound();
                 throw;
             }
-            return RedirectToAction("Index");
+            return Ok();
         }
-        return View(farmersMarketModel);
+        return BadRequest();
     }
-    [HttpGet]
-    [Route("Shopping/VeganCompany/Edit")]
-    public async Task<IActionResult> EditVeganCompany(int id)
-    {
-        if (id == null)
-            return NotFound();
-        var veganCompany = await _shoppingPageService.GetVeganCompanyById(id);
-        if (veganCompany == null)
-            return NotFound();
-        return View(veganCompany);
-    }
-    [HttpPost]
-    [Route("Shopping/VeganCompany/Edit")]
+    [HttpPut]
+    [Route("VeganCompany/Edit")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditVeganCompany(int? id, VeganCompanyModel veganCompanyModel)
+    public StatusCodeResult EditVeganCompany(int? id, VeganCompanyModel veganCompanyModel)
     {
         if (id != veganCompanyModel.Id)
             return NotFound();
@@ -158,7 +97,7 @@ public class ShoppingController : Controller
         {
             try
             {
-                await _shoppingPageService.UpdateVeganCompany(veganCompanyModel);
+                _shoppingPageService.UpdateVeganCompany(veganCompanyModel);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -166,9 +105,9 @@ public class ShoppingController : Controller
                     return NotFound();
                 throw;
             }
-            return RedirectToAction("Index");
+            return Ok();
         }
-        return View(veganCompanyModel);
+        return BadRequest();
     }
     private bool FarmersMarketExists(int id)
     {
@@ -176,11 +115,12 @@ public class ShoppingController : Controller
         return farmersMarket != null;
     }
     // GET
-    public async Task<IActionResult> Index()
+    [HttpGet]
+    public ShoppingViewModel Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        var viewModel = await _shoppingPageService.GetPageInformation();
-        return View(viewModel);
+        var viewModel = _shoppingPageService.GetPageInformation().Result;
+        return viewModel;
     }
     private bool VeganCompanyExists(int id)
     {
