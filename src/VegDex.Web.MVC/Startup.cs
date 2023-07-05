@@ -46,6 +46,7 @@ public class Startup
         app.UseRouting();
         app.UseAuthorization();
         app.UseSession();
+        app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:8080"));
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(
@@ -108,6 +109,7 @@ public class Startup
         services.AddHttpContextAccessor();
         services.AddControllersWithViews();
         services.AddSession();
+        services.AddCors();
 
         services.AddDbContext<AppKeysContext>(c =>
             c.UseSqlite("Data Source=../keys.sqlite3")
