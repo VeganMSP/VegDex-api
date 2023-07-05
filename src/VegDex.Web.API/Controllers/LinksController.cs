@@ -1,6 +1,5 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using VegDex.Application.Models;
@@ -9,6 +8,9 @@ using VegDex.Web.MVC.ViewModels;
 
 namespace VegDex.Web.MVC.Controllers;
 
+[ApiController]
+[ApiVersion("1")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class LinksController : Controller
 {
     private static readonly ILogger _logger = Log.ForContext<LinksController>();
@@ -18,110 +20,55 @@ public class LinksController : Controller
         _linksPageService =
             linksPageService ?? throw new ArgumentNullException(nameof(linksPageService));
     }
-    public async Task<IActionResult> Create()
-    {
-        var linkCategories = await _linksPageService.GetLinkCategories();
-        ViewData["LinkCategoryId"] = new SelectList(linkCategories, "Id", "Name");
-        return View();
-    }
     [HttpPost]
-    public async Task<IActionResult> Create(LinkModel link)
+    public StatusCodeResult Create(LinkModel link)
     {
         if (ModelState.IsValid)
         {
             _linksPageService.CreateLink(link);
-            return RedirectToAction("Index");
+            return Ok();
         }
-        var linkCategories = await _linksPageService.GetLinkCategories();
-        ViewData["LinkCategoryId"] = new SelectList(linkCategories, "Id", "Name");
-        return View(link);
-    }
-    [Route("Links/LinkCategory/Create")]
-    [HttpGet]
-    public async Task<IActionResult> CreateLinkCategory()
-    {
-        _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        return View();
+        return BadRequest();
     }
     [HttpPost]
-    [Route("Links/LinkCategory/Create")]
-    public async Task<IActionResult> CreateLinkCategory(LinkCategoryModel linkCategoryModel)
+    [Route("Links/Category/Create")]
+    public StatusCodeResult CreateLinkCategory(LinkCategoryModel linkCategoryModel)
     {
-        if (!ModelState.IsValid) return View(linkCategoryModel);
+        if (!ModelState.IsValid) return BadRequest();
         _linksPageService.CreateLinkCategory(linkCategoryModel);
-        return RedirectToAction("LinkCategoriesIndex");
+        return Ok();
     }
-    public async Task<IActionResult> Delete(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-        var link = await _linksPageService.GetLinkById(id.Value);
-        if (link == null)
-        {
-            return NotFound();
-        }
-        return View(link);
-    }
-    [HttpPost]
+    [HttpDelete]
     [ActionName("Delete")]
-    public async Task<IActionResult> DeleteConfirmed(int? id)
+    public StatusCodeResult DeleteConfirmed(int? id)
     {
         if (id == null)
         {
             return NotFound();
         }
-        var link = await _linksPageService.GetLinkById(id);
+        var link = _linksPageService.GetLinkById(id).Result;
         if (link == null)
         {
             return NotFound();
         }
-        await _linksPageService.DeleteLink(link);
-        return RedirectToAction("Index");
+        _linksPageService.DeleteLink(link);
+        return Ok();
     }
-    [Route("Links/LinkCategory/Delete")]
-    [HttpGet]
-    public async Task<IActionResult> DeleteLinkCategory(int? id)
+    [HttpDelete]
+    [Route("Links/Category/Delete")]
+    public StatusCodeResult DeleteLinkCategoryConfirmed(int? id)
     {
         if (id == null)
             return NotFound();
-        var linkCategory = await _linksPageService.GetLinkCategoryWithLinksById(id.Value);
+        var linkCategory = _linksPageService.GetLinkCategoryById(id.Value).Result;
         if (linkCategory == null)
             return NotFound();
-        return View(linkCategory);
+        _linksPageService.DeleteLinkCategory(linkCategory);
+        return Ok();
     }
-    [HttpPost]
-    [Route("Links/LinkCategory/Delete")]
-    public async Task<IActionResult> DeleteLinkCategoryConfirmed(int? id)
-    {
-        if (id == null)
-            return NotFound();
-        var linkCategory = await _linksPageService.GetLinkCategoryById(id.Value);
-        if (linkCategory == null)
-            return NotFound();
-        await _linksPageService.DeleteLinkCategory(linkCategory);
-        return RedirectToAction("LinkCategoriesIndex");
-    }
-    [HttpGet]
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-        var link = await _linksPageService.GetLinkById(id);
-        if (link == null)
-        {
-            return NotFound();
-        }
-        ViewData["LinkCategoryId"] = new SelectList(
-            await _linksPageService.GetLinkCategories(), "Id", "Name", link.LinkCategoryId);
-        return View(link);
-    }
-    [HttpPost]
+    [HttpPut]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int? id, LinkModel link)
+    public StatusCodeResult Edit(int? id, LinkModel link)
     {
         if (id != link.Id)
         {
@@ -131,7 +78,7 @@ public class LinksController : Controller
         {
             try
             {
-                await _linksPageService.UpdateLink(link);
+                _linksPageService.UpdateLink(link);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -144,27 +91,14 @@ public class LinksController : Controller
                     throw;
                 }
             }
-            return RedirectToAction("Index");
+            return Ok();
         }
-        ViewData["LinkCategoryId"] = new SelectList(
-            await _linksPageService.GetLinkCategories(), "Id", "Name", link.LinkCategoryId);
-        return View(link);
+        return BadRequest();
     }
-    [Route("Links/LinkCategory/Edit")]
-    [HttpGet]
-    public async Task<IActionResult> EditLinkCategory(int? id)
-    {
-        if (id == null)
-            return NotFound();
-        var linkCategory = await _linksPageService.GetLinkCategoryById(id.Value);
-        if (linkCategory == null)
-            return NotFound();
-        return View(linkCategory);
-    }
-    [HttpPost]
-    [Route("Links/LinkCategory/Edit")]
+    [HttpPut]
+    [Route("Links/Category/Edit")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditLinkCategory(int? id, LinkCategoryModel linkCategoryModel)
+    public StatusCodeResult EditLinkCategory(int? id, LinkCategoryModel linkCategoryModel)
     {
         if (id != linkCategoryModel.Id)
             return NotFound();
@@ -172,7 +106,7 @@ public class LinksController : Controller
         {
             try
             {
-                await _linksPageService.UpdateLinkCategory(linkCategoryModel);
+                _linksPageService.UpdateLinkCategory(linkCategoryModel);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -180,29 +114,29 @@ public class LinksController : Controller
                     return NotFound();
                 throw;
             }
-            return RedirectToAction("LinkCategoriesIndex");
+            return Ok();
         }
-        return View(linkCategoryModel);
+        return BadRequest();
     }
     // GET
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public LinkViewModel Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        var linkCategoriesWithLinks = await _linksPageService.GetLinkCategoriesWithLinks();
+        var linkCategoriesWithLinks = _linksPageService.GetLinkCategoriesWithLinks().Result;
         var viewModel = new LinkViewModel
         {
             LinkCategories = linkCategoriesWithLinks
         };
-        return View(viewModel);
+        return viewModel;
     }
     [HttpGet]
-    [Route("Links/LinkCategories")]
-    public async Task<IActionResult> LinkCategoriesIndex()
+    [Route("Links/Categories")]
+    public IEnumerable<LinkCategoryViewModel> LinkCategoriesIndex()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        var linkCategories = await _linksPageService.GetLinkCategories();
-        return View(linkCategories);
+        var linkCategories = _linksPageService.GetLinkCategories().Result;
+        return linkCategories;
     }
     private bool LinkCategoryExists(int id)
     {
