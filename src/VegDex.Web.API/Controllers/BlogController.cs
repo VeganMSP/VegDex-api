@@ -1,6 +1,5 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using VegDex.Application.Models;
@@ -9,6 +8,9 @@ using VegDex.Web.MVC.ViewModels;
 
 namespace VegDex.Web.MVC.Controllers;
 
+[ApiVersion("1")]
+[Route("api/v{version:apiVersion}/[controller]")]
+[ApiController]
 public class BlogController : Controller
 {
     private static readonly ILogger _logger = Log.ForContext<BlogController>();
@@ -20,11 +22,11 @@ public class BlogController : Controller
     }
     [Route("Blog/Categories")]
     [HttpGet]
-    public async Task<IActionResult> BlogCategoriesIndex()
+    public IEnumerable<BlogCategoryViewModel> BlogCategoriesIndex()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        var blogCategories = await _blogPageService.GetBlogCategories();
-        return View(blogCategories);
+        var blogCategories = _blogPageService.GetBlogCategories().Result;
+        return blogCategories;
     }
     private bool BlogCategoryExists(int id)
     {
@@ -36,123 +38,51 @@ public class BlogController : Controller
         var blogPost = _blogPageService.GetBlogPostById(id);
         return blogPost != null;
     }
-    public async Task<IActionResult> Create()
-    {
-        _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        var blogCategories = await _blogPageService.GetBlogCategories();
-        var postStatuses = from PostStatus s in Enum.GetValues(typeof(PostStatus))
-            select new
-            {
-                Id = (int)s,
-                Name = s.ToString()
-            };
-        ViewData["BlogCategoryId"] = new SelectList(blogCategories, "Id", "Name");
-        ViewData["PostStatus"] = new SelectList(postStatuses, "Id", "Name");
-        return View();
-    }
     [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Create(BlogPostModel blogPostModel)
+    public StatusCodeResult Create(BlogPostModel blogPostModel)
     {
         if (ModelState.IsValid)
         {
-            await _blogPageService.CreateBlogPost(blogPostModel);
-            return RedirectToAction("Index");
+            _blogPageService.CreateBlogPost(blogPostModel);
+            return Ok();
         }
-        var blogCategories = await _blogPageService.GetBlogCategories();
-        var postStatuses = from PostStatus s in Enum.GetValues(typeof(PostStatus))
-            select new
-            {
-                Id = (int)s,
-                Name = s.ToString()
-            };
-        ViewData["BlogCategoryId"] = new SelectList(blogCategories, "Id", "Name");
-        ViewData["PostStatus"] = new SelectList(postStatuses, "Id", "Name");
-        return View(blogPostModel);
-    }
-    [Route("Blog/Category/Create")]
-    [HttpGet]
-    public async Task<IActionResult> CreateBlogCategory()
-    {
-        _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        return View();
+        return BadRequest();
     }
     [HttpPost]
     [Route("Blog/Category/Create")]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> CreateBlogCategory(BlogCategoryModel blogCategoryModel)
+    public StatusCodeResult CreateBlogCategory(BlogCategoryModel blogCategoryModel)
     {
-        if (!ModelState.IsValid) return View(blogCategoryModel);
+        if (!ModelState.IsValid) return BadRequest();
         _blogPageService.CreateBlogCategory(blogCategoryModel);
-        return RedirectToAction("BlogCategoriesIndex");
+        return Ok();
     }
-    [HttpGet]
-    public async Task<IActionResult> Delete(int? id)
-    {
-        if (id == null)
-            return NotFound();
-        var blogPost = await _blogPageService.GetBlogPostById(id.Value);
-        if (blogPost == null)
-            return NotFound();
-        return View(blogPost);
-    }
+    [HttpDelete]
     [Route("Blog/Category/Delete")]
-    [HttpGet]
-    public async Task<IActionResult> DeleteBlogCategory(int? id)
+    public StatusCodeResult DeleteBlogCategoryConfirmed(int? id)
     {
         if (id == null)
             return NotFound();
-        var blogCategory = await _blogPageService.GetBlogCategoryById(id.Value);
+        var blogCategory = _blogPageService.GetBlogCategoryById(id.Value).Result;
         if (blogCategory == null)
             return NotFound();
-        return View(blogCategory);
+        _blogPageService.DeleteBlogCategory(blogCategory);
+        return Ok();
     }
-    [HttpPost]
-    [Route("Blog/Category/Delete")]
+    [HttpDelete]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteBlogCategoryConfirmed(int? id)
+    public StatusCodeResult DeleteConfirmed(int? id)
     {
         if (id == null)
             return NotFound();
-        var blogCategory = await _blogPageService.GetBlogCategoryById(id.Value);
-        if (blogCategory == null)
-            return NotFound();
-        await _blogPageService.DeleteBlogCategory(blogCategory);
-        return RedirectToAction("BlogCategoriesIndex");
-    }
-    [HttpPost]
-    [ValidateAntiForgeryToken]
-    public async Task<IActionResult> DeleteConfirmed(int? id)
-    {
-        if (id == null)
-            return NotFound();
-        var blogPost = await _blogPageService.GetBlogPostById(id.Value);
+        var blogPost = _blogPageService.GetBlogPostById(id.Value).Result;
         if (blogPost == null)
             return NotFound();
-        await _blogPageService.DeleteBlogPost(blogPost);
-        return RedirectToAction("Index");
+        _blogPageService.DeleteBlogPost(blogPost);
+        return Ok();
     }
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-            return NotFound();
-        var blogPost = await _blogPageService.GetBlogPostById(id.Value);
-        if (blogPost == null)
-            return NotFound();
-        var blogCategories = await _blogPageService.GetBlogCategories();
-        var postStatuses = from PostStatus s in Enum.GetValues(typeof(PostStatus))
-            select new
-            {
-                Id = (int)s,
-                Name = s.ToString()
-            };
-        ViewData["BlogCategoryId"] = new SelectList(blogCategories, "Id", "Name");
-        ViewData["PostStatus"] = new SelectList(postStatuses, "Id", "Name");
-        return View(blogPost);
-    }
-    [HttpPost]
+    [HttpPut]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int? id, BlogPostModel blogPostModel)
+    public StatusCodeResult Edit(int? id, BlogPostModel blogPostModel)
     {
         if (id != blogPostModel.Id)
             return NotFound();
@@ -160,7 +90,7 @@ public class BlogController : Controller
         {
             try
             {
-                await _blogPageService.UpdateBlogPost(blogPostModel);
+                _blogPageService.UpdateBlogPost(blogPostModel);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -168,34 +98,14 @@ public class BlogController : Controller
                     return NotFound();
                 throw;
             }
-            return RedirectToAction("Index");
+            return Ok();
         }
-        var blogCategories = await _blogPageService.GetBlogCategories();
-        var postStatuses = from PostStatus s in Enum.GetValues(typeof(PostStatus))
-            select new
-            {
-                Id = (int)s,
-                Name = s.ToString()
-            };
-        ViewData["BlogCategoryId"] = new SelectList(blogCategories, "Id", "Name");
-        ViewData["PostStatus"] = new SelectList(postStatuses, "Id", "Name");
-        return View(blogPostModel);
+        return BadRequest();
     }
-    [Route("Blog/Category/Edit")]
-    [HttpGet]
-    public async Task<IActionResult> EditBlogCategory(int? id)
-    {
-        if (id == null)
-            return NotFound();
-        var blogCategory = await _blogPageService.GetBlogCategoryById(id.Value);
-        if (blogCategory == null)
-            return NotFound();
-        return View(blogCategory);
-    }
-    [HttpPost]
+    [HttpPut]
     [Route("Blog/Category/Edit")]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> EditBlogCategory(int? id, BlogCategoryModel blogCategoryModel)
+    public StatusCodeResult EditBlogCategory(int? id, BlogCategoryModel blogCategoryModel)
     {
         if (id != blogCategoryModel.Id)
             return NotFound();
@@ -203,7 +113,7 @@ public class BlogController : Controller
         {
             try
             {
-                await _blogPageService.UpdateBlogCategory(blogCategoryModel);
+                _blogPageService.UpdateBlogCategory(blogCategoryModel);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -211,20 +121,19 @@ public class BlogController : Controller
                     return NotFound();
                 throw;
             }
-            return RedirectToAction("BlogCategoriesIndex");
+            return Ok();
         }
-        return View(blogCategoryModel);
+        return BadRequest();
     }
-    // GET
     [HttpGet]
-    public async Task<IActionResult> Index()
+    public BlogViewModel Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        var blogPosts = await _blogPageService.GetPublishedBlogPosts();
+        var blogPosts = _blogPageService.GetPublishedBlogPosts().Result;
         var viewModel = new BlogViewModel
         {
             BlogPosts = blogPosts
         };
-        return View(viewModel);
+        return viewModel;
     }
 }
