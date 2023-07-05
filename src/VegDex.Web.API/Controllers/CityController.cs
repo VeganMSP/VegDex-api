@@ -1,13 +1,17 @@
+using System.Net;
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using VegDex.Application.Models;
 using VegDex.Web.MVC.Interfaces;
+using VegDex.Web.MVC.ViewModels;
 
 namespace VegDex.Web.MVC.Controllers;
 
+[ApiController]
+[ApiVersion("1")]
+[Route("api/v{version:apiVersion}/[controller]")]
 public class CityController : Controller
 {
     private static readonly ILogger _logger = Log.ForContext<CityController>();
@@ -17,70 +21,40 @@ public class CityController : Controller
         _cityPageService =
             cityPageService ?? throw new ArgumentNullException(nameof(cityPageService));
     }
-    public async Task<IActionResult> Create()
+    private bool CityExists(int? id)
     {
-        var cities = await _cityPageService.GetCities();
-        ViewData["CityId"] = new SelectList(cities, "Id", "Name");
-        return View();
+        var city = _cityPageService.GetCityById(id);
+        return city != null;
     }
     [HttpPost]
-    public async Task<IActionResult> Create(CityModel city)
+    public StatusCodeResult Create(CityModel city)
     {
         if (ModelState.IsValid)
         {
             _cityPageService.CreateCity(city);
-            return RedirectToAction("Index");
+            return Ok();
         }
-        var cities = await _cityPageService.GetCities();
-        ViewData["CityId"] = new SelectList(cities, "Id", "Name");
-        return View(city);
+        return BadRequest();
     }
-    public async Task<IActionResult> Delete(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-        var city = await _cityPageService.GetCityById(id.Value);
-        if (city == null)
-        {
-            return NotFound();
-        }
-        city.Restaurants = await _cityPageService.GetRestaurantsInCityById(id.Value);
-        return View(city);
-    }
-    [HttpPost]
+    [HttpDelete]
     [ActionName("Delete")]
-    public async Task<IActionResult> DeleteConfirmed(int? id)
+    public StatusCodeResult Delete(int? id)
     {
         if (id == null)
         {
             return NotFound();
         }
-        var city = await _cityPageService.GetCityById(id);
+        var city = _cityPageService.GetCityById(id).Result;
         if (city == null)
         {
             return NotFound();
         }
-        await _cityPageService.DeleteCity(city);
-        return RedirectToAction("Index");
+        _cityPageService.DeleteCity(city);
+        return Ok();
     }
-    public async Task<IActionResult> Edit(int? id)
-    {
-        if (id == null)
-        {
-            return NotFound();
-        }
-        var city = await _cityPageService.GetCityById(id);
-        if (city == null)
-        {
-            return NotFound();
-        }
-        return View(city);
-    }
-    [HttpPost]
+    [HttpPatch]
     [ValidateAntiForgeryToken]
-    public async Task<IActionResult> Edit(int? id, CityModel city)
+    public StatusCodeResult Edit(int? id, CityModel city)
     {
         if (id != city.Id)
         {
@@ -90,7 +64,7 @@ public class CityController : Controller
         {
             try
             {
-                await _cityPageService.UpdateCity(city);
+                _cityPageService.UpdateCity(city);
             }
             catch (DbUpdateConcurrencyException)
             {
@@ -98,24 +72,17 @@ public class CityController : Controller
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
-            return RedirectToAction("Index");
+            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
         }
-        return View(city);
+        return Ok();
     }
-    public async Task<IActionResult> Index()
+    [HttpGet]
+    public IEnumerable<CityViewModel> Index()
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
-        var cities = await _cityPageService.GetCities();
-        return View(cities);
-    }
-    private bool CityExists(int? id)
-    {
-        var city = _cityPageService.GetCityById(id);
-        return city != null;
+        var cities = _cityPageService.GetCities().Result;
+        return cities;
     }
 }
