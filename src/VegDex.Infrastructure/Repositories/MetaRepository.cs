@@ -3,7 +3,6 @@ namespace VegDex.Infrastructure.Repositories;
 public class MetaRepository : IMetaRepository
 {
     private readonly VegDexContext _dbContext;
-    /// <inheritdoc />
     public MetaRepository(VegDexContext dbContext)
     {
         _dbContext = dbContext;
