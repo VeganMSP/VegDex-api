@@ -3,7 +3,6 @@ namespace VegDex.Infrastructure.Repositories;
 public class MetaRepository : IMetaRepository
 {
     private readonly VegDexContext _dbContext;
-    /// <inheritdoc />
     public MetaRepository(VegDexContext dbContext)
     {
         _dbContext = dbContext;
@@ -29,12 +28,5 @@ public class MetaRepository : IMetaRepository
         page.DateUpdated = now;
         _dbContext.Entry(page).State = EntityState.Modified;
         await _dbContext.SaveChangesAsync();
-    }
-    /// <inheritdoc />
-    public async Task<IEnumerable<Link>> GetLinkListAsync()
-    {
-        var links = await _dbContext.Set<Link>()
-            .ToListAsync();
-        return links;
     }
 }

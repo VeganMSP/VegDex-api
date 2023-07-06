@@ -1,6 +1,6 @@
 namespace VegDex.Core.Specifications;
 
-public class BlogPostWithCategorySpecification : BaseSpecification<BlogPost>
+public sealed class BlogPostWithCategorySpecification : BaseSpecification<BlogPost>
 {
     public BlogPostWithCategorySpecification() : base(null)
     {

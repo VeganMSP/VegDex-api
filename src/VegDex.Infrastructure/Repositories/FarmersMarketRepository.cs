@@ -2,7 +2,6 @@ namespace VegDex.Infrastructure.Repositories;
 
 public class FarmersMarketRepository : Repository<FarmersMarket>, IFarmersMarketRepository
 {
-    private static readonly ILogger _logger = Log.ForContext<FarmersMarketRepository>();
     private VegDexContext _dbContext;
     /// <inheritdoc />
     public FarmersMarketRepository(VegDexContext dbContext) : base(dbContext)

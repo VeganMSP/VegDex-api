@@ -2,7 +2,6 @@ namespace VegDex.Core.Entities;
 
 public class BlogPost : Entity
 {
-    public BlogPost() { }
     public int BlogCategoryId { get; set; }
     public BlogCategory Category { get; set; }
     public string Content { get; set; }
