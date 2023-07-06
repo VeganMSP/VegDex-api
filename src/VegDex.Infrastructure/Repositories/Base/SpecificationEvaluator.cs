@@ -31,7 +31,7 @@ public class SpecificationEvaluator<T> where T : Entity
         }
 
         // Apply paging if enabled
-        if (specification.isPagingEnabled)
+        if (specification.IsPagingEnabled)
         {
             query = query.Skip(specification.Skip)
                 .Take(specification.Take);
