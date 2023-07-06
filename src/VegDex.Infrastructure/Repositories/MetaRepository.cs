@@ -30,11 +30,4 @@ public class MetaRepository : IMetaRepository
         _dbContext.Entry(page).State = EntityState.Modified;
         await _dbContext.SaveChangesAsync();
     }
-    /// <inheritdoc />
-    public async Task<IEnumerable<Link>> GetLinkListAsync()
-    {
-        var links = await _dbContext.Set<Link>()
-            .ToListAsync();
-        return links;
-    }
 }
