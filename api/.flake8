@@ -1,5 +1,0 @@
-[flake8]
-exclude =
-    migrations
-per-file-ignores =
-    config/settings/*.py: E501,F405

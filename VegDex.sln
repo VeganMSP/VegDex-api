@@ -1,0 +1,99 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{660D5815-F76B-45D7-9E1A-573193F4A591}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		README.md = README.md
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Workflows", "Workflows", "{957DD8D7-41FA-451C-9CF7-8D7C99AC65EE}"
+	ProjectSection(SolutionItems) = preProject
+		.github\workflows\dotnet.yml = .github\workflows\dotnet.yml
+		.github\workflows\release.yml = .github\workflows\release.yml
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{CC013160-6AED-498F-A2FF-8B743693566D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{A250413D-191D-4F39-A4E3-F1CC3BFBC49C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Application", "src\VegDex.Application\VegDex.Application.csproj", "{E1D755D5-0064-4564-810E-A6043ABA6C88}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Core", "src\VegDex.Core\VegDex.Core.csproj", "{A8F9ED05-9F4B-4116-8451-F3D869BCB50D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Infrastructure", "src\VegDex.Infrastructure\VegDex.Infrastructure.csproj", "{F2EB892D-4D19-44DD-9E29-FC3E76D69DEF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Web.API", "src\VegDex.Web.API\VegDex.Web.API.csproj", "{DC40AFEC-686E-4143-BE0E-09CC4BC11261}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Core.Tests", "tests\VegDex.Core.Tests\VegDex.Core.Tests.csproj", "{1720A7CE-4D8E-474B-9290-B0954FE05EC9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Infrastructure.Tests", "tests\VegDex.Infrastructure.Tests\VegDex.Infrastructure.Tests.csproj", "{FF6CC23B-21AE-4488-A850-3A3B3597B54A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Web.API.Tests", "tests\VegDex.Web.API.Tests\VegDex.Web.API.Tests.csproj", "{CBC406F5-676B-4EE7-A89A-7DCC93FDA282}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Application.Tests", "tests\VegDex.Application.Tests\VegDex.Application.Tests.csproj", "{461E70F5-3415-46DA-A267-AE966E06080D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.TestHelpers", "tests\VegDex.TestHelpers\VegDex.TestHelpers.csproj", "{B6E174E8-AC7C-4115-B2D6-9838B629AFB1}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VegDex.Web.SPA", "src\VegDex.Web.SPA\VegDex.Web.SPA.csproj", "{F3CA67DE-FE0A-49D5-8EFD-0A30F709FDB6}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E1D755D5-0064-4564-810E-A6043ABA6C88}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E1D755D5-0064-4564-810E-A6043ABA6C88}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E1D755D5-0064-4564-810E-A6043ABA6C88}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E1D755D5-0064-4564-810E-A6043ABA6C88}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8F9ED05-9F4B-4116-8451-F3D869BCB50D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8F9ED05-9F4B-4116-8451-F3D869BCB50D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8F9ED05-9F4B-4116-8451-F3D869BCB50D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8F9ED05-9F4B-4116-8451-F3D869BCB50D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F2EB892D-4D19-44DD-9E29-FC3E76D69DEF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F2EB892D-4D19-44DD-9E29-FC3E76D69DEF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F2EB892D-4D19-44DD-9E29-FC3E76D69DEF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F2EB892D-4D19-44DD-9E29-FC3E76D69DEF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC40AFEC-686E-4143-BE0E-09CC4BC11261}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC40AFEC-686E-4143-BE0E-09CC4BC11261}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC40AFEC-686E-4143-BE0E-09CC4BC11261}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC40AFEC-686E-4143-BE0E-09CC4BC11261}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1720A7CE-4D8E-474B-9290-B0954FE05EC9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1720A7CE-4D8E-474B-9290-B0954FE05EC9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1720A7CE-4D8E-474B-9290-B0954FE05EC9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1720A7CE-4D8E-474B-9290-B0954FE05EC9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FF6CC23B-21AE-4488-A850-3A3B3597B54A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF6CC23B-21AE-4488-A850-3A3B3597B54A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF6CC23B-21AE-4488-A850-3A3B3597B54A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF6CC23B-21AE-4488-A850-3A3B3597B54A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{CBC406F5-676B-4EE7-A89A-7DCC93FDA282}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{CBC406F5-676B-4EE7-A89A-7DCC93FDA282}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{CBC406F5-676B-4EE7-A89A-7DCC93FDA282}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{CBC406F5-676B-4EE7-A89A-7DCC93FDA282}.Release|Any CPU.Build.0 = Release|Any CPU
+		{461E70F5-3415-46DA-A267-AE966E06080D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{461E70F5-3415-46DA-A267-AE966E06080D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{461E70F5-3415-46DA-A267-AE966E06080D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{461E70F5-3415-46DA-A267-AE966E06080D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B6E174E8-AC7C-4115-B2D6-9838B629AFB1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B6E174E8-AC7C-4115-B2D6-9838B629AFB1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B6E174E8-AC7C-4115-B2D6-9838B629AFB1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B6E174E8-AC7C-4115-B2D6-9838B629AFB1}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3CA67DE-FE0A-49D5-8EFD-0A30F709FDB6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3CA67DE-FE0A-49D5-8EFD-0A30F709FDB6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3CA67DE-FE0A-49D5-8EFD-0A30F709FDB6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3CA67DE-FE0A-49D5-8EFD-0A30F709FDB6}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{957DD8D7-41FA-451C-9CF7-8D7C99AC65EE} = {660D5815-F76B-45D7-9E1A-573193F4A591}
+		{E1D755D5-0064-4564-810E-A6043ABA6C88} = {CC013160-6AED-498F-A2FF-8B743693566D}
+		{A8F9ED05-9F4B-4116-8451-F3D869BCB50D} = {CC013160-6AED-498F-A2FF-8B743693566D}
+		{F2EB892D-4D19-44DD-9E29-FC3E76D69DEF} = {CC013160-6AED-498F-A2FF-8B743693566D}
+		{DC40AFEC-686E-4143-BE0E-09CC4BC11261} = {CC013160-6AED-498F-A2FF-8B743693566D}
+		{1720A7CE-4D8E-474B-9290-B0954FE05EC9} = {A250413D-191D-4F39-A4E3-F1CC3BFBC49C}
+		{FF6CC23B-21AE-4488-A850-3A3B3597B54A} = {A250413D-191D-4F39-A4E3-F1CC3BFBC49C}
+		{CBC406F5-676B-4EE7-A89A-7DCC93FDA282} = {A250413D-191D-4F39-A4E3-F1CC3BFBC49C}
+		{461E70F5-3415-46DA-A267-AE966E06080D} = {A250413D-191D-4F39-A4E3-F1CC3BFBC49C}
+		{B6E174E8-AC7C-4115-B2D6-9838B629AFB1} = {A250413D-191D-4F39-A4E3-F1CC3BFBC49C}
+		{F3CA67DE-FE0A-49D5-8EFD-0A30F709FDB6} = {CC013160-6AED-498F-A2FF-8B743693566D}
+	EndGlobalSection
+EndGlobal
