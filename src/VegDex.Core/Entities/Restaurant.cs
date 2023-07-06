@@ -2,7 +2,6 @@ namespace VegDex.Core.Entities;
 
 public class Restaurant : Entity
 {
-    public Restaurant() { }
     public bool AllVegan { get; set; }
     public City City { get; set; }
     public int CityId { get; set; }

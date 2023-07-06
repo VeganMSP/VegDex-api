@@ -37,7 +37,7 @@ public class BlogPageService : IBlogPageService
         var posts = await _blogPostAppService.GetBlogPosts();
         var mapped = _mapper.Map<IEnumerable<BlogPostModel>>(posts);
         return mapped
-            .Where(p => p.Status == PostStatus.PUBLISHED);
+            .Where(p => p.Status == PostStatus.Published);
     }
     /// <inheritdoc />
     public async Task<IEnumerable<BlogPostModel>> GetAllBlogPosts()
@@ -69,7 +69,7 @@ public class BlogPageService : IBlogPageService
         if (mapped == null)
             throw new Exception("Entity could not be mapped");
         await _blogPostAppService.Delete(mapped);
-        _logger.Information("Entity successfully deleted: {BlogPost}", mapped);
+        _logger.Information("Entity successfully deleted: {@BlogPost}", mapped);
     }
     /// <inheritdoc />
     public async Task UpdateBlogPost(BlogPostModel blogPostModel)
@@ -78,7 +78,7 @@ public class BlogPageService : IBlogPageService
         if (mapped == null)
             throw new Exception("Entity could not be mapped");
         await _blogPostAppService.Update(mapped);
-        _logger.Information("Entity successfully updated: {BlogPost}", mapped);
+        _logger.Information("Entity successfully updated: {@BlogPost}", mapped);
     }
     /// <inheritdoc />
     public async Task<BlogPostModel> CreateBlogPost(BlogPostModel blogPostModel)
@@ -88,7 +88,7 @@ public class BlogPageService : IBlogPageService
             throw new Exception("Entity could not be mapped");
         mapped.Slug = mapped.Title.ToUrlSlug();
         var entityDto = await _blogPostAppService.Create(mapped);
-        _logger.Information("Entity successfully created: {BlogPost}", blogPostModel);
+        _logger.Information("Entity successfully created: {@BlogPost}", blogPostModel);
 
         var mappedModel = _mapper.Map<BlogPostModel>(entityDto);
         return mappedModel;

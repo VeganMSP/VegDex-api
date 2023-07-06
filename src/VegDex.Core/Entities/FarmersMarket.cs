@@ -2,7 +2,6 @@ namespace VegDex.Core.Entities;
 
 public class FarmersMarket : Entity
 {
-    public FarmersMarket() { }
     public string? Address { get; set; }
     public string? Hours { get; set; }
     public string Name { get; set; }

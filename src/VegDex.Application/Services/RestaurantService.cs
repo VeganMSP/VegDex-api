@@ -53,7 +53,7 @@ public class RestaurantService : IRestaurantService
         if (editRestaurant == null)
             throw new ApplicationException("Entity could not be loaded.");
 
-        ObjectMapper.Mapper.Map<RestaurantModel, Restaurant>(restaurantModel, editRestaurant);
+        ObjectMapper.Mapper.Map(restaurantModel, editRestaurant);
 
         await _restaurantRepository.UpdateAsync(editRestaurant);
         _logger.Information("Entity successfully updated");
@@ -80,12 +80,12 @@ public class RestaurantService : IRestaurantService
     {
         var existingEntity = await _restaurantRepository.GetByIdAsync(restaurantModel.Id);
         if (existingEntity != null)
-            throw new ApplicationException($"{restaurantModel.ToString()} with this id already exists");
+            throw new ApplicationException($"{restaurantModel} with this id already exists");
     }
     private void ValidateRestaurantIfNotExist(RestaurantModel restaurantModel)
     {
         var existingEntity = _restaurantRepository.GetByIdAsync(restaurantModel.Id);
         if (existingEntity == null)
-            throw new ApplicationException($"{restaurantModel.ToString()} with this id is not exists");
+            throw new ApplicationException($"{restaurantModel} with this id is not exists");
     }
 }

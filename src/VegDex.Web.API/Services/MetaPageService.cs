@@ -1,5 +1,4 @@
 using AutoMapper;
-using Serilog;
 using VegDex.Application.Interfaces;
 using VegDex.Web.MVC.Interfaces;
 using VegDex.Web.MVC.ViewModels.Meta;
@@ -8,7 +7,6 @@ namespace VegDex.Web.MVC.Services;
 
 public class MetaPageService : IMetaPageService
 {
-    private readonly ILogger _logger = Log.ForContext<LinksPageService>();
     private readonly IMapper _mapper;
     private readonly IMetaService _metaAppService;
     public MetaPageService(IMetaService metaAppService, IMapper mapper)

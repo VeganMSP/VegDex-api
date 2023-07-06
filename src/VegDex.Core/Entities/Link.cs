@@ -2,7 +2,6 @@ namespace VegDex.Core.Entities;
 
 public class Link : Entity
 {
-    public Link() { }
     public LinkCategory Category { get; set; }
     public string? Description { get; set; }
     public int LinkCategoryId { get; set; }

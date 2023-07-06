@@ -11,7 +11,7 @@ public static class UrlUtilities
         value = value.ToLowerInvariant();
 
         // Remove accents
-        byte[]? bytes = Encoding.GetEncoding("ISO-8859-8").GetBytes(value);
+        byte[] bytes = Encoding.GetEncoding("ISO-8859-8").GetBytes(value);
         value = Encoding.ASCII.GetString(bytes);
 
         value = Regex.Replace(value, @"\s", "-", RegexOptions.Compiled);

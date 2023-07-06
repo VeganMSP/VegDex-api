@@ -1,4 +1,3 @@
-using System.Reflection;
 using AutoMapper;
 using Serilog;
 using VegDex.Application.Interfaces;
@@ -20,20 +19,6 @@ public class CityPageService : ICityPageService
         _cityAppService = cityAppService ?? throw new ArgumentNullException(nameof(cityAppService));
         _restaurantAppService = restaurantAppService ?? throw new ArgumentNullException(nameof(restaurantAppService));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
-    }
-    /// <inheritdoc />
-    public async Task<IEnumerable<CityViewModel>> GetCitys(string? cityName)
-    {
-        if (string.IsNullOrWhiteSpace(cityName))
-        {
-            var list = await _cityAppService.GetCities();
-            var mapped = _mapper.Map<IEnumerable<CityViewModel>>(list);
-            return mapped;
-        }
-        _logger.Debug("{Method} with term {CityName}", MethodBase.GetCurrentMethod()?.Name, cityName);
-        var listByName = await _cityAppService.GetCityByName(cityName);
-        var mappedByName = _mapper.Map<IEnumerable<CityViewModel>>(listByName);
-        return mappedByName;
     }
     /// <inheritdoc />
     public async Task<IEnumerable<CityViewModel>> GetCities()
