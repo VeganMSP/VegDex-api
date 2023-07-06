@@ -4,8 +4,8 @@ namespace VegDex.Application.Models;
 
 public enum PostStatus
 {
-    DRAFT,
-    PUBLISHED
+    Draft,
+    Published
 }
 public class BlogPostModel : BaseModel
 {

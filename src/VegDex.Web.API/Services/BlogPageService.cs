@@ -37,7 +37,7 @@ public class BlogPageService : IBlogPageService
         var posts = await _blogPostAppService.GetBlogPosts();
         var mapped = _mapper.Map<IEnumerable<BlogPostModel>>(posts);
         return mapped
-            .Where(p => p.Status == PostStatus.PUBLISHED);
+            .Where(p => p.Status == PostStatus.Published);
     }
     /// <inheritdoc />
     public async Task<IEnumerable<BlogPostModel>> GetAllBlogPosts()
