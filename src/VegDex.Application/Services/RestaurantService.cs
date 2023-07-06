@@ -53,7 +53,7 @@ public class RestaurantService : IRestaurantService
         if (editRestaurant == null)
             throw new ApplicationException("Entity could not be loaded.");
 
-        ObjectMapper.Mapper.Map<RestaurantModel, Restaurant>(restaurantModel, editRestaurant);
+        ObjectMapper.Mapper.Map(restaurantModel, editRestaurant);
 
         await _restaurantRepository.UpdateAsync(editRestaurant);
         _logger.Information("Entity successfully updated");
