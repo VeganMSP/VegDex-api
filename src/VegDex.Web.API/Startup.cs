@@ -1,5 +1,8 @@
 using Microsoft.AspNetCore.DataProtection;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.OpenApi.Models;
 using VegDex.Application.Interfaces;
 using VegDex.Application.Services;
 using VegDex.Core.Configuration;
@@ -27,6 +30,12 @@ public class Startup
         if (Env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
+            
+            app.UseSwagger();
+            app.UseSwaggerUI(c =>
+            {
+                c.SwaggerEndpoint("v1/swagger.json", "VegDex API V1");
+            });
         }
         else
         {
@@ -49,9 +58,8 @@ public class Startup
         app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:8080"));
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllerRoute(
-                "default",
-                "{controller=Meta}/{action=Index}");
+            endpoints.MapControllers();
+            // add my own routes
         });
     }
     public void ConfigureDatabase(IServiceCollection services)
@@ -108,6 +116,31 @@ public class Startup
 
         services.AddHttpContextAccessor();
         services.AddControllersWithViews();
+        services.AddApiVersioning(opt =>
+        {
+            opt.DefaultApiVersion = new ApiVersion(1, 0);
+            opt.AssumeDefaultVersionWhenUnspecified = true;
+            opt.ReportApiVersions = true;
+            opt.ApiVersionReader = ApiVersionReader.Combine(new UrlSegmentApiVersionReader(),
+                new HeaderApiVersionReader("x-api-version"),
+                new MediaTypeApiVersionReader("x-api-version"));
+        });
+        // Add ApiExplorer to discover versions
+        services.AddVersionedApiExplorer(opt =>
+        {
+            opt.GroupNameFormat = "'v'V";
+            opt.SubstituteApiVersionInUrl = true;
+        });
+        services.AddEndpointsApiExplorer();
+        services.AddSwaggerGen(c =>
+        {
+            c.SwaggerDoc("v1", new OpenApiInfo
+            {
+                Title = "VegDex API",
+                Description = "The API for the VegDex application.",
+                Version = "v1"
+            });
+        });
         services.AddSession();
         services.AddCors();
 

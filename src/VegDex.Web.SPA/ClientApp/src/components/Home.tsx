@@ -1,19 +1,44 @@
-import React, {Component} from 'react';
+import React, {useEffect, useState} from 'react';
+import {IPageInfo} from '../models/IPageInfo';
+import DOMPurify from 'dompurify';
+import {BASE_API_URL} from '../config';
+import {escapedNewLineToLineBreakTag} from '../functions/HtmlUtils';
 
-export class Home extends Component {
-	static displayName = Home.name;
+const fetchHomePage = async () => {
+  return await fetch(`${BASE_API_URL}/meta`)
+    .then(response => response.json());
+};
 
-	render() {
-		return (
-			<>
-				<p>Welcome to VeganMSP.com!</p>
-
-				<p>It&apos;s easy being vegan in Minneapolis and St. Paul, but it can be hard to know where to start, or where to
-					look for information and answers. We aim to fix that.</p>
-
-				<p>At VeganMSP.com, you will find restaurant and food guides, shopping guides, and other information to help you
-					on your vegan journey.</p>
-			</>
-		);
-	}
+export const Home = () => {
+  const [isLoading, setIsLoading] = useState(true);
+  const [homePageInfo, setHomePageInfo] = useState<IPageInfo>(null!);
+  const sanitizedData = () => ({
+    __html: DOMPurify.sanitize(
+      escapedNewLineToLineBreakTag(homePageInfo.content).join(""))
+  });
+  
+  const fetchData = () => {
+    fetchHomePage().then(data => setHomePageInfo(data));
+  }
+  
+  useEffect(() => {
+    if (homePageInfo) {
+      setIsLoading(false);
+      console.log(homePageInfo);
+    } else {
+      fetchData();
+    }
+  }, [homePageInfo])
+  
+  return (
+    <div>
+      <h2>VeganMSP.com</h2>
+      {isLoading ?
+        <p>Loading...</p> :
+        <>
+          <div dangerouslySetInnerHTML={sanitizedData()}></div>
+        </>
+      }
+    </div>
+  );
 }
