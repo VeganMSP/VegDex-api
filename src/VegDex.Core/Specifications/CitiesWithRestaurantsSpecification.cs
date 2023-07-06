@@ -1,6 +1,6 @@
 namespace VegDex.Core.Specifications;
 
-public class CitiesWithRestaurantsSpecification : BaseSpecification<City>
+public sealed class CitiesWithRestaurantsSpecification : BaseSpecification<City>
 {
     public CitiesWithRestaurantsSpecification() : base(c => c.Restaurants.Count > 0)
     {
