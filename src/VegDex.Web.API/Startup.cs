@@ -12,10 +12,10 @@ using VegDex.Core.Repositories.Base;
 using VegDex.Infrastructure.Context;
 using VegDex.Infrastructure.Repositories;
 using VegDex.Infrastructure.Repositories.Base;
-using VegDex.Web.MVC.Interfaces;
-using VegDex.Web.MVC.Services;
+using VegDex.Web.API.Interfaces;
+using VegDex.Web.API.Services;
 
-namespace VegDex.Web.MVC;
+namespace VegDex.Web.API;
 
 public class Startup
 {

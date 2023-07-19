@@ -1,4 +1,4 @@
-namespace VegDex.Web.MVC.ViewModels.Meta;
+namespace VegDex.Web.API.ViewModels.Meta;
 
 public class HomePageViewModel
 {

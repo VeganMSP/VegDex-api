@@ -1,9 +1,9 @@
 using AutoMapper;
 using VegDex.Application.Models;
-using VegDex.Web.MVC.ViewModels;
-using VegDex.Web.MVC.ViewModels.Meta;
+using VegDex.Web.API.ViewModels;
+using VegDex.Web.API.ViewModels.Meta;
 
-namespace VegDex.Web.MVC.Mapper;
+namespace VegDex.Web.API.Mapper;
 
 public class VegDexProfile : Profile
 {

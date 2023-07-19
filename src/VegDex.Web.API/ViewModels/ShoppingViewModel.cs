@@ -1,7 +1,7 @@
 using VegDex.Application.Models;
-using VegDex.Web.MVC.ViewModels.Base;
+using VegDex.Web.API.ViewModels.Base;
 
-namespace VegDex.Web.MVC.ViewModels;
+namespace VegDex.Web.API.ViewModels;
 
 public class ShoppingViewModel : BaseViewModel
 {
