@@ -1,7 +1,7 @@
 using VegDex.Application.Models;
-using VegDex.Web.MVC.ViewModels;
+using VegDex.Web.API.ViewModels;
 
-namespace VegDex.Web.MVC.Interfaces;
+namespace VegDex.Web.API.Interfaces;
 
 public interface IRestaurantsPageService
 {

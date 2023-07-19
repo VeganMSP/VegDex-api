@@ -2,10 +2,10 @@
 using System.Reflection;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
-using VegDex.Web.MVC.Interfaces;
-using VegDex.Web.MVC.ViewModels.Meta;
+using VegDex.Web.API.Interfaces;
+using VegDex.Web.API.ViewModels.Meta;
 
-namespace VegDex.Web.MVC.Controllers;
+namespace VegDex.Web.API.Controllers;
 
 [ApiVersion("1")]
 [Route("api/v{version:apiVersion}/[controller]")]

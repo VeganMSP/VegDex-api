@@ -4,10 +4,10 @@ using Serilog;
 using VegDex.Application.Interfaces;
 using VegDex.Application.Models;
 using VegDex.Core.Utilities;
-using VegDex.Web.MVC.Interfaces;
-using VegDex.Web.MVC.ViewModels;
+using VegDex.Web.API.Interfaces;
+using VegDex.Web.API.ViewModels;
 
-namespace VegDex.Web.MVC.Services;
+namespace VegDex.Web.API.Services;
 
 public class LinksPageService : ILinksPageService
 {
