@@ -89,6 +89,7 @@ public class Startup
         services.AddScoped<IRestaurantRepository, RestaurantRepository>();
         services.AddScoped<IVeganCompanyRepository, VeganCompanyRepository>();
         services.AddScoped<IMetaRepository, MetaRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         // Application Layer
         services.AddScoped<IBlogCategoryService, BlogCategoryService>();
@@ -100,6 +101,9 @@ public class Startup
         services.AddScoped<IRestaurantService, RestaurantService>();
         services.AddScoped<IVeganCompanyService, VeganCompanyService>();
         services.AddScoped<IMetaService, MetaService>();
+        
+        // User Service
+        services.AddScoped<IUserService, UserService>();
 
         // Web Layer
         services.AddAutoMapper(typeof(Startup));

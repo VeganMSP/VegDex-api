@@ -15,6 +15,7 @@ public class VegDexContext : DbContext
         modelBuilder.Entity<VeganCompany>().ToTable("VeganCompany");
         modelBuilder.Entity<BlogPost>().ToTable("BlogPost");
         modelBuilder.Entity<BlogCategory>().ToTable("BlogCategory");
+        modelBuilder.Entity<User>().ToTable("Users");
         modelBuilder.Entity<HomePage>().ToTable("HomePage")
             .HasData(new HomePage
             {
