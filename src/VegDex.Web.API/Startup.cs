@@ -1,5 +1,3 @@
-using Microsoft.AspNetCore.Authentication.Cookies;
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
@@ -55,7 +53,6 @@ public class Startup
         app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
-        app.UseAuthentication();
         app.UseSession();
         app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:8080"));
         app.UseEndpoints(endpoints =>
@@ -120,18 +117,6 @@ public class Startup
 
         services.AddSingleton(_configuration);
 
-        services.AddAuthentication(
-                CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(CookieAuthenticationDefaults.AuthenticationScheme, options =>
-            {
-                options.LoginPath = "/Account/Login";
-                options.LogoutPath = "/Account/Logout";
-            });
-        services.AddAuthentication(options =>
-        {
-            options.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-        });
-        // services.AddTransient(m => new UserManager())
         services.AddHttpContextAccessor();
         services.AddControllersWithViews();
         services.AddApiVersioning(opt =>
@@ -161,13 +146,6 @@ public class Startup
         });
         services.AddSession();
         services.AddCors();
-
-        services.AddDbContext<AppKeysContext>(c =>
-            c.UseSqlite("Data Source=../keys.sqlite3")
-        );
-
-        services.AddDataProtection()
-            .PersistKeysToDbContext<AppKeysContext>();
 
         if (Env.IsDevelopment())
         {
