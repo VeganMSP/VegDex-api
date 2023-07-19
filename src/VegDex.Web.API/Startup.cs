@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
@@ -143,13 +142,6 @@ public class Startup
         });
         services.AddSession();
         services.AddCors();
-
-        services.AddDbContext<AppKeysContext>(c =>
-            c.UseSqlite("Data Source=../keys.sqlite3")
-        );
-
-        services.AddDataProtection()
-            .PersistKeysToDbContext<AppKeysContext>();
 
         if (Env.IsDevelopment())
         {
