@@ -3,7 +3,7 @@ using Serilog;
 using Serilog.Events;
 using VegDex.Infrastructure.Context;
 
-namespace VegDex.Web.MVC;
+namespace VegDex.Web.API;
 
 public class Program
 {
