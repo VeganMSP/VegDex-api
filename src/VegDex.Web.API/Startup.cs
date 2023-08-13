@@ -72,7 +72,8 @@ public class Startup
     }
     public void ConfigureServices(IServiceCollection services)
     {
-        services.Configure<VegDexSettings>(_configuration);
+        IConfigManager configManager = new ConfigManager(_configuration);
+        services.AddSingleton(configManager);
 
         // Set up database
         ConfigureDatabase(services);
