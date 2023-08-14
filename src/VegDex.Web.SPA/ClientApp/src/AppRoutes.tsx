@@ -14,31 +14,31 @@ const AppRoutes = [
     element: <Home/>
   },
   {
-    path: '/about',
+    path: "/about",
     element: <About/>
   },
   {
-    path: '/blog',
+    path: "/blog",
     element: <Blog/>
   },
   {
-    path: '/links',
+    path: "/links",
     element: <Links/>
   },
   {
-    path: '/restaurants',
+    path: "/restaurants",
     element: <Restaurants/>
   },
   {
-    path: '/shopping',
+    path: "/shopping",
     element: <Shopping/>
   },
   {
-    path: '/counter',
+    path: "/counter",
     element: <Counter/>
   },
   {
-    path: '/fetch-data',
+    path: "/fetch-data",
     element: <FetchData/>
   }
 ];

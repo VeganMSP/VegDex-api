@@ -1,4 +1,4 @@
-import {ILink} from './ILink';
+import {ILink} from "./ILink";
 
 export interface ILinkCategory {
   id: number;

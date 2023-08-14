@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import PropTypes from "prop-types";
-import NewLink from './_new_link';
-import {ILinkCategory} from '../models/ILinkCategory';
-import {ILink} from '../models/ILink';
+import NewLink from "./_new_link";
+import {ILinkCategory} from "../models/ILinkCategory";
+import {ILink} from "../models/ILink";
 
 interface IState {
 	links_by_category: ILinkCategory[];
@@ -38,7 +38,7 @@ export class Links extends Component<any, IState> {
 	}
 
 	render() {
-		let contents = this.state.loading
+		const contents = this.state.loading
 			? <p><em>Loading...</em></p>
 			: Links.renderLinksList(this.state.links_by_category);
 
@@ -52,7 +52,7 @@ export class Links extends Component<any, IState> {
 	}
 
 	async populateLinksByCategory() {
-		const response = await fetch('api/v1/links-by-category');
+		const response = await fetch("api/v1/links-by-category");
 		const data = await response.json();
 
 		this.setState({links_by_category: data, loading: false});
@@ -63,7 +63,7 @@ export class LinkCategory extends Component<{ category: ILinkCategory, links: IL
 	static propTypes = {
 		category: PropTypes.object,
 		links: PropTypes.array
-	}
+	};
 
 	render() {
 		const {category, links} = this.props;
@@ -77,14 +77,14 @@ export class LinkCategory extends Component<{ category: ILinkCategory, links: IL
 					)}
 				</ul>
 			</div>
-		)
+		);
 	}
 }
 
 export class Link extends Component<{ link: ILink }> {
 	static propTypes = {
 		link: PropTypes.object,
-	}
+	};
 
 	render() {
 		const {name, website, description} = this.props.link;
@@ -92,7 +92,7 @@ export class Link extends Component<{ link: ILink }> {
 		return (
 			<li>
 				<a
-					href={website} target={'_blank'} rel="noreferrer">{name}</a> - {description}
+					href={website} target={"_blank"} rel="noreferrer">{name}</a> - {description}
 			</li>
 		);
 	}

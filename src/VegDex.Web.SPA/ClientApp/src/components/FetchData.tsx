@@ -1,4 +1,4 @@
-import React, { Component } from 'react';
+import React, { Component } from "react";
 
 interface IForecast {
   summary: string;
@@ -50,7 +50,7 @@ export class FetchData extends Component<any, IState> {
   }
 
   render() {
-    let contents = this.state.loading
+    const contents = this.state.loading
       ? <p><em>Loading...</em></p>
       : FetchData.renderForecastsTable(this.state.forecasts);
 
@@ -64,7 +64,7 @@ export class FetchData extends Component<any, IState> {
   }
 
   async populateWeatherData() {
-    const response = await fetch('/weatherforecast');
+    const response = await fetch("/weatherforecast");
     const data = await response.json();
     this.setState({ forecasts: data, loading: false });
   }

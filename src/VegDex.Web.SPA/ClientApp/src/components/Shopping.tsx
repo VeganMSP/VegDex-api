@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import PropTypes from "prop-types";
-import {IFarmersMarket} from '../models/IFarmersMarket';
-import {IVeganCompany} from '../models/IVeganCompany';
+import {IFarmersMarket} from "../models/IFarmersMarket";
+import {IVeganCompany} from "../models/IVeganCompany";
 
 interface IState {
 	farmers_markets: IFarmersMarket[];
@@ -40,13 +40,13 @@ export class Shopping extends Component<any, IState> {
 						)}
 					</ul>
 				</div>
-			)
+			);
 		} else {
 			return (
 				<div>
 					<p>There are no vegan companies in the database!</p>
 				</div>
-			)
+			);
 		}
 	}
 
@@ -62,21 +62,21 @@ export class Shopping extends Component<any, IState> {
 						)}
 					</ul>
 				</div>
-			)
+			);
 		} else {
 			return (
 				<div>
 					<p>There are no farmers markets in the database!</p>
 				</div>
-			)
+			);
 		}
 	}
 
 	render() {
-		let vegan_companies = this.state.loading_vc
+		const vegan_companies = this.state.loading_vc
 			? <p><em>Loading...</em></p>
 			: Shopping.renderVeganCompaniesList(this.state.vegan_companies);
-		let farmers_markets = this.state.loading_fm
+		const farmers_markets = this.state.loading_fm
 			? <p><em>Loading...</em></p>
 			: Shopping.renderFarmersMarketsList(this.state.farmers_markets);
 		return (
@@ -94,13 +94,13 @@ export class Shopping extends Component<any, IState> {
 	}
 
 	async getFarmersMarkets() {
-		const response = await fetch('api/v1/shopping/farmers-markets');
+		const response = await fetch("api/v1/shopping/farmers-markets");
 		const data = await response.json();
 		this.setState({farmers_markets: data, loading_fm: false});
 	}
 
 	async getVeganCompanies() {
-		const response = await fetch('api/v1/shopping/vegan-companies');
+		const response = await fetch("api/v1/shopping/vegan-companies");
 		const data = await response.json();
 		this.setState({vegan_companies: data, loading_vc: false});
 	}
@@ -109,7 +109,7 @@ export class Shopping extends Component<any, IState> {
 class FarmersMarket extends Component<{ market: IFarmersMarket }> {
 	static propTypes = {
 		market: PropTypes.object
-	}
+	};
 
 	render() {
 		const {name, website, address, description} = this.props.market;
@@ -125,7 +125,7 @@ class FarmersMarket extends Component<{ market: IFarmersMarket }> {
 class VeganCompany extends Component<{ company: IVeganCompany }> {
 	static propTypes = {
 		company: PropTypes.object
-	}
+	};
 
 	render() {
 		const {name, website, description} = this.props.company;
