@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {Button, Input, Label} from "reactstrap";
 import {useAuth} from "../../hooks/useAuth";
 import {Navigate} from "react-router-dom";
@@ -6,12 +6,12 @@ import {Navigate} from "react-router-dom";
 export function Login() {
   const {user, login} = useAuth();
   if (user) {
-    return <Navigate to={"/"}/>
+    return <Navigate to={"/"}/>;
   }
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     console.log("e: ", e);
-    let target = e.target as HTMLFormElement;
+    const target = e.target as HTMLFormElement;
     console.log("target: ", target);
     login({username: target.username.value, password: target.password.value});
   };

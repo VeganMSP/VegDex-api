@@ -9,12 +9,12 @@ export const useUser = () => {
   const addUser = (user: User) => {
     setUser(user);
     setItem("user", JSON.stringify(user));
-  }
+  };
 
   const removeUser = () => {
     setUser(null);
     setItem("user", "");
-  }
+  };
 
   return {user, addUser, removeUser};
-}
+};

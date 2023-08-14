@@ -1,8 +1,8 @@
-import React from 'react';
-import {Route, Routes} from 'react-router-dom';
-import AppRoutes from './AppRoutes';
-import {Layout} from './components/Layout';
-import './custom.scss';
+import React from "react";
+import {Route, Routes} from "react-router-dom";
+import AppRoutes from "./AppRoutes";
+import {Layout} from "./components/Layout";
+import "./custom.scss";
 import {AuthProvider} from "./context/AuthContext";
 
 const App = () => {
@@ -19,6 +19,6 @@ const App = () => {
       </Layout>
     </AuthProvider>
   );
-}
+};
 
 export default App;

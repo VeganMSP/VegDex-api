@@ -1,4 +1,4 @@
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 import {BASE_URL} from "../config";
 import sessionManager from "../functions/SessionManager";
 import {useUser} from "./useUser";
@@ -38,7 +38,7 @@ export const useAuth = () => {
         .then(data => {
           const {username, token, id} = data;
           sessionManager.setUserSession(username, token, id);
-          let user: User = {
+          const user: User = {
             id: id,
             username: username,
             token: token
@@ -48,7 +48,7 @@ export const useAuth = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const register = async (data: { username: string; password: string; confirm_password: string }) => {
     try {
@@ -67,7 +67,7 @@ export const useAuth = () => {
         .then(data => {
           const {username, token, id} = data;
           sessionManager.setUserSession(username, token, id);
-          let user: User = {
+          const user: User = {
             id: id,
             username: username,
             token: token
@@ -77,11 +77,11 @@ export const useAuth = () => {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   const logout = () => {
     removeUser();
-  }
+  };
 
   return {user, login, logout, register};
-}
+};

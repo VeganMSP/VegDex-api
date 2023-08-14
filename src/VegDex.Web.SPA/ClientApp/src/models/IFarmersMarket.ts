@@ -1,4 +1,4 @@
-import {IAddress} from './IAddress';
+import {IAddress} from "./IAddress";
 
 export interface IFarmersMarket {
   slug: string;

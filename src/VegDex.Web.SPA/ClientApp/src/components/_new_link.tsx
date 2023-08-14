@@ -1,7 +1,7 @@
-import React, {ChangeEvent, Component, FormEvent} from 'react';
-import {Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody} from 'reactstrap';
-import AsyncCreatableSelect from 'react-select/async-creatable';
-import {ILinkCategory} from '../models/ILinkCategory';
+import React, {ChangeEvent, Component, FormEvent} from "react";
+import {Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody} from "reactstrap";
+import AsyncCreatableSelect from "react-select/async-creatable";
+import {ILinkCategory} from "../models/ILinkCategory";
 
 interface IState {
   link_categories: string[],
@@ -24,7 +24,7 @@ class NewLink extends Component<any, IState> {
     this.setState(prevState => ({
       newLinkModal: !prevState.newLinkModal
     }));
-  }
+  };
 
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState(state => {
@@ -36,7 +36,7 @@ class NewLink extends Component<any, IState> {
     console.log(typeof(e));
     // TODO: handle creating new categories here
     this.setState(state => {
-      state.form['link_category_id'] = e.id;
+      state.form["link_category_id"] = e.id;
     });
   };
 
@@ -44,12 +44,12 @@ class NewLink extends Component<any, IState> {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
     try {
-      const response = await fetch('/api/v1/links', {
-        method: 'POST',
+      const response = await fetch("/api/v1/links", {
+        method: "POST",
         body: JSON.stringify(this.state.form),
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
       });
       if (!response.ok) throw Error(response.statusText);
@@ -58,7 +58,7 @@ class NewLink extends Component<any, IState> {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   componentDidMount() {
     this.populateLinkCategories();
@@ -71,14 +71,14 @@ class NewLink extends Component<any, IState> {
           <option key={category.id} value={category.id}>{category.name}</option>
         )}
       </>
-    )
+    );
   }
 
   render() {
 
     return (
       <>
-        <Button id="link_form_toggle" className={'primary'} onClick={this.toggleLinkForm}>
+        <Button id="link_form_toggle" className={"primary"} onClick={this.toggleLinkForm}>
           Create New +
         </Button>
 
@@ -152,15 +152,15 @@ class NewLink extends Component<any, IState> {
           </ModalBody>
         </Modal>
       </>
-    )
+    );
   }
 
   async populateLinkCategories() {
-    const response = await fetch('api/v1/link-categories');
+    const response = await fetch("api/v1/link-categories");
     const data = await response.json();
     return data;
   }
 
 }
 
-export default NewLink
+export default NewLink;

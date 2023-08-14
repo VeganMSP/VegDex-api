@@ -1,4 +1,4 @@
-import {IRestaurant} from './IRestaurant';
+import {IRestaurant} from "./IRestaurant";
 
 export interface ICity {
   slug: string;

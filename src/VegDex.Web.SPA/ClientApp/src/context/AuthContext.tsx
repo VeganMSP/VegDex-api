@@ -10,7 +10,7 @@ interface AuthContext {
 
 const AuthContext = createContext<AuthContext>({
   user: null,
-})
+});
 
 const useAuthContext = () => useContext(AuthContext);
 
@@ -20,6 +20,6 @@ const AuthProvider = (props: {children: ReactNode}) => {
     <AuthContext.Provider value={auth}>
       {props.children}
     </AuthContext.Provider>);
-}
+};
 
 export {AuthProvider, useAuthContext};

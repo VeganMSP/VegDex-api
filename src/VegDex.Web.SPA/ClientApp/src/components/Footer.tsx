@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 import {useAuth} from "../hooks/useAuth";
 
 export const Footer = () => {
@@ -40,5 +40,5 @@ const SiteBio = () => {
                        href="https://veganmilwaukee.com/">https://veganmilwaukee.com</a>.
       </p>
     </div>
-  )
+  );
 };

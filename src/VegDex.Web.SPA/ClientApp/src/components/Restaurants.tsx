@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
-import {City} from './City'
-import {ICity} from '../models/ICity';
+import React, {Component} from "react";
+import {City} from "./City";
+import {ICity} from "../models/ICity";
 
 interface IState {
 	restaurants_by_city: ICity[];
@@ -38,18 +38,18 @@ export class Restaurants extends Component<any, IState> {
 				Jump to city:
 				<ul>
 					{restaurants_by_city.map(city =>
-						<li key={city.slug}><a href={'#' + city.slug}>{city.name}</a></li>
+						<li key={city.slug}><a href={"#" + city.slug}>{city.name}</a></li>
 					)}
 				</ul>
 			</div>
-		)
+		);
 	}
 
 	render() {
-		let contents = this.state.loading
+		const contents = this.state.loading
 			? <p><em>Loading...</em></p>
 			: Restaurants.renderRestaurantsList(this.state.restaurants_by_city);
-		let city_list = this.state.loading
+		const city_list = this.state.loading
 			? <p><em>Loading...</em></p>
 			: Restaurants.renderCityList(this.state.restaurants_by_city);
 
@@ -63,7 +63,7 @@ export class Restaurants extends Component<any, IState> {
 	}
 
 	async populateRestaurantsByCity() {
-		const response = await fetch('api/v1/cities-with-restaurants');
+		const response = await fetch("api/v1/cities-with-restaurants");
 		const data = await response.json();
 		this.setState({restaurants_by_city: data, loading: false});
 	}

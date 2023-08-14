@@ -6,13 +6,13 @@ export const useLocalStorage = () => {
   const setItem = (key: string, value: string) => {
     localStorage.setItem(key, value);
     setValue(value);
-  }
+  };
 
   const getItem = (key: string) => {
     const value = localStorage.getItem(key);
     setValue(value);
     return value;
-  }
+  };
 
   const removeItem = (key: string) => {
     localStorage.removeItem(key);
@@ -20,4 +20,4 @@ export const useLocalStorage = () => {
   };
 
   return { value, setItem, getItem, removeItem };
-}
+};
