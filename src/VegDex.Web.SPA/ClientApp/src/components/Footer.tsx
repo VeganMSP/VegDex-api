@@ -1,5 +1,5 @@
-import React, {Component} from 'react';
-import {IRestaurant} from '../models/IRestaurant';
+import React, {Component} from "react";
+import {IRestaurant} from "../models/IRestaurant";
 
 interface IState {
 	restaurants: IRestaurant[];
@@ -52,6 +52,6 @@ class SiteBio extends Component {
                          href="https://veganmilwaukee.com/">https://veganmilwaukee.com</a>.
 				</p>
 			</div>
-		)
+		);
 	}
 }

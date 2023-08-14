@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
-import PropTypes from 'prop-types';
-import {ICity} from '../models/ICity';
-import {IRestaurant} from '../models/IRestaurant';
-import {Restaurant} from './Restaurant';
+import React, {Component} from "react";
+import PropTypes from "prop-types";
+import {ICity} from "../models/ICity";
+import {IRestaurant} from "../models/IRestaurant";
+import {Restaurant} from "./Restaurant";
 
 interface IProps {
 	city: ICity;
@@ -13,7 +13,7 @@ export class City extends Component<IProps> {
 	static propTypes = {
 		city: PropTypes.object,
 		restaurants: PropTypes.array
-	}
+	};
 
 	render() {
 		const {city, restaurants} = this.props;
@@ -29,6 +29,6 @@ export class City extends Component<IProps> {
 					)}
 				</ul>
 			</div>
-		)
+		);
 	}
 }

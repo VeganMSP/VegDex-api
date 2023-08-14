@@ -1,5 +1,5 @@
-import React, {ChangeEvent, Component, FormEvent} from 'react';
-import {Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody} from 'reactstrap';
+import React, {ChangeEvent, Component, FormEvent} from "react";
+import {Button, Col, Form, FormGroup, Input, Label, Modal, ModalBody} from "reactstrap";
 import AsyncCreatableSelect from "react-select/async-creatable";
 
 export const BlogPostStatus = {
@@ -27,31 +27,31 @@ class NewBlogPost extends Component<any, IState> {
     this.setState(prevState => ({
       modal: !prevState.modal
     }));
-  }
+  };
 
   handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     this.setState(state => {
       state.form[e.target.name] = e.target.value;
     });
-  }
+  };
 
   handleBlogPostCategorySelectChange = (e: any /*ChangeEvent<HTMLInputElement>*/) => {
     // TODO: handle new category creation here
     this.setState(state => {
-      state.form['blog_post_category_id'] = e.id;
+      state.form["blog_post_category_id"] = e.id;
     });
-  }
+  };
 
   submitForm = async (e: FormEvent) => {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
     try {
-      const response = await fetch('/api/v1/blog_posts', {
-        method: 'POST',
+      const response = await fetch("/api/v1/blog_posts", {
+        method: "POST",
         body: JSON.stringify(this.state.form),
         headers: {
-          Accept: 'application/json',
-          'Content-Type': 'application/json',
+          Accept: "application/json",
+          "Content-Type": "application/json",
         },
       });
       if (!response.ok) throw Error(response.statusText);
@@ -60,13 +60,13 @@ class NewBlogPost extends Component<any, IState> {
     } catch (error) {
       console.error(error);
     }
-  }
+  };
 
   render() {
 
     return (
       <>
-        <Button class={'primary'} onClick={this.toggle}>
+        <Button class={"primary"} onClick={this.toggle}>
           Create New +
         </Button>
 
@@ -144,13 +144,13 @@ class NewBlogPost extends Component<any, IState> {
           </ModalBody>
         </Modal>
       </>
-    )
+    );
   }
 
   async populateBlogPostCategories() {
-    const response = await fetch('api/v1/blog_post_categories');
+    const response = await fetch("api/v1/blog_post_categories");
     return await response.json();
   }
 }
 
-export default NewBlogPost
+export default NewBlogPost;
