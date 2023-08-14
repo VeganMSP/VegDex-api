@@ -11,6 +11,7 @@ using VegDex.Infrastructure.Context;
 using VegDex.Infrastructure.Repositories;
 using VegDex.Infrastructure.Repositories.Base;
 using VegDex.Web.API.Interfaces;
+using VegDex.Web.API.Middlewares;
 using VegDex.Web.API.Services;
 
 namespace VegDex.Web.API;
@@ -55,6 +56,7 @@ public class Startup
         app.UseAuthorization();
         app.UseSession();
         app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:8080"));
+        app.UseMiddleware<JwtMiddleware>();
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
@@ -99,7 +101,7 @@ public class Startup
         services.AddScoped<IRestaurantService, RestaurantService>();
         services.AddScoped<IVeganCompanyService, VeganCompanyService>();
         services.AddScoped<IMetaService, MetaService>();
-        
+
         // User Service
         services.AddScoped<IUserService, UserService>();
 

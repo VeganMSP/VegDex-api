@@ -1,7 +1,8 @@
-using Microsoft.AspNetCore.Authorization;
+
 using Microsoft.AspNetCore.Mvc;
 using VegDex.Application.Interfaces;
 using VegDex.Application.Models;
+using VegDex.Web.API.Attributes;
 
 namespace VegDex.Web.API.Controllers;
 

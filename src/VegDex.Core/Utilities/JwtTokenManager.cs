@@ -31,4 +31,19 @@ public class JwtTokenManager
         var token = tokenHandler.CreateToken(tokenDescriptor);
         return tokenHandler.WriteToken(token);
     }
+    public JwtSecurityToken Validate(string token)
+    {
+        var tokenHandler = new JwtSecurityTokenHandler();
+        var key = Encoding.ASCII.GetBytes(_secretKey);
+        tokenHandler.ValidateToken(token, new TokenValidationParameters
+        {
+            ValidateIssuerSigningKey = true,
+            IssuerSigningKey = new SymmetricSecurityKey(key),
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            // Set ClockSkew to zero so tokens expire exactly at token expiration time
+            ClockSkew = TimeSpan.Zero
+        }, out SecurityToken validatedToken);
+        return (JwtSecurityToken)validatedToken;
+    }
 }
