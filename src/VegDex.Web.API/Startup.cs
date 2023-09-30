@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
+using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using VegDex.Application.Interfaces;
 using VegDex.Application.Services;
@@ -13,6 +14,7 @@ using VegDex.Infrastructure.Repositories.Base;
 using VegDex.Web.API.Interfaces;
 using VegDex.Web.API.Middlewares;
 using VegDex.Web.API.Services;
+using VegDex.Web.API.Setup;
 
 namespace VegDex.Web.API;
 
@@ -119,6 +121,9 @@ public class Startup
 
         services.AddHttpContextAccessor();
         services.AddControllersWithViews();
+
+        services.AddSingleton<IConfigureOptions<JsonOptions>, ConfigureJsonOptions>();
+
         services.AddApiVersioning(opt =>
         {
             opt.DefaultApiVersion = new ApiVersion(1, 0);
