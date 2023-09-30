@@ -40,7 +40,7 @@ public class Startup
         {
             app.UseExceptionHandler("/Home/Error");
         }
-        if (_configuration.GetValue<bool>("HttpRedirection"))
+        if (_configuration.GetValue<bool>("HttpsRedirection"))
         {
             app.UseHttpsRedirection();
             if (Env.IsDevelopment())
