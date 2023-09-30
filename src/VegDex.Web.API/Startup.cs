@@ -50,7 +50,6 @@ public class Startup
             }
         }
         app.UseStatusCodePages();
-        app.UseStaticFiles();
         app.UseRouting();
         app.UseAuthorization();
         app.UseSession();
