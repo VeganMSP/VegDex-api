@@ -22,7 +22,7 @@
     "sass-loader": "^13.2.1",
     "web-vitals": "^2.1.4",
     "webpack": "^5.76.2",
-    "webpack-cli": "^5.0.1"
+    "webpack-cli": "^5.1.4"
   },
   "scripts": {
     "start": "rimraf ./build && react-scripts start",
