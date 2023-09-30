@@ -9,6 +9,6 @@ public interface ICityPageService
     Task DeleteCity(CityModel cityModel);
     Task<IEnumerable<CityViewModel>> GetCities();
     Task<CityModel> GetCityById(int? id);
-    Task UpdateCity(CityModel cityModel);
     Task<IEnumerable<RestaurantModel>> GetRestaurantsInCityById(int id);
+    Task UpdateCity(CityModel cityModel);
 }

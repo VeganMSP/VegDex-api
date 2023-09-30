@@ -14,22 +14,22 @@ public class MetaPageService : IMetaPageService
         _mapper = mapper;
         _metaAppService = metaAppService ?? throw new ArgumentNullException(nameof(metaAppService));
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<AboutPageViewModel> GetAboutPage()
     {
         var page = await _metaAppService.GetAboutPage();
         var mapped = _mapper.Map<AboutPageViewModel>(page);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<HomePageViewModel> GetHomePage()
     {
         var page = await _metaAppService.GetHomePage();
         var mapped = _mapper.Map<HomePageViewModel>(page);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdateAboutPage(string content) => await _metaAppService.UpdateAboutPage(content);
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdateHomePage(string content) => await _metaAppService.UpdateHomePage(content);
 }

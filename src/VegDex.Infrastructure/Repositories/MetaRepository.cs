@@ -7,21 +7,21 @@ public class MetaRepository : IMetaRepository
     {
         _dbContext = dbContext;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<AboutPage> GetAboutPage()
     {
         var page = await _dbContext.Set<AboutPage>()
             .FirstAsync();
         return page;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<HomePage> GetHomePage()
     {
         var page = await _dbContext.Set<HomePage>()
             .FirstAsync();
         return page;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdatePageAsync(dynamic page)
     {
         var now = DateTime.Now;

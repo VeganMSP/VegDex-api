@@ -8,21 +8,21 @@ public class BlogCategoryService : IBlogCategoryService
     {
         _blogCategoryRepository = blogCategoryRepository;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<BlogCategoryModel>> GetBlogCategories()
     {
         var blogCategories = await _blogCategoryRepository.GetBlogCategories();
         var mapped = ObjectMapper.Mapper.Map<IEnumerable<BlogCategoryModel>>(blogCategories);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<BlogCategoryModel> GetBlogCategoryById(int blogCategoryId)
     {
         var category = await _blogCategoryRepository.GetByIdAsync(blogCategoryId);
         var mapped = ObjectMapper.Mapper.Map<BlogCategoryModel>(category);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<BlogCategoryModel> Create(BlogCategoryModel blogCategoryModel)
     {
         await ValidateBlogCategoryIfExist(blogCategoryModel);
@@ -37,7 +37,7 @@ public class BlogCategoryService : IBlogCategoryService
         var newMappedEntity = ObjectMapper.Mapper.Map<BlogCategoryModel>(newEntity);
         return newMappedEntity;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Update(BlogCategoryModel blogCategoryModel)
     {
         ValidateBlogCategoryIfNotExist(blogCategoryModel);
@@ -48,7 +48,7 @@ public class BlogCategoryService : IBlogCategoryService
         await _blogCategoryRepository.UpdateAsync(editBlogCategory);
         _logger.Information("Entity successfully updated");
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Delete(BlogCategoryModel blogCategoryModel)
     {
         ValidateBlogCategoryIfNotExist(blogCategoryModel);

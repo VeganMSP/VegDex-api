@@ -25,26 +25,24 @@ public class ShoppingPageService : IShoppingPageService
             veganCompanyAppService ?? throw new ArgumentNullException(nameof(veganCompanyAppService));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<ShoppingViewModel> GetPageInformation()
     {
         var farmersMarkets = await _farmersMarketAppService.GetFarmersMarkets();
         var veganCompanies = await _veganCompanyAppService.GetVeganCompanies();
         var viewModel = new ShoppingViewModel
-        {
-            FarmersMarkets = farmersMarkets,
-            VeganCompanies = veganCompanies
-        };
+        { FarmersMarkets = farmersMarkets,
+          VeganCompanies = veganCompanies };
         return viewModel;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<VeganCompanyModel> GetVeganCompanyById(int id)
     {
         var veganCompany = await _veganCompanyAppService.GetVeganCompanyById(id);
         var mapped = _mapper.Map<VeganCompanyModel>(veganCompany);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdateVeganCompany(VeganCompanyModel veganCompany)
     {
         var mapped = _mapper.Map<VeganCompanyModel>(veganCompany);
@@ -53,7 +51,7 @@ public class ShoppingPageService : IShoppingPageService
         await _veganCompanyAppService.Update(mapped);
         _logger.Information("Entity successfully updated: {VeganCompany}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task DeleteVeganCompany(VeganCompanyModel veganCompanyModel)
     {
         var mapped = _mapper.Map<VeganCompanyModel>(veganCompanyModel);
@@ -62,7 +60,7 @@ public class ShoppingPageService : IShoppingPageService
         await _veganCompanyAppService.Delete(mapped);
         _logger.Information("Entity successfully deleted: {VeganCompany}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<FarmersMarketModel> CreateFarmersMarket(FarmersMarketModel farmersMarketModel)
     {
         var mapped = _mapper.Map<FarmersMarketModel>(farmersMarketModel);
@@ -75,7 +73,7 @@ public class ShoppingPageService : IShoppingPageService
         var mappedModel = _mapper.Map<FarmersMarketModel>(entityDto);
         return mappedModel;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<VeganCompanyModel> CreateVeganCompany(VeganCompanyModel veganCompanyModel)
     {
         var mapped = _mapper.Map<VeganCompanyModel>(veganCompanyModel);
@@ -88,14 +86,14 @@ public class ShoppingPageService : IShoppingPageService
         var mappedModel = _mapper.Map<VeganCompanyModel>(entityDto);
         return mappedModel;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<FarmersMarketModel> GetFarmersMarketById(int id)
     {
         var farmersMarket = await _farmersMarketAppService.GetFarmersMarketById(id);
         var mapped = _mapper.Map<FarmersMarketModel>(farmersMarket);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task DeleteFarmersMarket(FarmersMarketModel farmersMarket)
     {
         var mapped = _mapper.Map<FarmersMarketModel>(farmersMarket);
@@ -104,7 +102,7 @@ public class ShoppingPageService : IShoppingPageService
         await _farmersMarketAppService.Delete(mapped);
         _logger.Information("Entity successfully deleted: {FarmersMarket}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdateFarmersMarket(FarmersMarketModel farmersMarketModel)
     {
         var mapped = _mapper.Map<FarmersMarketModel>(farmersMarketModel);

@@ -23,9 +23,7 @@ public class CityModelTests
     {
         // Arrange
         var obj = new CityModel
-        {
-            Name = "Hopkins"
-        };
+        { Name = "Hopkins" };
         var expected = "Hopkins";
 
         // Assert

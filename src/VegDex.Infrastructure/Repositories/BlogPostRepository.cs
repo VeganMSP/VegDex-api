@@ -2,9 +2,9 @@ namespace VegDex.Infrastructure.Repositories;
 
 public class BlogPostRepository : Repository<BlogPost>, IBlogPostRepository
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public BlogPostRepository(VegDexContext dbContext) : base(dbContext) { }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<BlogPost>> GetBlogPosts()
     {
         var spec = new BlogPostWithCategorySpecification();

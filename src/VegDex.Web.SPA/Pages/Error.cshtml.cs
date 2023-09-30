@@ -7,8 +7,7 @@ namespace VegDex.Web.SPA.Pages;
 [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
 public class ErrorModel : PageModel
 {
-    public ErrorModel(ILogger<ErrorModel> logger)
-    { }
+    public ErrorModel(ILogger<ErrorModel> logger) { }
     public string? RequestId { get; set; }
     public bool ShowRequestId => !string.IsNullOrEmpty(RequestId);
     public void OnGet()

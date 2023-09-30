@@ -1,4 +1,4 @@
-import React, { Component } from "react";
+import React, {Component} from "react";
 
 interface IState {
   currentCount: number;
@@ -9,7 +9,7 @@ export class Counter extends Component<any, IState> {
 
   constructor(props: any) {
     super(props);
-    this.state = { currentCount: 0 };
+    this.state = {currentCount: 0};
     this.incrementCounter = this.incrementCounter.bind(this);
   }
 

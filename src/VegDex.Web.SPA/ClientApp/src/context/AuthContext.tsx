@@ -14,7 +14,7 @@ const AuthContext = createContext<AuthContext>({
 
 const useAuthContext = () => useContext(AuthContext);
 
-const AuthProvider = (props: {children: ReactNode}) => {
+const AuthProvider = (props: { children: ReactNode }) => {
   const auth = useAuth();
   return (
     <AuthContext.Provider value={auth}>

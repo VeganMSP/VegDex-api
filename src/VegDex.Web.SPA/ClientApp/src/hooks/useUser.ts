@@ -4,7 +4,7 @@ import {User} from "./useAuth";
 
 export const useUser = () => {
   const [user, setUser] = useState<User | null>(null);
-  const { setItem } = useLocalStorage();
+  const {setItem} = useLocalStorage();
 
   const addUser = (user: User) => {
     setUser(user);

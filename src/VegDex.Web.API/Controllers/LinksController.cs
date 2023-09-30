@@ -125,9 +125,7 @@ public class LinksController : Controller
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
         var linkCategoriesWithLinks = _linksPageService.GetLinkCategoriesWithLinks().Result;
         var viewModel = new LinkViewModel
-        {
-            LinkCategories = linkCategoriesWithLinks
-        };
+        { LinkCategories = linkCategoriesWithLinks };
         return viewModel;
     }
     [HttpGet]

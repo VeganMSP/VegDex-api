@@ -7,9 +7,7 @@ public class BlogPostModelTests
     public void Init()
     {
         _blogCategory = new BlogCategoryModel
-        {
-            Name = "Announcements"
-        };
+        { Name = "Announcements" };
     }
     private static BlogCategoryModel? _blogCategory;
     [TestMethod]

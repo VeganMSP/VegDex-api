@@ -7,7 +7,7 @@ namespace VegDex.Web.API.Attributes;
 [AttributeUsage(AttributeTargets.Class | AttributeTargets.Method)]
 public class AuthorizeAttribute : Attribute, IAuthorizationFilter
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public void OnAuthorization(AuthorizationFilterContext context)
     {
         var user = (User?)context.HttpContext.Items["User"];
@@ -15,12 +15,8 @@ public class AuthorizeAttribute : Attribute, IAuthorizationFilter
         {
             // not logged in
             context.Result = new JsonResult(new
-            {
-                message = "Unauthorized"
-            })
-            {
-                StatusCode = StatusCodes.Status401Unauthorized
-            };
+            { message = "Unauthorized" })
+            { StatusCode = StatusCodes.Status401Unauthorized };
         }
     }
 }

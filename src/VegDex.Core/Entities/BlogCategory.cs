@@ -12,10 +12,8 @@ public class BlogCategory : Entity
     public static BlogCategory Create(int blogCategoryId, string name)
     {
         var blogCategory = new BlogCategory
-        {
-            Id = blogCategoryId,
-            Name = name
-        };
+        { Id = blogCategoryId,
+          Name = name };
         return blogCategory;
     }
 }

@@ -8,21 +8,21 @@ public class VeganCompanyService : IVeganCompanyService
     {
         _veganCompanyRepository = veganCompanyRepository;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<VeganCompanyModel>> GetVeganCompanies()
     {
         var veganCompanies = await _veganCompanyRepository.GetVeganCompanies();
         var mapped = ObjectMapper.Mapper.Map<IEnumerable<VeganCompanyModel>>(veganCompanies);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<VeganCompanyModel> GetVeganCompanyById(int veganCompanyId)
     {
         var veganCompany = await _veganCompanyRepository.GetByIdAsync(veganCompanyId);
         var mapped = ObjectMapper.Mapper.Map<VeganCompanyModel>(veganCompany);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<VeganCompanyModel> Create(VeganCompanyModel veganCompanyModel)
     {
         await ValidateVeganCompanyIfExist(veganCompanyModel);
@@ -35,13 +35,7 @@ public class VeganCompanyService : IVeganCompanyService
         var newMappedEntity = ObjectMapper.Mapper.Map<VeganCompanyModel>(newEntity);
         return newMappedEntity;
     }
-    async private Task ValidateVeganCompanyIfExist(VeganCompanyModel veganCompany)
-    {
-        var existingEntity = await _veganCompanyRepository.GetByIdAsync(veganCompany.Id);
-        if (existingEntity != null)
-            throw new ApplicationException($"{veganCompany} with this Id exists already");
-    }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Update(VeganCompanyModel veganCompanyModel)
     {
         ValidateVeganCompanyIfNotExist(veganCompanyModel);
@@ -52,13 +46,7 @@ public class VeganCompanyService : IVeganCompanyService
         await _veganCompanyRepository.UpdateAsync(editVeganCompany);
         _logger.Information("Entity successfully updated");
     }
-    private void ValidateVeganCompanyIfNotExist(VeganCompanyModel veganCompanyModel)
-    {
-        var existingEntity = _veganCompanyRepository.GetByIdAsync(veganCompanyModel.Id);
-        if (existingEntity == null)
-            throw new ApplicationException($"{veganCompanyModel} with this Id does not exist");
-    }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Delete(VeganCompanyModel veganCompanyModel)
     {
         ValidateVeganCompanyIfNotExist(veganCompanyModel);
@@ -67,5 +55,17 @@ public class VeganCompanyService : IVeganCompanyService
             throw new ApplicationException("Entity could not be loaded");
         await _veganCompanyRepository.DeleteAsync(deletedVeganCompany);
         _logger.Information("Entity successfully deleted");
+    }
+    async private Task ValidateVeganCompanyIfExist(VeganCompanyModel veganCompany)
+    {
+        var existingEntity = await _veganCompanyRepository.GetByIdAsync(veganCompany.Id);
+        if (existingEntity != null)
+            throw new ApplicationException($"{veganCompany} with this Id exists already");
+    }
+    private void ValidateVeganCompanyIfNotExist(VeganCompanyModel veganCompanyModel)
+    {
+        var existingEntity = _veganCompanyRepository.GetByIdAsync(veganCompanyModel.Id);
+        if (existingEntity == null)
+            throw new ApplicationException($"{veganCompanyModel} with this Id does not exist");
     }
 }

@@ -143,35 +143,24 @@ public class Startup
         services.AddSwaggerGen(c =>
         {
             c.SwaggerDoc("v1", new OpenApiInfo
-            {
-                Title = "VegDex API",
-                Description = "The API for the VegDex application.",
-                Version = "v1"
-            });
+            { Title = "VegDex API",
+              Description = "The API for the VegDex application.",
+              Version = "v1" });
             c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
-            {
-                In = ParameterLocation.Header,
-                Description = "JWT Token",
-                Name = "Authorization",
-                Type = SecuritySchemeType.ApiKey,
-                Scheme = "Bearer",
-                BearerFormat = "JWT"
-            });
+            { In = ParameterLocation.Header,
+              Description = "JWT Token",
+              Name = "Authorization",
+              Type = SecuritySchemeType.ApiKey,
+              Scheme = "Bearer",
+              BearerFormat = "JWT" });
             c.AddSecurityRequirement(new OpenApiSecurityRequirement
             {
-                {
-                    new OpenApiSecurityScheme
-                    {
-                        Reference = new OpenApiReference
-                        {
-                            Type = ReferenceType.SecurityScheme,
-                            Id = "Bearer"
-                        }
-                    },
-                    new string[]
-                        { }
-                }
-            });
+            { new OpenApiSecurityScheme
+              { Reference = new OpenApiReference
+                { Type = ReferenceType.SecurityScheme,
+                  Id = "Bearer" } },
+              new string[]
+              { } } });
         });
         services.AddSession();
         services.AddCors();

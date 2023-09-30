@@ -15,8 +15,8 @@ public class ConfigManager : IConfigManager
     {
         App = configuration.GetSection("App").Get<App>() ?? throw new InvalidOperationException();
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public App App { get; set; }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public string GetConfigValue(string key) => throw new NotImplementedException();
 }

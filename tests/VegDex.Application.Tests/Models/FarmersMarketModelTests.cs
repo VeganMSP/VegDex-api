@@ -4,9 +4,7 @@ namespace VegDex.Application.Tests.Models;
 public class FarmersMarketModelTests
 {
     [TestInitialize]
-    public void Init()
-    {
-    }
+    public void Init() { }
     [TestMethod]
     public void FarmersMarket_HasProperties()
     {
@@ -30,10 +28,8 @@ public class FarmersMarketModelTests
     {
         // Arrange
         var obj = new FarmersMarketModel
-        {
-            Name = "Hopkins Winter Farmers Market",
-            Address = "Hopkins"
-        };
+        { Name = "Hopkins Winter Farmers Market",
+          Address = "Hopkins" };
         var expected = "Hopkins Winter Farmers Market";
 
         // Assert

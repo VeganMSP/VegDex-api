@@ -6,6 +6,6 @@ public class LinkCategoryModel : BaseModel
     public IEnumerable<LinkModel>? Links { get; set; }
     public string Name { get; set; }
     public string? Slug { get; set; }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public override string ToString() => Name;
 }
