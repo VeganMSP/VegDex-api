@@ -60,7 +60,6 @@ public class Startup
             endpoints.MapControllerRoute(
                 "default",
                 "{controller=Home}/{action=Index}/{id?}");
-            endpoints.MapRazorPages();
         });
     }
     public void ConfigureDatabase(IServiceCollection services)
