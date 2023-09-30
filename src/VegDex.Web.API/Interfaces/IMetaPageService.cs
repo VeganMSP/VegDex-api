@@ -1,6 +1,6 @@
-using VegDex.Web.MVC.ViewModels.Meta;
+using VegDex.Web.API.ViewModels.Meta;
 
-namespace VegDex.Web.MVC.Interfaces;
+namespace VegDex.Web.API.Interfaces;
 
 public interface IMetaPageService
 {

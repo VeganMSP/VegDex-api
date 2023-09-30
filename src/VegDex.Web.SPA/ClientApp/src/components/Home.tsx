@@ -1,8 +1,8 @@
-import React, {useEffect, useState} from 'react';
-import {IPageInfo} from '../models/IPageInfo';
-import DOMPurify from 'dompurify';
-import {BASE_API_URL} from '../config';
-import {escapedNewLineToLineBreakTag} from '../functions/HtmlUtils';
+import React, {useEffect, useState} from "react";
+import {IPageInfo} from "../models/IPageInfo";
+import DOMPurify from "dompurify";
+import {BASE_API_URL} from "../config";
+import {escapedNewLineToLineBreakTag} from "../functions/HtmlUtils";
 
 const fetchHomePage = async () => {
   return await fetch(`${BASE_API_URL}/meta`)
@@ -19,7 +19,7 @@ export const Home = () => {
   
   const fetchData = () => {
     fetchHomePage().then(data => setHomePageInfo(data));
-  }
+  };
   
   useEffect(() => {
     if (homePageInfo) {
@@ -28,7 +28,7 @@ export const Home = () => {
     } else {
       fetchData();
     }
-  }, [homePageInfo])
+  }, [homePageInfo]);
   
   return (
     <div>
@@ -41,4 +41,4 @@ export const Home = () => {
       }
     </div>
   );
-}
+};

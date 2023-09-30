@@ -1,4 +1,3 @@
-using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.EntityFrameworkCore;
@@ -11,10 +10,11 @@ using VegDex.Core.Repositories.Base;
 using VegDex.Infrastructure.Context;
 using VegDex.Infrastructure.Repositories;
 using VegDex.Infrastructure.Repositories.Base;
-using VegDex.Web.MVC.Interfaces;
-using VegDex.Web.MVC.Services;
+using VegDex.Web.API.Interfaces;
+using VegDex.Web.API.Middlewares;
+using VegDex.Web.API.Services;
 
-namespace VegDex.Web.MVC;
+namespace VegDex.Web.API;
 
 public class Startup
 {
@@ -30,12 +30,9 @@ public class Startup
         if (Env.IsDevelopment())
         {
             app.UseDeveloperExceptionPage();
-            
+
             app.UseSwagger();
-            app.UseSwaggerUI(c =>
-            {
-                c.SwaggerEndpoint("v1/swagger.json", "VegDex API V1");
-            });
+            app.UseSwaggerUI(c => { c.SwaggerEndpoint("v1/swagger.json", "VegDex API V1"); });
         }
         else
         {
@@ -56,6 +53,7 @@ public class Startup
         app.UseAuthorization();
         app.UseSession();
         app.UseCors(builder => builder.AllowAnyHeader().AllowAnyMethod().WithOrigins("http://localhost:8080"));
+        app.UseMiddleware<JwtMiddleware>();
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
@@ -73,7 +71,8 @@ public class Startup
     }
     public void ConfigureServices(IServiceCollection services)
     {
-        services.Configure<VegDexSettings>(_configuration);
+        IConfigManager configManager = new ConfigManager(_configuration);
+        services.AddSingleton(configManager);
 
         // Set up database
         ConfigureDatabase(services);
@@ -87,6 +86,7 @@ public class Startup
         services.AddScoped<IRestaurantRepository, RestaurantRepository>();
         services.AddScoped<IVeganCompanyRepository, VeganCompanyRepository>();
         services.AddScoped<IMetaRepository, MetaRepository>();
+        services.AddScoped<IUserRepository, UserRepository>();
 
         // Application Layer
         services.AddScoped<IBlogCategoryService, BlogCategoryService>();
@@ -98,6 +98,9 @@ public class Startup
         services.AddScoped<IRestaurantService, RestaurantService>();
         services.AddScoped<IVeganCompanyService, VeganCompanyService>();
         services.AddScoped<IMetaService, MetaService>();
+
+        // User Service
+        services.AddScoped<IUserService, UserService>();
 
         // Web Layer
         services.AddAutoMapper(typeof(Startup));
@@ -140,16 +143,33 @@ public class Startup
                 Description = "The API for the VegDex application.",
                 Version = "v1"
             });
+            c.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
+            {
+                In = ParameterLocation.Header,
+                Description = "JWT Token",
+                Name = "Authorization",
+                Type = SecuritySchemeType.ApiKey,
+                Scheme = "Bearer",
+                BearerFormat = "JWT"
+            });
+            c.AddSecurityRequirement(new OpenApiSecurityRequirement
+            {
+                {
+                    new OpenApiSecurityScheme
+                    {
+                        Reference = new OpenApiReference
+                        {
+                            Type = ReferenceType.SecurityScheme,
+                            Id = "Bearer"
+                        }
+                    },
+                    new string[]
+                        { }
+                }
+            });
         });
         services.AddSession();
         services.AddCors();
-
-        services.AddDbContext<AppKeysContext>(c =>
-            c.UseSqlite("Data Source=../keys.sqlite3")
-        );
-
-        services.AddDataProtection()
-            .PersistKeysToDbContext<AppKeysContext>();
 
         if (Env.IsDevelopment())
         {

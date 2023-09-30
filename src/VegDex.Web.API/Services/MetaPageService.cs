@@ -1,9 +1,9 @@
 using AutoMapper;
 using VegDex.Application.Interfaces;
-using VegDex.Web.MVC.Interfaces;
-using VegDex.Web.MVC.ViewModels.Meta;
+using VegDex.Web.API.Interfaces;
+using VegDex.Web.API.ViewModels.Meta;
 
-namespace VegDex.Web.MVC.Services;
+namespace VegDex.Web.API.Services;
 
 public class MetaPageService : IMetaPageService
 {

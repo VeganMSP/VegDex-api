@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Serilog;
 using VegDex.Application.Models;
-using VegDex.Web.MVC.Interfaces;
-using VegDex.Web.MVC.ViewModels;
+using VegDex.Web.API.Interfaces;
+using VegDex.Web.API.ViewModels;
 
-namespace VegDex.Web.MVC.Controllers;
+namespace VegDex.Web.API.Controllers;
 
 [ApiController]
 [ApiVersion("1")]

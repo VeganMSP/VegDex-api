@@ -8,7 +8,7 @@ appsettings.*.json
 !appsettings.Example.json
 
 # Database
-*.sqlite3*
+db.sqlite3*
 
 # User-specific files
 *.rsuser

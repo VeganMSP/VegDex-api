@@ -1,4 +1,4 @@
-namespace VegDex.Web.MVC.ViewModels;
+namespace VegDex.Web.API.ViewModels;
 
 public class LinkViewModel
 {

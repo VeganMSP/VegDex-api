@@ -1,8 +1,8 @@
-import React, {Component} from 'react';
+import React, {Component} from "react";
 import PropTypes from "prop-types";
 import {format} from "date-fns";
-import withRouter from '../../helpers/withRouter';
-import {IBlogPost} from '../../models/IBlogPost';
+import withRouter from "../../helpers/withRouter";
+import {IBlogPost} from "../../models/IBlogPost";
 
 interface IState {
   slug: string;
@@ -11,22 +11,22 @@ interface IState {
 }
 
 const emptyBlogPost = (): IBlogPost => ({
-  title: '',
-  slug: '',
-  content: '',
+  title: "",
+  slug: "",
+  content: "",
   created_at: new Date()
 });
 
 const createEmptyBlogPost = <T extends Partial<IBlogPost>>(initialValues: T): IBlogPost & T => {
   return Object.assign(emptyBlogPost(), initialValues);
-}
+};
 
 class SingleBlogPost extends Component<any, IState> {
   static propTypes = {
     post: PropTypes.object.isRequired,
     slug: PropTypes.string,
     params: PropTypes.object,
-  }
+  };
 
   constructor(props: any) {
     super(props);
@@ -34,32 +34,32 @@ class SingleBlogPost extends Component<any, IState> {
       slug: this.props.params.slug,
       blog_post: createEmptyBlogPost({}),
       loading: true
-    }
+    };
   }
 
   static renderBlogPost(blog_post: IBlogPost) {
-    const {title, content, created_at} = blog_post
+    const {title, content, created_at} = blog_post;
 
     return (
       <div className='post-stub'>
         <h3 className='post-title'>
           <span className='date xs-hidden'>
-            {format(new Date(created_at), 'yyyy-MM-dd')}
+            {format(new Date(created_at), "yyyy-MM-dd")}
             &nbsp;
             {title}
           </span>
         </h3>
         <p className='post-content'>{content}</p>
       </div>
-    )
+    );
   }
 
   componentDidMount() {
-    this.getBlogPost(this.state.slug)
+    this.getBlogPost(this.state.slug);
   }
 
   render() {
-    let content = this.state.loading
+    const content = this.state.loading
       ? <p><em>Loading...</em></p>
       : SingleBlogPost.renderBlogPost(this.state.blog_post);
     return (
@@ -70,7 +70,7 @@ class SingleBlogPost extends Component<any, IState> {
   }
 
   async getBlogPost(slug: string) {
-    const reponse = await fetch('/api/v1/blog_posts?' + new URLSearchParams({
+    const reponse = await fetch("/api/v1/blog_posts?" + new URLSearchParams({
       slug: slug
     }));
     const data = await reponse.json();

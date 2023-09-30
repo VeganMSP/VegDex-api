@@ -1,10 +1,10 @@
-import React, {Component} from 'react';
-import {Link} from 'react-router-dom';
-import {format} from 'date-fns';
+import React, {Component} from "react";
+import {Link} from "react-router-dom";
+import {format} from "date-fns";
 import PropTypes from "prop-types";
-import NewBlogPost from './_new_blog_post';
-import {BASE_API_URL} from '../config';
-import {IBlogPost} from '../models/IBlogPost';
+import NewBlogPost from "./_new_blog_post";
+import {BASE_API_URL} from "../config";
+import {IBlogPost} from "../models/IBlogPost";
 
 interface IState {
   blog_posts: IBlogPost[];
@@ -43,19 +43,19 @@ export class Blog extends Component<any, IState> {
             )}
           </ul>
         </div>
-      )
+      );
     } else {
       return (
         <div>
           <NewBlogPost/>
           <p>There are no blog posts in the database!</p>
         </div>
-      )
+      );
     }
   }
 
   render() {
-    let blog_posts = this.state.loading
+    const blog_posts = this.state.loading
       ? <p><em>Loading...</em></p>
       : Blog.renderBlogPosts(this.state.blog_posts);
     return (
@@ -81,15 +81,15 @@ class BlogPost extends Component<{ post: IBlogPost }> {
 
   static propTypes = {
     post: PropTypes.object.isRequired,
-  }
+  };
 
   render() {
     const {title, slug, content, created_at} = this.props.post;
     const date = new Date(created_at);
-    const fullDate = format(date, 'yyyy-MM-dd')
-    const year = format(date, 'yyyy');
-    const month = format(date, 'MM');
-    const day = format(date, 'dd');
+    const fullDate = format(date, "yyyy-MM-dd");
+    const year = format(date, "yyyy");
+    const month = format(date, "MM");
+    const day = format(date, "dd");
 
     return (
       <div className='post-stub'>

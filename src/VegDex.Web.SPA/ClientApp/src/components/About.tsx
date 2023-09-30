@@ -1,7 +1,7 @@
-import React, {useEffect, useState} from 'react';
-import {IPageInfo} from '../models/IPageInfo';
-import {BASE_API_URL} from '../config';
-import DOMPurify from 'dompurify';
+import React, {useEffect, useState} from "react";
+import {IPageInfo} from "../models/IPageInfo";
+import {BASE_API_URL} from "../config";
+import DOMPurify from "dompurify";
 
 const fetchAboutPage = async () => {
   return await fetch(`${BASE_API_URL}/meta/about`)
@@ -17,7 +17,7 @@ export const About = () => {
   
   const fetchData = () => {
     fetchAboutPage().then(data => setAboutInfo(data));
-  }
+  };
   
   useEffect(() => {
     if (aboutInfo) {
@@ -38,4 +38,4 @@ export const About = () => {
       }
     </div>
   );
-}
+};

@@ -15,7 +15,7 @@ namespace VegDex.Infrastructure.Migrations
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
-            modelBuilder.HasAnnotation("ProductVersion", "7.0.4");
+            modelBuilder.HasAnnotation("ProductVersion", "7.0.9");
 
             modelBuilder.Entity("VegDex.Core.Entities.AboutPage", b =>
                 {
@@ -42,8 +42,8 @@ namespace VegDex.Infrastructure.Migrations
                         {
                             Id = 1,
                             Content = "VeganMSP.com is a new project from <a href=\"https://jrgnsn.net\" target=\"_blank\">Matthew Jorgensen</a>. Inspired\nby <a href=\"https://veganmilwaukee.com/\" target=\"_blank\">VeganMKE.com</a>, this site aims to be a complete-as-possible\nguide to being vegan in and around the Minneapolis/St. Paul area. But\nwe're always welcome to suggestions! Find something wrong? Feel free to\n<a href=\"https://github.com/VeganMSP/VeganMSP.com/issues\">open a ticket</a> on our tracker.",
-                            DateCreated = new DateTime(2023, 4, 6, 11, 47, 25, 900, DateTimeKind.Local).AddTicks(6009),
-                            DateUpdated = new DateTime(2023, 4, 6, 11, 47, 25, 900, DateTimeKind.Local).AddTicks(6024)
+                            DateCreated = new DateTime(2023, 8, 13, 18, 5, 17, 143, DateTimeKind.Local).AddTicks(9710),
+                            DateUpdated = new DateTime(2023, 8, 13, 18, 5, 17, 143, DateTimeKind.Local).AddTicks(9730)
                         });
                 });
 
@@ -196,8 +196,8 @@ namespace VegDex.Infrastructure.Migrations
                         {
                             Id = 1,
                             Content = "It’s easy being vegan in Minneapolis and St. Paul, but it can be hard to\nknow where to start, or where to look for information and answers. We\naim to fix that.\n\nAt VeganMSP.com you will find restaurant and food guides, shopping\nguides, and other information to help you on your vegan journey.",
-                            DateCreated = new DateTime(2023, 4, 6, 11, 47, 25, 900, DateTimeKind.Local).AddTicks(113),
-                            DateUpdated = new DateTime(2023, 4, 6, 11, 47, 25, 900, DateTimeKind.Local).AddTicks(162)
+                            DateCreated = new DateTime(2023, 8, 13, 18, 5, 17, 143, DateTimeKind.Local).AddTicks(2610),
+                            DateUpdated = new DateTime(2023, 8, 13, 18, 5, 17, 143, DateTimeKind.Local).AddTicks(2680)
                         });
                 });
 
@@ -303,6 +303,28 @@ namespace VegDex.Infrastructure.Migrations
                     b.HasIndex("CityId");
 
                     b.ToTable("Restaurant", (string)null);
+                });
+
+            modelBuilder.Entity("VegDex.Core.Entities.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Password")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Username")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("Username")
+                        .IsUnique();
+
+                    b.ToTable("Users", (string)null);
                 });
 
             modelBuilder.Entity("VegDex.Core.Entities.VeganCompany", b =>

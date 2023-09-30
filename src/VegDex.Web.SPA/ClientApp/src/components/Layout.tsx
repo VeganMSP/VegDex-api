@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import {Container} from 'reactstrap';
-import {NavMenu} from './NavMenu';
-import {Footer} from './Footer';
+import React, {Component} from "react";
+import {Container} from "reactstrap";
+import {NavMenu} from "./NavMenu";
+import {Footer} from "./Footer";
 
 
 export class Layout extends Component<any, any> {
