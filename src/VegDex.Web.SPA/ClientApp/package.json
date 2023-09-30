@@ -51,11 +51,11 @@
     ]
   },
   "devDependencies": {
-    "@types/dompurify": "^3.0.2",
+    "@types/dompurify": "^3.0.3",
     "@types/jest": "^29.5.5",
     "@typescript-eslint/eslint-plugin": "^5.62.0",
     "@typescript-eslint/parser": "^5.61.0",
-    "dompurify": "^3.0.4",
+    "dompurify": "^3.0.6",
     "eslint": "^8.44.0",
     "eslint-plugin-import": "^2.27.5",
     "eslint-plugin-promise": "^6.1.1",
