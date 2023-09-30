@@ -18,7 +18,7 @@
     "react-select": "^5.7.5",
     "reactstrap": "^9.2.0",
     "rimraf": "^5.0.5",
-    "sass": "^1.59.3",
+    "sass": "^1.68.0",
     "sass-loader": "^13.2.1",
     "web-vitals": "^3.5.0",
     "webpack": "^5.76.2",
