@@ -24,8 +24,7 @@ export class Shopping extends Component<any, IState> {
 	}
 
 	componentDidMount() {
-		this.getVeganCompanies();
-		this.getFarmersMarkets();
+		this.getShoppingData();
 	}
 
 	static renderVeganCompaniesList(vegan_companies: IVeganCompany[]) {
@@ -93,16 +92,15 @@ export class Shopping extends Component<any, IState> {
 		);
 	}
 
-	async getFarmersMarkets() {
-		const response = await fetch("api/v1/shopping/farmers-markets");
+	async getShoppingData() {
+		const response = await fetch("/api/v1/Shopping");
 		const data = await response.json();
-		this.setState({farmers_markets: data, loading_fm: false});
-	}
-
-	async getVeganCompanies() {
-		const response = await fetch("api/v1/shopping/vegan-companies");
-		const data = await response.json();
-		this.setState({vegan_companies: data, loading_vc: false});
+		this.setState({
+			farmers_markets: data.farmersMarkets,
+			vegan_companies: data.veganCompanies,
+			loading_fm: false,
+			loading_vc: false
+		});
 	}
 }
 

@@ -63,7 +63,7 @@ export class Restaurants extends Component<any, IState> {
 	}
 
 	async populateRestaurantsByCity() {
-		const response = await fetch("api/v1/cities-with-restaurants");
+		const response = await fetch("/api/v1/Restaurants");
 		const data = await response.json();
 		this.setState({restaurants_by_city: data, loading: false});
 	}

@@ -1,10 +1,9 @@
 import React, {useEffect, useState} from "react";
 import {IPageInfo} from "../models/IPageInfo";
-import {BASE_API_URL} from "../config";
 import DOMPurify from "dompurify";
 
 const fetchAboutPage = async () => {
-  return await fetch(`${BASE_API_URL}/meta/about`)
+  return await fetch(`/api/v1/Meta/About`)
     .then(response => response.json());
 };
 

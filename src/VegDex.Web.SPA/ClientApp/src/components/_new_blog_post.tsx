@@ -46,7 +46,7 @@ class NewBlogPost extends Component<any, IState> {
     e.preventDefault();
     const target = e.target as HTMLFormElement;
     try {
-      const response = await fetch("/api/v1/blog_posts", {
+      const response = await fetch("/api/v1/Blog", {
         method: "POST",
         body: JSON.stringify(this.state.form),
         headers: {
@@ -148,7 +148,7 @@ class NewBlogPost extends Component<any, IState> {
   }
 
   async populateBlogPostCategories() {
-    const response = await fetch("api/v1/blog_post_categories");
+    const response = await fetch("api/v1/Blog/Blog/Categories");
     return await response.json();
   }
 }

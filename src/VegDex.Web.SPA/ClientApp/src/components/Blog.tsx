@@ -68,7 +68,7 @@ export class Blog extends Component<any, IState> {
   }
 
   async getBlogPosts() {
-    const response = await fetch(`${BASE_API_URL}/blog_posts`);
+    const response = await fetch(`/api/v1/Blog`);
     const data = await response.json();
     this.setState({blog_posts: data, loading: false});
   }

@@ -1,11 +1,10 @@
 import React, {useEffect, useState} from "react";
 import {IPageInfo} from "../models/IPageInfo";
 import DOMPurify from "dompurify";
-import {BASE_API_URL} from "../config";
 import {escapedNewLineToLineBreakTag} from "../functions/HtmlUtils";
 
 const fetchHomePage = async () => {
-  return await fetch(`${BASE_API_URL}/meta`)
+  return await fetch(`/api/v1/Meta`)
     .then(response => response.json());
 };
 
