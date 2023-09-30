@@ -58,8 +58,10 @@ public class Startup
         app.UseMiddleware<JwtMiddleware>();
         app.UseEndpoints(endpoints =>
         {
-            endpoints.MapControllers();
-            // add my own routes
+            endpoints.MapControllerRoute(
+                "default",
+                "{controller=Home}/{action=Index}/{id?}");
+            endpoints.MapRazorPages();
         });
     }
     public void ConfigureDatabase(IServiceCollection services)
