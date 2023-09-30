@@ -27,12 +27,16 @@ export class Links extends Component<any, IState> {
 	static renderLinksList(links_by_category: ILinkCategory[]) {
 		return (
 			<div>
+				{links_by_category.length > 0 ? <>
 				{links_by_category.map(category =>
 					<LinkCategory
 						key={category.slug}
 						category={category}
 						links={category.links}
 					/>)}
+				</> : <>
+					<p>There are no links in the database.</p>
+				</>}
 			</div>
 		);
 	}
