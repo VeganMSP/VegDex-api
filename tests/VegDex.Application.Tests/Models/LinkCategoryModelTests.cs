@@ -24,9 +24,7 @@ public class LinkCategoryModelTests
     {
         // Arrange
         var obj = new LinkCategoryModel
-        {
-            Name = "Other Information Sites"
-        };
+        { Name = "Other Information Sites" };
         var expected = "Other Information Sites";
 
         // Assert

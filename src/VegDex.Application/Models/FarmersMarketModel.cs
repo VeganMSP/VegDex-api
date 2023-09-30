@@ -8,6 +8,6 @@ public class FarmersMarketModel : BaseModel
     public string? Phone { get; set; }
     public string? Slug { get; set; }
     public string? Website { get; set; }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public override string ToString() => Name;
 }

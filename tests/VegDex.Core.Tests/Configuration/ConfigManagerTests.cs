@@ -7,6 +7,14 @@ namespace VegDex.Core.Tests.Configuration;
 public class ConfigManagerTests
 {
     [TestMethod]
+    public void ConfigManager_HasMethods()
+    {
+        var obj = new ConfigManager();
+
+        // Assert
+        Assert.IsTrue(obj.HasMethod("GetConfigValue"));
+    }
+    [TestMethod]
     public void ConfigManager_HasProperties()
     {
         var obj = new ConfigManager();
@@ -14,13 +22,5 @@ public class ConfigManagerTests
         // Assert
         Assert.AreEqual(1, obj.PropertyCount());
         Assert.IsTrue(obj.HasProperty("App"));
-    }
-    [TestMethod]
-    public void ConfigManager_HasMethods()
-    {
-        var obj = new ConfigManager();
-
-        // Assert
-        Assert.IsTrue(obj.HasMethod("GetConfigValue"));
     }
 }

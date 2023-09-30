@@ -8,21 +8,21 @@ public class MetaService : IMetaService
     {
         _metaRepository = metaRepository;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<AboutPageModel> GetAboutPage()
     {
         var page = await _metaRepository.GetAboutPage();
         var mapped = ObjectMapper.Mapper.Map<AboutPageModel>(page);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<HomePageModel> GetHomePage()
     {
         var page = await _metaRepository.GetHomePage();
         var mapped = ObjectMapper.Mapper.Map<HomePageModel>(page);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdateHomePage(string content)
     {
         var page = await _metaRepository.GetHomePage();
@@ -32,7 +32,7 @@ public class MetaService : IMetaService
         await _metaRepository.UpdatePageAsync(page);
         _logger.Information("Entity successfully updated");
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdateAboutPage(string content)
     {
         var page = await _metaRepository.GetAboutPage();

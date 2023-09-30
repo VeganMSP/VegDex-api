@@ -13,11 +13,11 @@ export const About = () => {
   const sanitizedData = () => ({
     __html: DOMPurify.sanitize(aboutInfo.content)
   });
-  
+
   const fetchData = () => {
     fetchAboutPage().then(data => setAboutInfo(data));
   };
-  
+
   useEffect(() => {
     if (aboutInfo) {
       setIsLoading(false);

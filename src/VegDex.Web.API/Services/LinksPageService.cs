@@ -22,23 +22,23 @@ public class LinksPageService : ILinksPageService
             linkCategoryAppService ?? throw new ArgumentNullException(nameof(linkCategoryAppService));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<LinkViewModel>> GetLinks() => await GetLinks(null!);
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<LinkCategoryViewModel>> GetLinkCategoriesWithLinks()
     {
         var linkCategoriesWithLinks = await _linkCategoryAppService.GetLinkCategoriesWithLinks();
         var mapped = _mapper.Map<IEnumerable<LinkCategoryViewModel>>(linkCategoriesWithLinks);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<LinkModel> GetLinkById(int? id)
     {
         var link = await _linkAppService.GetLinkById(id);
         var mapped = _mapper.Map<LinkModel>(link);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<LinkModel> CreateLink(LinkModel link)
     {
         var mapped = _mapper.Map<LinkModel>(link);
@@ -51,7 +51,7 @@ public class LinksPageService : ILinksPageService
         var mappedModel = _mapper.Map<LinkModel>(entityDto);
         return mappedModel;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task DeleteLink(LinkModel link)
     {
         var mapped = _mapper.Map<LinkModel>(link);
@@ -61,7 +61,7 @@ public class LinksPageService : ILinksPageService
         await _linkAppService.Delete(mapped);
         _logger.Information("Entity successfully deleted: {Link}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdateLink(LinkModel link)
     {
         var mapped = _mapper.Map<LinkModel>(link);
@@ -71,7 +71,7 @@ public class LinksPageService : ILinksPageService
         await _linkAppService.Update(mapped);
         _logger.Information("Entity successfully updated: {Restaurant}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<LinkCategoryModel> CreateLinkCategory(LinkCategoryModel linkCategoryModel)
     {
         var mapped = _mapper.Map<LinkCategoryModel>(linkCategoryModel);
@@ -84,14 +84,14 @@ public class LinksPageService : ILinksPageService
         var mappedModel = _mapper.Map<LinkCategoryModel>(entityDto);
         return mappedModel;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<LinkCategoryModel> GetLinkCategoryById(int id)
     {
         var linkCategory = await _linkCategoryAppService.GetLinkCategoryById(id);
         var mapped = _mapper.Map<LinkCategoryModel>(linkCategory);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task DeleteLinkCategory(LinkCategoryModel linkCategory)
     {
         var mapped = _mapper.Map<LinkCategoryModel>(linkCategory);
@@ -100,7 +100,7 @@ public class LinksPageService : ILinksPageService
         await _linkCategoryAppService.Delete(mapped);
         _logger.Information("Entity successfully deleted: {LinkCategory}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdateLinkCategory(LinkCategoryModel linkCategoryViewModel)
     {
         var mapped = _mapper.Map<LinkCategoryModel>(linkCategoryViewModel);
@@ -109,14 +109,14 @@ public class LinksPageService : ILinksPageService
         await _linkCategoryAppService.Update(mapped);
         _logger.Information("Entity successfully updated: {LinkCategory}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<LinkCategoryViewModel> GetLinkCategoryWithLinksById(int id)
     {
         var linkCategoryWithLinks = await _linkCategoryAppService.GetLinkCategoryWithLinksById(id);
         var mapped = _mapper.Map<LinkCategoryViewModel>(linkCategoryWithLinks);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<LinkViewModel>> GetLinks(string? linkName)
     {
         if (string.IsNullOrWhiteSpace(linkName))
@@ -130,7 +130,7 @@ public class LinksPageService : ILinksPageService
         var mappedByName = _mapper.Map<IEnumerable<LinkViewModel>>(listByName);
         return mappedByName;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<LinkCategoryViewModel>> GetLinkCategories()
     {
         var linkCategories = await _linkCategoryAppService.GetLinkCategoryList();

@@ -7,9 +7,7 @@ public class LinkModelTests
     public void Init()
     {
         _linkCategory = new LinkCategoryModel
-        {
-            Name = "Local Organizations"
-        };
+        { Name = "Local Organizations" };
     }
     private static LinkCategoryModel _linkCategory;
     [TestMethod]
@@ -35,10 +33,8 @@ public class LinkModelTests
     {
         // Arrange
         var obj = new LinkModel
-        {
-            Name = "Animal Rights Coalition",
-            Category = _linkCategory
-        };
+        { Name = "Animal Rights Coalition",
+          Category = _linkCategory };
         var expected = "Animal Rights Coalition";
 
         // Assert

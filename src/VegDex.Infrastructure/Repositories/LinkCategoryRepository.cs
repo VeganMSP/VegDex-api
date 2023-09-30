@@ -2,23 +2,23 @@ namespace VegDex.Infrastructure.Repositories;
 
 public class LinkCategoryRepository : Repository<LinkCategory>, ILinkCategoryRepository
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public LinkCategoryRepository(VegDexContext dbContext) : base(dbContext) { }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<LinkCategory>> GetLinkCategoriesWithLinks()
     {
         var spec = new LinkCategoriesWithLinksSpecification();
         var linkCategories = await GetAsync(spec);
         return linkCategories;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<LinkCategory>> GetLinkCategories()
     {
         var linkCategories = await _dbContext.Set<LinkCategory>()
             .ToListAsync();
         return linkCategories;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<LinkCategory> GetLinkCategoryWithLinksById(int id)
     {
         var spec = new LinkCategoryWithLinksByIdSpecification(id);

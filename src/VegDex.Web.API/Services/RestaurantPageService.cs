@@ -21,7 +21,7 @@ public class RestaurantPageService : IRestaurantsPageService
         _cityAppService = cityAppService ?? throw new ArgumentNullException(nameof(cityAppService));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<RestaurantViewModel>> GetRestaurants(string? restaurantName)
     {
         if (string.IsNullOrWhiteSpace(restaurantName))
@@ -35,21 +35,21 @@ public class RestaurantPageService : IRestaurantsPageService
         var mappedByName = _mapper.Map<IEnumerable<RestaurantViewModel>>(listByName);
         return mappedByName;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<CityViewModel>> GetCitiesWithRestaurants()
     {
         var citiesWithRestaurants = await _cityAppService.GetCitiesWithRestaurants();
         var mapped = _mapper.Map<IEnumerable<CityViewModel>>(citiesWithRestaurants);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<CityModel>> GetCities()
     {
         var list = await _cityAppService.GetCities();
         var mapped = _mapper.Map<IEnumerable<CityModel>>(list);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<RestaurantModel> CreateRestaurant(RestaurantModel restaurant)
     {
         var mapped = _mapper.Map<RestaurantModel>(restaurant);
@@ -62,14 +62,14 @@ public class RestaurantPageService : IRestaurantsPageService
         var mappedModel = _mapper.Map<RestaurantModel>(entityDto);
         return mappedModel;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<RestaurantModel> GetRestaurantById(int? id)
     {
         var restaurant = await _restaurantAppService.GetRestaurantById(id);
         var mapped = _mapper.Map<RestaurantModel>(restaurant);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task DeleteRestaurant(RestaurantModel restaurant)
     {
         var mapped = _mapper.Map<RestaurantModel>(restaurant);
@@ -79,7 +79,7 @@ public class RestaurantPageService : IRestaurantsPageService
         await _restaurantAppService.Delete(mapped);
         _logger.Information("Entity successfully deleted: {Restaurant}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdateRestaurant(RestaurantModel restaurant)
     {
         var mapped = _mapper.Map<RestaurantModel>(restaurant);
@@ -89,6 +89,6 @@ public class RestaurantPageService : IRestaurantsPageService
         await _restaurantAppService.Update(mapped);
         _logger.Information("Entity successfully updated: {Restaurant}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<RestaurantViewModel>> GetRestaurants() => await GetRestaurants(null!);
 }

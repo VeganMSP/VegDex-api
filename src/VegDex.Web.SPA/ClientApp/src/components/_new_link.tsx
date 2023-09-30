@@ -20,6 +20,16 @@ class NewLink extends Component<any, IState> {
     this.toggleLinkForm = this.toggleLinkForm.bind(NewLink);
   }
 
+  static renderLinkCategoryOptions(link_categories: ILinkCategory[]) {
+    return (
+      <>
+        {link_categories.map(category =>
+          <option key={category.id} value={category.id}>{category.name}</option>
+        )}
+      </>
+    );
+  }
+
   toggleLinkForm = () => {
     this.setState(prevState => ({
       newLinkModal: !prevState.newLinkModal
@@ -33,7 +43,7 @@ class NewLink extends Component<any, IState> {
   };
 
   handleLinkCategorySelectChange = (e: any) => {
-    console.log(typeof(e));
+    console.log(typeof (e));
     // TODO: handle creating new categories here
     this.setState(state => {
       state.form["link_category_id"] = e.id;
@@ -62,16 +72,6 @@ class NewLink extends Component<any, IState> {
 
   componentDidMount() {
     this.populateLinkCategories();
-  }
-
-  static renderLinkCategoryOptions(link_categories: ILinkCategory[]) {
-    return (
-      <>
-        {link_categories.map(category =>
-          <option key={category.id} value={category.id}>{category.name}</option>
-        )}
-      </>
-    );
   }
 
   render() {

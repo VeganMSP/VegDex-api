@@ -16,13 +16,11 @@ public class Link : Entity
         string? description = null)
     {
         var link = new Link
-        {
-            Id = linkId,
-            Category = linkCategory,
-            Name = name,
-            Website = website,
-            Description = description
-        };
+        { Id = linkId,
+          Category = linkCategory,
+          Name = name,
+          Website = website,
+          Description = description };
         return link;
     }
 }

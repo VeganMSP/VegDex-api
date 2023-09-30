@@ -21,14 +21,6 @@ export class Blog extends Component<any, IState> {
     this.handleFormSubmit = this.handleFormSubmit.bind(NewBlogPost);
   }
 
-  handleFormSubmit(title: string, content: string, status: string) {
-    console.log(title, content, status);
-  }
-
-  componentDidMount() {
-    this.getBlogPosts();
-  }
-
   static renderBlogPosts(blog_posts: IBlogPost[]) {
     if (blog_posts.length > 0) {
       return (
@@ -54,6 +46,14 @@ export class Blog extends Component<any, IState> {
     }
   }
 
+  handleFormSubmit(title: string, content: string, status: string) {
+    console.log(title, content, status);
+  }
+
+  componentDidMount() {
+    this.getBlogPosts();
+  }
+
   render() {
     const blog_posts = this.state.loading
       ? <p><em>Loading...</em></p>
@@ -75,13 +75,13 @@ export class Blog extends Component<any, IState> {
 }
 
 class BlogPost extends Component<{ post: IBlogPost }> {
-  constructor(props: { post: IBlogPost }) {
-    super(props);
-  }
-
   static propTypes = {
     post: PropTypes.object.isRequired,
   };
+
+  constructor(props: { post: IBlogPost }) {
+    super(props);
+  }
 
   render() {
     const {title, slug, content, created_at} = this.props.post;

@@ -131,9 +131,7 @@ public class BlogController : Controller
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
         var blogPosts = _blogPageService.GetPublishedBlogPosts().Result;
         var viewModel = new BlogViewModel
-        {
-            BlogPosts = blogPosts
-        };
+        { BlogPosts = blogPosts };
         return viewModel;
     }
 }

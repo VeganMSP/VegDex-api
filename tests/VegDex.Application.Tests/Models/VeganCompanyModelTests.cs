@@ -24,9 +24,7 @@ public class VeganCompanyModelTests
     {
         // Arrange
         var obj = new VeganCompanyModel
-        {
-            Name = "PLNT BSD"
-        };
+        { Name = "PLNT BSD" };
         var expected = "PLNT BSD";
 
         // Assert

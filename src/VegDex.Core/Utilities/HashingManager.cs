@@ -19,16 +19,11 @@ public class HashingManager
     /// </summary>
     private readonly Dictionary<short, HashVersion> _versions = new()
     {
-        {
-            1, new HashVersion
-            {
-                Version = 1,
-                KeyDerivation = KeyDerivationPrf.HMACSHA512,
-                HashSize = 256 / 8,
-                SaltSize = 128 / 8
-            }
-        }
-    };
+    { 1, new HashVersion
+      { Version = 1,
+        KeyDerivation = KeyDerivationPrf.HMACSHA512,
+        HashSize = 256 / 8,
+        SaltSize = 128 / 8 } } };
     /// <summary>
     /// The default Hash Version, which should be used, if a new Hash is created
     /// </summary>

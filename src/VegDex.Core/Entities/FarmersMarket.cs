@@ -17,14 +17,12 @@ public class FarmersMarket : Entity
         string? website = null)
     {
         var farmersMarket = new FarmersMarket
-        {
-            Id = farmersMarketId,
-            Name = name,
-            Address = address,
-            Hours = hours,
-            Phone = phone,
-            Website = website
-        };
+        { Id = farmersMarketId,
+          Name = name,
+          Address = address,
+          Hours = hours,
+          Phone = phone,
+          Website = website };
         return farmersMarket;
     }
 }

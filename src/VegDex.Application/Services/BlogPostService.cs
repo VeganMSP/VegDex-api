@@ -8,11 +8,11 @@ public class BlogPostService : IBlogPostService
     {
         _blogPostRepository = blogPostRepository;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public Task<IEnumerable<BlogPostModel>> GetBlogCategoryList() => throw new NotImplementedException();
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public Task<BlogPostModel> GetBlogCategoryById(int blogCategoryId) => throw new NotImplementedException();
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<BlogPostModel> Create(BlogPostModel blogPostModel)
     {
         await ValidateBlogPostIfExist(blogPostModel);
@@ -25,7 +25,7 @@ public class BlogPostService : IBlogPostService
         var newMappedEntity = ObjectMapper.Mapper.Map<BlogPostModel>(newEntity);
         return newMappedEntity;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Update(BlogPostModel blogPostModel)
     {
         ValidateBlogPostIfNotExist(blogPostModel);
@@ -36,14 +36,14 @@ public class BlogPostService : IBlogPostService
         await _blogPostRepository.UpdateAsync(editBlogPost);
         _logger.Information("Entity successfully updated");
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<BlogPostModel> GetBlogPostById(int id)
     {
         var blogPost = await _blogPostRepository.GetByIdAsync(id);
         var mapped = ObjectMapper.Mapper.Map<BlogPostModel>(blogPost);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Delete(BlogPostModel blogPostModel)
     {
         ValidateBlogPostIfNotExist(blogPostModel);
@@ -53,7 +53,7 @@ public class BlogPostService : IBlogPostService
         await _blogPostRepository.DeleteAsync(deletedBlogPost);
         _logger.Information("Entity successfully deleted");
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<BlogPostModel>> GetBlogPosts()
     {
         var blogPosts = await _blogPostRepository.GetBlogPosts();

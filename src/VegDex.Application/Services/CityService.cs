@@ -8,21 +8,21 @@ public class CityService : ICityService
     {
         _cityRepository = cityRepository;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<CityModel>> GetCities()
     {
         var cities = await _cityRepository.GetAllAsync();
         var mapped = ObjectMapper.Mapper.Map<IEnumerable<CityModel>>(cities);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<CityModel> GetCityById(int cityId)
     {
         var city = await _cityRepository.GetByIdAsync(cityId);
         var mapped = ObjectMapper.Mapper.Map<CityModel>(city);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<CityModel> Create(CityModel cityModel)
     {
         await ValidateCityIfExist(cityModel);
@@ -37,7 +37,7 @@ public class CityService : ICityService
         var newMappedEntity = ObjectMapper.Mapper.Map<CityModel>(newEntity);
         return newMappedEntity;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Update(CityModel cityModel)
     {
         ValidateCityIfNotExist(cityModel);
@@ -48,14 +48,14 @@ public class CityService : ICityService
         await _cityRepository.UpdateAsync(editCity);
         _logger.Information("Entity successfully updated");
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<CityModel> GetCityByName(string cityName)
     {
         var city = await _cityRepository.GetByNameAsync(cityName);
         var mapped = ObjectMapper.Mapper.Map<CityModel>(city);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Delete(CityModel cityModel)
     {
         ValidateCityIfNotExist(cityModel);
@@ -65,7 +65,7 @@ public class CityService : ICityService
         await _cityRepository.DeleteAsync(deletedCity);
         _logger.Information("Entity successfully deleted");
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<CityModel>> GetCitiesWithRestaurants()
     {
         var citiesWithRestaurants = await _cityRepository.GetCitiesWithRestaurants();

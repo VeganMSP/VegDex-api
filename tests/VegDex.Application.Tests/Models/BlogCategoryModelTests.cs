@@ -22,9 +22,7 @@ public class BlogCategoryModelTests
     {
         // Arrange
         var obj = new BlogCategoryModel
-        {
-            Name = "Announcements"
-        };
+        { Name = "Announcements" };
         var expected = "Announcements";
 
         // Assert

@@ -81,9 +81,7 @@ public class RestaurantsController : Controller
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
         var citiesWithRestaurants = _restaurantsPageService.GetCitiesWithRestaurants().Result;
         var viewModel = new RestaurantViewModel
-        {
-            Cities = citiesWithRestaurants
-        };
+        { Cities = citiesWithRestaurants };
         return viewModel;
     }
     private bool RestaurantExists(int? id)

@@ -12,10 +12,8 @@ public class City : Entity
     public static City Create(int cityId, string name)
     {
         var city = new City
-        {
-            Id = cityId,
-            Name = name
-        };
+        { Id = cityId,
+          Name = name };
         return city;
     }
 }

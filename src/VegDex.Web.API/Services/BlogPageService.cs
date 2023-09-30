@@ -24,14 +24,14 @@ public class BlogPageService : IBlogPageService
             blogCategoryAppService ?? throw new ArgumentNullException(nameof(blogCategoryAppService));
         _mapper = mapper ?? throw new ArgumentNullException(nameof(mapper));
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<BlogCategoryModel> GetBlogCategoryById(int id)
     {
         var category = await _blogCategoryAppService.GetBlogCategoryById(id);
         var mapped = _mapper.Map<BlogCategoryModel>(category);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<BlogPostModel>> GetPublishedBlogPosts()
     {
         var posts = await _blogPostAppService.GetBlogPosts();
@@ -39,14 +39,14 @@ public class BlogPageService : IBlogPageService
         return mapped
             .Where(p => p.Status == PostStatus.Published);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<BlogPostModel>> GetAllBlogPosts()
     {
         var posts = await _blogPostAppService.GetBlogPosts();
         var mapped = _mapper.Map<IEnumerable<BlogPostModel>>(posts);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdateBlogCategory(BlogCategoryModel blogCategoryModel)
     {
         var mapped = _mapper.Map<BlogCategoryModel>(blogCategoryModel);
@@ -55,14 +55,14 @@ public class BlogPageService : IBlogPageService
         await _blogCategoryAppService.Update(mapped);
         _logger.Information("Entity successfully updated: {BlogCategory}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<BlogPostModel> GetBlogPostById(int id)
     {
         var post = await _blogPostAppService.GetBlogPostById(id);
         var mapped = _mapper.Map<BlogPostModel>(post);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task DeleteBlogPost(BlogPostModel blogPostModel)
     {
         var mapped = _mapper.Map<BlogPostModel>(blogPostModel);
@@ -71,7 +71,7 @@ public class BlogPageService : IBlogPageService
         await _blogPostAppService.Delete(mapped);
         _logger.Information("Entity successfully deleted: {@BlogPost}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task UpdateBlogPost(BlogPostModel blogPostModel)
     {
         var mapped = _mapper.Map<BlogPostModel>(blogPostModel);
@@ -80,7 +80,7 @@ public class BlogPageService : IBlogPageService
         await _blogPostAppService.Update(mapped);
         _logger.Information("Entity successfully updated: {@BlogPost}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<BlogPostModel> CreateBlogPost(BlogPostModel blogPostModel)
     {
         var mapped = _mapper.Map<BlogPostModel>(blogPostModel);
@@ -93,7 +93,7 @@ public class BlogPageService : IBlogPageService
         var mappedModel = _mapper.Map<BlogPostModel>(entityDto);
         return mappedModel;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<BlogCategoryModel> CreateBlogCategory(BlogCategoryModel blogCategoryModel)
     {
         var mapped = _mapper.Map<BlogCategoryModel>(blogCategoryModel);
@@ -106,7 +106,7 @@ public class BlogPageService : IBlogPageService
         var mappedModel = _mapper.Map<BlogCategoryModel>(entityDto);
         return mappedModel;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task DeleteBlogCategory(BlogCategoryModel blogCategory)
     {
         var mapped = _mapper.Map<BlogCategoryModel>(blogCategory);
@@ -115,7 +115,7 @@ public class BlogPageService : IBlogPageService
         await _blogCategoryAppService.Delete(mapped);
         _logger.Information("Entity successfully deleted: {BlogCategory}", mapped);
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<BlogCategoryViewModel>> GetBlogCategories()
     {
         var categories = await _blogCategoryAppService.GetBlogCategories();

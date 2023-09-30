@@ -45,8 +45,9 @@ public class UserService : IUserService
         if (!request.PasswordsMatch())
             return null;
 
-        var user = await _userRepository.CreateUser(new User(request.Username, _hashManager.HashToString(request.Password)));
-        var token = _jwtManager.Generate(user);
+        var user = await _userRepository.CreateUser(new User(request.Username,
+            _hashManager.HashToString(request.Password)));
+        string token = _jwtManager.Generate(user);
 
         return new AuthRegistrationResponse(user, token);
     }

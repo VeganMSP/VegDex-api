@@ -1,4 +1,3 @@
-
 using Microsoft.AspNetCore.Mvc;
 using VegDex.Application.Interfaces;
 using VegDex.Application.Models;
@@ -23,11 +22,16 @@ public class UsersController : ControllerBase
 
         if (response == null)
             return BadRequest(new
-            {
-                message = "Username or password is incorrect"
-            });
+            { message = "Username or password is incorrect" });
 
         return Ok(response);
+    }
+    [Authorize]
+    [HttpGet]
+    public IActionResult GetAll()
+    {
+        var users = _userService.GetAll();
+        return Ok(users);
     }
     [HttpPost("register")]
     public async Task<IActionResult> Register(AuthRegistrationRequest model)
@@ -38,12 +42,5 @@ public class UsersController : ControllerBase
             return BadRequest();
 
         return Ok(response);
-    }
-    [Authorize]
-    [HttpGet]
-    public IActionResult GetAll()
-    {
-        var users = _userService.GetAll();
-        return Ok(users);
     }
 }

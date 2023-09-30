@@ -8,21 +8,21 @@ public class FarmersMarketService : IFarmersMarketService
     {
         _farmersMarketRepository = farmersMarketRepository;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<FarmersMarketModel>> GetFarmersMarkets()
     {
         var veganCompanies = await _farmersMarketRepository.GetFarmersMarkets();
         var mapped = ObjectMapper.Mapper.Map<IEnumerable<FarmersMarketModel>>(veganCompanies);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<FarmersMarketModel> GetFarmersMarketById(int farmersMarketId)
     {
         var farmersMarket = await _farmersMarketRepository.GetByIdAsync(farmersMarketId);
         var mapped = ObjectMapper.Mapper.Map<FarmersMarketModel>(farmersMarket);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<FarmersMarketModel> Create(FarmersMarketModel farmersMarketModel)
     {
         await ValidateFarmersMarketIfExist(farmersMarketModel);
@@ -35,13 +35,7 @@ public class FarmersMarketService : IFarmersMarketService
         var newMappedEntity = ObjectMapper.Mapper.Map<FarmersMarketModel>(newEntity);
         return newMappedEntity;
     }
-    async private Task ValidateFarmersMarketIfExist(FarmersMarketModel farmersMarket)
-    {
-        var existingEntity = await _farmersMarketRepository.GetByIdAsync(farmersMarket.Id);
-        if (existingEntity != null)
-            throw new ApplicationException($"{farmersMarket} with this Id exists already");
-    }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Update(FarmersMarketModel farmersMarketModel)
     {
         ValidateFarmersMarketIfNotExist(farmersMarketModel);
@@ -52,13 +46,7 @@ public class FarmersMarketService : IFarmersMarketService
         await _farmersMarketRepository.UpdateAsync(editFarmersMarket);
         _logger.Information("Entity successfully updated");
     }
-    private void ValidateFarmersMarketIfNotExist(FarmersMarketModel farmersMarketModel)
-    {
-        var existingEntity = _farmersMarketRepository.GetByIdAsync(farmersMarketModel.Id);
-        if (existingEntity == null)
-            throw new ApplicationException($"{farmersMarketModel} with this Id does not exist");
-    }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Delete(FarmersMarketModel farmersMarketModel)
     {
         ValidateFarmersMarketIfNotExist(farmersMarketModel);
@@ -67,5 +55,17 @@ public class FarmersMarketService : IFarmersMarketService
             throw new ApplicationException("Entity could not be loaded");
         await _farmersMarketRepository.DeleteAsync(deletedFarmersMarket);
         _logger.Information("Entity successfully deleted");
+    }
+    async private Task ValidateFarmersMarketIfExist(FarmersMarketModel farmersMarket)
+    {
+        var existingEntity = await _farmersMarketRepository.GetByIdAsync(farmersMarket.Id);
+        if (existingEntity != null)
+            throw new ApplicationException($"{farmersMarket} with this Id exists already");
+    }
+    private void ValidateFarmersMarketIfNotExist(FarmersMarketModel farmersMarketModel)
+    {
+        var existingEntity = _farmersMarketRepository.GetByIdAsync(farmersMarketModel.Id);
+        if (existingEntity == null)
+            throw new ApplicationException($"{farmersMarketModel} with this Id does not exist");
     }
 }

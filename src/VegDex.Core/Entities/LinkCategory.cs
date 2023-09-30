@@ -13,11 +13,9 @@ public class LinkCategory : Entity
     public static LinkCategory Create(int linkCategoryId, string name, string? description = null)
     {
         var linkCategory = new LinkCategory
-        {
-            Id = linkCategoryId,
-            Name = name,
-            Description = description
-        };
+        { Id = linkCategoryId,
+          Name = name,
+          Description = description };
         return linkCategory;
     }
 }

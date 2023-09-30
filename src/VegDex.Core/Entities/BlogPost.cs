@@ -11,13 +11,11 @@ public class BlogPost : Entity
     public static BlogPost Create(int blogPostId, string title, string content, BlogCategory blogCategory, int status)
     {
         var blogPost = new BlogPost
-        {
-            Id = blogPostId,
-            Title = title,
-            Content = content,
-            Category = blogCategory,
-            Status = status
-        };
+        { Id = blogPostId,
+          Title = title,
+          Content = content,
+          Category = blogCategory,
+          Status = status };
         return blogPost;
     }
 }

@@ -8,21 +8,21 @@ public class LinkCategoryService : ILinkCategoryService
     {
         _linkCategoryRepository = linkCategoryRepository;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<LinkCategoryModel>> GetLinkCategoryList()
     {
         var linkCategories = await _linkCategoryRepository.GetLinkCategories();
         var mapped = ObjectMapper.Mapper.Map<IEnumerable<LinkCategoryModel>>(linkCategories);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<LinkCategoryModel> GetLinkCategoryById(int linkCategoryId)
     {
         var linkCategory = await _linkCategoryRepository.GetByIdAsync(linkCategoryId);
         var mapped = ObjectMapper.Mapper.Map<LinkCategoryModel>(linkCategory);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<LinkCategoryModel> Create(LinkCategoryModel linkCategoryModel)
     {
         await ValidateLinkCategoryIfExist(linkCategoryModel);
@@ -37,7 +37,7 @@ public class LinkCategoryService : ILinkCategoryService
         var newMappedEntity = ObjectMapper.Mapper.Map<LinkCategoryModel>(newEntity);
         return newMappedEntity;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Update(LinkCategoryModel linkCategoryModel)
     {
         ValidateLinkCategoryIfNotExist(linkCategoryModel);
@@ -48,7 +48,7 @@ public class LinkCategoryService : ILinkCategoryService
         await _linkCategoryRepository.UpdateAsync(editLinkCategory);
         _logger.Information("Entity successfully updated");
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Delete(LinkCategoryModel linkCategoryModel)
     {
         ValidateLinkCategoryIfNotExist(linkCategoryModel);
@@ -58,14 +58,14 @@ public class LinkCategoryService : ILinkCategoryService
         await _linkCategoryRepository.DeleteAsync(deletedLinkCategory);
         _logger.Information("Entity successfully deleted");
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<LinkCategoryModel>> GetLinkCategoriesWithLinks()
     {
         var linkCategoriesWithLinks = await _linkCategoryRepository.GetLinkCategoriesWithLinks();
         var mapped = ObjectMapper.Mapper.Map<IEnumerable<LinkCategoryModel>>(linkCategoriesWithLinks);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<LinkCategoryModel> GetLinkCategoryWithLinksById(int id)
     {
         var linkCategoryWithLinks = await _linkCategoryRepository.GetLinkCategoryWithLinksById(id);

@@ -7,9 +7,7 @@ public class RestaurantModelTests
     public void Init()
     {
         _city = new CityModel
-        {
-            Name = "Vadnais Heights"
-        };
+        { Name = "Vadnais Heights" };
     }
     private static CityModel _city;
     [TestMethod]
@@ -36,10 +34,8 @@ public class RestaurantModelTests
     {
         // Arrange
         var obj = new RestaurantModel
-        {
-            Name = "Piggy Bank",
-            City = _city
-        };
+        { Name = "Piggy Bank",
+          City = _city };
         var expected = "Piggy Bank";
 
         // Assert

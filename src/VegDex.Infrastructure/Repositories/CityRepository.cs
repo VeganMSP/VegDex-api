@@ -2,16 +2,16 @@ namespace VegDex.Infrastructure.Repositories;
 
 public class CityRepository : Repository<City>, ICityRepository
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public CityRepository(VegDexContext dbContext) : base(dbContext) { }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<City>> GetCitiesWithRestaurants()
     {
         var spec = new CitiesWithRestaurantsSpecification();
         var cities = await GetAsync(spec);
         return cities;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<City> GetByNameAsync(string cityName)
     {
         var city = await _dbContext.Set<City>()

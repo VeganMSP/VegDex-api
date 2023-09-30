@@ -15,11 +15,11 @@ export const Home = () => {
     __html: DOMPurify.sanitize(
       escapedNewLineToLineBreakTag(homePageInfo.content).join(""))
   });
-  
+
   const fetchData = () => {
     fetchHomePage().then(data => setHomePageInfo(data));
   };
-  
+
   useEffect(() => {
     if (homePageInfo) {
       setIsLoading(false);
@@ -28,7 +28,7 @@ export const Home = () => {
       fetchData();
     }
   }, [homePageInfo]);
-  
+
   return (
     <div>
       <h2>VeganMSP.com</h2>

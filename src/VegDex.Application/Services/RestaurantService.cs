@@ -8,28 +8,28 @@ public class RestaurantService : IRestaurantService
     {
         _restaurantRepository = restaurantRepository;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<RestaurantModel>> GetRestaurantList()
     {
         var restaurantList = await _restaurantRepository.GetRestaurantListAsync();
         var mapped = ObjectMapper.Mapper.Map<IEnumerable<RestaurantModel>>(restaurantList);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<RestaurantModel> GetRestaurantById(int? restaurantId)
     {
         var restaurant = await _restaurantRepository.GetByIdAsync(restaurantId);
         var mapped = ObjectMapper.Mapper.Map<RestaurantModel>(restaurant);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<RestaurantModel>> GetRestaurantsByLocation(int locationId)
     {
         var restaurants = await _restaurantRepository.GetRestaurantsByCityListAsync(locationId);
         var mapped = ObjectMapper.Mapper.Map<IEnumerable<RestaurantModel>>(restaurants);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<RestaurantModel> Create(RestaurantModel restaurantModel)
     {
         await ValidateRestaurantIfExist(restaurantModel);
@@ -44,7 +44,7 @@ public class RestaurantService : IRestaurantService
         var newMappedEntity = ObjectMapper.Mapper.Map<RestaurantModel>(newEntity);
         return newMappedEntity;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Update(RestaurantModel restaurantModel)
     {
         ValidateRestaurantIfNotExist(restaurantModel);
@@ -58,7 +58,7 @@ public class RestaurantService : IRestaurantService
         await _restaurantRepository.UpdateAsync(editRestaurant);
         _logger.Information("Entity successfully updated");
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Delete(RestaurantModel restaurantModel)
     {
         ValidateRestaurantIfNotExist(restaurantModel);
@@ -69,7 +69,7 @@ public class RestaurantService : IRestaurantService
         await _restaurantRepository.DeleteAsync(deletedRestaurant);
         _logger.Information("Entity successfully deleted");
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<RestaurantModel> GetRestaurantByName(string? restaurantName)
     {
         var restaurantList = await _restaurantRepository.GetRestaurantByNameAsync(restaurantName);

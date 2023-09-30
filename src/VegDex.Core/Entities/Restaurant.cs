@@ -18,14 +18,12 @@ public class Restaurant : Entity
         bool allVegan = false)
     {
         var restaurant = new Restaurant
-        {
-            Id = restaurantId,
-            Name = name,
-            City = city,
-            Description = description,
-            Website = website,
-            AllVegan = allVegan
-        };
+        { Id = restaurantId,
+          Name = name,
+          City = city,
+          Description = description,
+          Website = website,
+          AllVegan = allVegan };
         return restaurant;
     }
 }

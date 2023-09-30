@@ -8,23 +8,23 @@ public class LinkService : ILinkService
     {
         _linkRepository = linkRepository;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public Task<LinkModel> GetLinkByName(string linkName) => throw new NotImplementedException();
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<LinkModel>> GetLinkList()
     {
         var linkList = await _linkRepository.GetLinkListAsync();
         var mapped = ObjectMapper.Mapper.Map<IEnumerable<LinkModel>>(linkList);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<LinkModel> GetLinkById(int? linkId)
     {
         var link = await _linkRepository.GetByIdAsync(linkId);
         var mapped = ObjectMapper.Mapper.Map<LinkModel>(link);
         return mapped;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<LinkModel> Create(LinkModel linkModel)
     {
         await ValidateLinkIfExist(linkModel);
@@ -39,7 +39,7 @@ public class LinkService : ILinkService
         var newMappedEntity = ObjectMapper.Mapper.Map<LinkModel>(newEntity);
         return newMappedEntity;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Update(LinkModel linkModel)
     {
         ValidateLinkIfNotExist(linkModel);
@@ -50,7 +50,7 @@ public class LinkService : ILinkService
         await _linkRepository.UpdateAsync(editLink);
         _logger.Information("Entity successfully updated");
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task Delete(LinkModel linkModel)
     {
         ValidateLinkIfNotExist(linkModel);

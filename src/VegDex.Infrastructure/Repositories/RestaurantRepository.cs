@@ -3,16 +3,16 @@ namespace VegDex.Infrastructure.Repositories;
 public class RestaurantRepository : Repository<Restaurant>, IRestaurantRepository
 {
     public RestaurantRepository(VegDexContext context) : base(context) { }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public Task<Restaurant> GetRestaurantByNameAsync(string? restaurantName) => throw new NotImplementedException();
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<Restaurant>> GetRestaurantListAsync()
     {
         var restaurants = await _dbContext.Set<Restaurant>()
             .ToListAsync();
         return restaurants;
     }
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public async Task<IEnumerable<Restaurant>> GetRestaurantsByCityListAsync(int locationId)
     {
         var restaurants = await _dbContext.Set<Restaurant>()

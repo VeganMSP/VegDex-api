@@ -13,12 +13,10 @@ public class VeganCompany : Entity
         string? website = null)
     {
         var veganCompany = new VeganCompany
-        {
-            Id = veganCompanyId,
-            Name = name,
-            Description = description,
-            Website = website
-        };
+        { Id = veganCompanyId,
+          Name = name,
+          Description = description,
+          Website = website };
         return veganCompany;
     }
 }
