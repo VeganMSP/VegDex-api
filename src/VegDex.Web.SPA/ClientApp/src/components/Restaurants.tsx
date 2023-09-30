@@ -22,12 +22,16 @@ export class Restaurants extends Component<any, IState> {
 	static renderRestaurantsList(restaurants_by_city: ICity[]) {
 		return (
 			<div>
+				{restaurants_by_city.length > 0 ? <>
 				{restaurants_by_city.map(city =>
 					<City
 						key={city.slug}
 						city={city}
 						restaurants={city.restaurants}
 					/>)}
+				</> : <>
+					<p>There are no restaurants in the database.</p>
+				</>}
 			</div>
 		);
 	}
@@ -35,12 +39,16 @@ export class Restaurants extends Component<any, IState> {
 	static renderCityList(restaurants_by_city: ICity[]) {
 		return (
 			<div>
+				{restaurants_by_city.length > 0 ? <>
 				Jump to city:
 				<ul>
 					{restaurants_by_city.map(city =>
 						<li key={city.slug}><a href={"#" + city.slug}>{city.name}</a></li>
 					)}
 				</ul>
+				</> : <>
+					<p>No cities in the database.</p>
+				</>}
 			</div>
 		);
 	}
@@ -63,7 +71,7 @@ export class Restaurants extends Component<any, IState> {
 	}
 
 	async populateRestaurantsByCity() {
-		const response = await fetch("api/v1/cities-with-restaurants");
+		const response = await fetch("/api/v1/Restaurants");
 		const data = await response.json();
 		this.setState({restaurants_by_city: data, loading: false});
 	}

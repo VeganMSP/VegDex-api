@@ -27,12 +27,16 @@ export class Links extends Component<any, IState> {
 	static renderLinksList(links_by_category: ILinkCategory[]) {
 		return (
 			<div>
+				{links_by_category.length > 0 ? <>
 				{links_by_category.map(category =>
 					<LinkCategory
 						key={category.slug}
 						category={category}
 						links={category.links}
 					/>)}
+				</> : <>
+					<p>There are no links in the database.</p>
+				</>}
 			</div>
 		);
 	}
@@ -52,7 +56,7 @@ export class Links extends Component<any, IState> {
 	}
 
 	async populateLinksByCategory() {
-		const response = await fetch("api/v1/links-by-category");
+		const response = await fetch("/api/v1/Links");
 		const data = await response.json();
 
 		this.setState({links_by_category: data, loading: false});
