@@ -1,5 +1,3 @@
-import {Counter} from "./components/Counter";
-import {FetchData} from "./components/FetchData";
 import {Home} from "./components/Home";
 import {Blog} from "./components/Blog";
 import React from "react";
@@ -42,14 +40,6 @@ const AppRoutes = [
   {
     path: "/shopping",
     element: <Shopping/>
-  },
-  {
-    path: "/counter",
-    element: <Counter/>
-  },
-  {
-    path: "/fetch-data",
-    element: <FetchData/>
   }
 ];
 

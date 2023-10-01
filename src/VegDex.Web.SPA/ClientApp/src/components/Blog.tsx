@@ -1,31 +1,59 @@
-import React, {Component} from "react";
+import React, {ChangeEvent, FormEvent, useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 import {format} from "date-fns";
-import PropTypes from "prop-types";
-import NewBlogPost from "./_new_blog_post";
-import {BASE_API_URL} from "../config";
+import {BlogPostFormModal} from "./_new_blog_post";
 import {IBlogPost} from "../models/IBlogPost";
+import {getBlogPosts} from "../services/BlogService";
 
-interface IState {
-  blog_posts: IBlogPost[];
-  loading: boolean
-}
+export const Blog = () => {
+  const [blogPosts, setBlogPosts] = useState<IBlogPost[] | null>(null);
+  const [loading, setLoading] = useState(true);
+  const [formModal, setFormModal] = useState(false);
+  const [form, setForm] = useState<{ [key: string]: string }>({});
 
-export class Blog extends Component<any, IState> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      blog_posts: [],
-      loading: true
-    };
-    this.handleFormSubmit = this.handleFormSubmit.bind(NewBlogPost);
-  }
+  const toggleModal = () => setFormModal(!formModal);
 
-  static renderBlogPosts(blog_posts: IBlogPost[]) {
+  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+    const {target} = e;
+    console.log(e);
+    setForm(prevState => {
+      prevState[target.name] = target.value;
+      return prevState;
+    });
+  };
+
+  const submitForm = async (e: FormEvent) => {
+    e.preventDefault();
+    const target = e.target as HTMLFormElement;
+    try {
+      const response = await fetch("/api/v1/Blog", {
+        method: "POST",
+        body: JSON.stringify(form),
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/json",
+        },
+      });
+      if (!response.ok) throw Error(response.statusText);
+      target.reset();
+      toggleModal();
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  const blogPostFormModal = <BlogPostFormModal
+    isOpen={formModal}
+    toggleFunc={toggleModal}
+    changeFunc={handleChange}
+    submitFunc={submitForm}
+  />;
+
+  const renderBlogPosts = (blog_posts: IBlogPost[]) => {
     if (blog_posts.length > 0) {
       return (
         <div>
-          <NewBlogPost/>
+          {blogPostFormModal}
           <ul>
             {blog_posts.map(post =>
               <BlogPost
@@ -39,71 +67,59 @@ export class Blog extends Component<any, IState> {
     } else {
       return (
         <div>
-          <NewBlogPost/>
+          {blogPostFormModal}
           <p>There are no blog posts in the database!</p>
         </div>
       );
     }
   }
 
-  handleFormSubmit(title: string, content: string, status: string) {
+  const handleSubmit = (title: string, content: string, status: string) => {
     console.log(title, content, status);
   }
 
-  componentDidMount() {
-    this.getBlogPosts();
-  }
+  useEffect(() => {
+    if (blogPosts) {
+      setLoading(false);
+    } else {
+      getBlogPosts().then(r => {
+        if (r.ok) return r.json();
+      }).then(data => {
+        setBlogPosts(data)
+      });
+    }
+  }, [blogPosts]);
 
-  render() {
-    const blog_posts = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : Blog.renderBlogPosts(this.state.blog_posts);
-    return (
-      <>
-        <div>
-          {blog_posts}
-        </div>
-      </>
-    );
-  }
+  return (
+    <>
+      <div>
+        {loading ? <p><em>Loading...</em></p> :
+          renderBlogPosts(blogPosts as IBlogPost[])}
+      </div>
+    </>
+  );
+};
 
-  async getBlogPosts() {
-    const response = await fetch(`/api/v1/Blog`);
-    const data = await response.json();
-    this.setState({blog_posts: data, loading: false});
-  }
-}
+const BlogPost = (props: { post: IBlogPost }) => {
+  const {title, slug, content, created_at} = props.post;
+  const date = new Date(created_at);
+  const fullDate = format(date, "yyyy-MM-dd");
+  const year = format(date, "yyyy");
+  const month = format(date, "MM");
+  const day = format(date, "dd");
 
-class BlogPost extends Component<{ post: IBlogPost }> {
-  static propTypes = {
-    post: PropTypes.object.isRequired,
-  };
-
-  constructor(props: { post: IBlogPost }) {
-    super(props);
-  }
-
-  render() {
-    const {title, slug, content, created_at} = this.props.post;
-    const date = new Date(created_at);
-    const fullDate = format(date, "yyyy-MM-dd");
-    const year = format(date, "yyyy");
-    const month = format(date, "MM");
-    const day = format(date, "dd");
-
-    return (
-      <div className='post-stub'>
-        <h3 className='post-title'>
+  return (
+    <div className='post-stub'>
+      <h3 className='post-title'>
 					<span className='date xs-hidden'>
 						{fullDate}
             &nbsp;
 					</span>
-          <Link to={`/blog/${year}/${month}/${day}/${slug}`}>
-            {title}
-          </Link>
-        </h3>
-        <p className='post-content'>{content}</p>
-      </div>
-    );
-  }
-}
+        <Link to={`/blog/${year}/${month}/${day}/${slug}`}>
+          {title}
+        </Link>
+      </h3>
+      <p className='post-content'>{content}</p>
+    </div>
+  );
+};
