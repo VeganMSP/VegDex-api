@@ -3,7 +3,7 @@ import {Button, Input, Label} from "reactstrap";
 import {useAuth} from "../../hooks/useAuth";
 import {Navigate} from "react-router-dom";
 
-export function Login() {
+export const Login = () => {
   const {user, login} = useAuth();
   if (user) {
     return <Navigate to={"/"}/>;

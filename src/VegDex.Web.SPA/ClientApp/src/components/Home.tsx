@@ -2,11 +2,7 @@ import React, {useEffect, useState} from "react";
 import {IPageInfo} from "../models/IPageInfo";
 import DOMPurify from "dompurify";
 import {escapedNewLineToLineBreakTag} from "../functions/HtmlUtils";
-
-const fetchHomePage = async () => {
-  return await fetch(`/api/v1/Meta`)
-    .then(response => response.json());
-};
+import {fetchHomePage} from "../services/MetaService";
 
 export const Home = () => {
   const [isLoading, setIsLoading] = useState(true);

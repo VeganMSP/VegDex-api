@@ -1,11 +1,7 @@
 import React, {useEffect, useState} from "react";
 import {IPageInfo} from "../models/IPageInfo";
 import DOMPurify from "dompurify";
-
-const fetchAboutPage = async () => {
-  return await fetch(`/api/v1/Meta/About`)
-    .then(response => response.json());
-};
+import {fetchAboutPage} from "../services/MetaService";
 
 export const About = () => {
   const [isLoading, setIsLoading] = useState(true);

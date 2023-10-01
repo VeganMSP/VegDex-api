@@ -1,21 +1,13 @@
-import React, {Component} from "react";
+import React, {useEffect, useState} from "react";
 import {City} from "./City";
 import {ICity} from "../models/ICity";
+import {getRestaurantsByCity} from "../services/RestaurantService";
 
-interface IState {
-  restaurants_by_city: ICity[];
-  loading: boolean;
-}
+export const Restaurants = () => {
+  const [data, setData] = useState<ICity[] | null>(null);
+  const [loading, setLoading] = useState(true);
 
-export class Restaurants extends Component<any, IState> {
-  static displayName = Restaurants.name;
-
-  constructor(props: any) {
-    super(props);
-    this.state = {restaurants_by_city: [], loading: true};
-  }
-
-  static renderRestaurantsList(restaurants_by_city: ICity[]) {
+  const renderRestaurantsList = (restaurants_by_city: ICity[]) => {
     return (
       <div>
         {restaurants_by_city.length > 0 ? <>
@@ -32,7 +24,7 @@ export class Restaurants extends Component<any, IState> {
     );
   }
 
-  static renderCityList(restaurants_by_city: ICity[]) {
+  const renderCityList = (restaurants_by_city: ICity[]) => {
     return (
       <div>
         {restaurants_by_city.length > 0 ? <>
@@ -49,30 +41,26 @@ export class Restaurants extends Component<any, IState> {
     );
   }
 
-  componentDidMount() {
-    this.populateRestaurantsByCity();
-  }
+  useEffect(() => {
+    if (data) {
+      setLoading(false);
+    } else {
+      getRestaurantsByCity().then(r => {
+        if (r.ok) return r.json();
+      }).then(data => {
+        setData(data);
+        setLoading(false);
+      })
+    }
+  }, [data]);
 
-  render() {
-    const contents = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : Restaurants.renderRestaurantsList(this.state.restaurants_by_city);
-    const city_list = this.state.loading
-      ? <p><em>Loading...</em></p>
-      : Restaurants.renderCityList(this.state.restaurants_by_city);
-
-    return (
-      <div>
-        <h2>Restaurants</h2>
-        {city_list}
-        {contents}
-      </div>
-    );
-  }
-
-  async populateRestaurantsByCity() {
-    const response = await fetch("/api/v1/Restaurants");
-    const data = await response.json();
-    this.setState({restaurants_by_city: data, loading: false});
-  }
-}
+  return (
+    <div>
+      <h2>Restaurants</h2>
+      {loading ? <p><em>Loading...</em></p> : <>
+        {renderCityList(data as ICity[])}
+        {renderRestaurantsList(data as ICity[])}
+      </>}
+    </div>
+  );
+};
