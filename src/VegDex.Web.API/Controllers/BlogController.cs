@@ -30,12 +30,12 @@ public class BlogController : Controller
     }
     private bool BlogCategoryExists(int id)
     {
-        var blogCategory = _blogPageService.GetBlogCategoryById(id);
+        var blogCategory = _blogPageService.GetBlogCategoryById(id).Result;
         return blogCategory != null;
     }
     private bool BlogPostExists(int id)
     {
-        var blogPost = _blogPageService.GetBlogPostById(id);
+        var blogPost = _blogPageService.GetBlogPostById(id).Result;
         return blogPost != null;
     }
     [HttpPost]
