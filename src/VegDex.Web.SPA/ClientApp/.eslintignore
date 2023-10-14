@@ -1,6 +1,0 @@
-/db/**
-/lib/**
-/node_modules/**
-/public/**
-/tmp/**
-!.eslintrc.js
