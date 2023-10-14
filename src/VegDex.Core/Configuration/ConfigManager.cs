@@ -6,7 +6,6 @@ namespace VegDex.Core.Configuration;
 public interface IConfigManager
 {
     App App { get; set; }
-    string GetConfigValue(string key);
 }
 public class ConfigManager : IConfigManager
 {
@@ -17,6 +16,4 @@ public class ConfigManager : IConfigManager
     }
     /// <inheritdoc/>
     public App App { get; set; }
-    /// <inheritdoc/>
-    public string GetConfigValue(string key) => throw new NotImplementedException();
 }

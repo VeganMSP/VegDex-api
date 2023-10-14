@@ -8,8 +8,8 @@ namespace VegDex.Web.API;
 public class Program
 {
     private static IConfiguration Configuration { get; } = new ConfigurationBuilder()
-        .AddJsonFile("appsettings.json", false, true)
-        .AddJsonFile($"appsettings.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.json",
+        .AddYamlFile("config.yaml", false, true)
+        .AddYamlFile($"config.{Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT") ?? "Production"}.yaml",
             false, true)
         .AddEnvironmentVariables()
         .Build();
