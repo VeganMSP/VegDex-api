@@ -23,7 +23,7 @@ public class CityController : Controller
     }
     private bool CityExists(int? id)
     {
-        var city = _cityPageService.GetCityById(id);
+        var city = _cityPageService.GetCityById(id).Result;
         return city != null;
     }
     [HttpPost]
@@ -74,9 +74,9 @@ public class CityController : Controller
                 }
                 throw;
             }
-            return new StatusCodeResult((int)HttpStatusCode.InternalServerError);
+            return Ok();
         }
-        return Ok();
+        return BadRequest();
     }
     [HttpGet]
     public IEnumerable<CityViewModel> Index()
