@@ -16,7 +16,7 @@ public class VeganCompanyService : IVeganCompanyService
         return mapped;
     }
     /// <inheritdoc/>
-    public async Task<VeganCompanyModel> GetVeganCompanyById(int veganCompanyId)
+    public async Task<VeganCompanyModel> GetVeganCompanyById(int? veganCompanyId)
     {
         var veganCompany = await _veganCompanyRepository.GetByIdAsync(veganCompanyId);
         var mapped = ObjectMapper.Mapper.Map<VeganCompanyModel>(veganCompany);

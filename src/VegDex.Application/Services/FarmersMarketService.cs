@@ -16,7 +16,7 @@ public class FarmersMarketService : IFarmersMarketService
         return mapped;
     }
     /// <inheritdoc/>
-    public async Task<FarmersMarketModel> GetFarmersMarketById(int farmersMarketId)
+    public async Task<FarmersMarketModel> GetFarmersMarketById(int? farmersMarketId)
     {
         var farmersMarket = await _farmersMarketRepository.GetByIdAsync(farmersMarketId);
         var mapped = ObjectMapper.Mapper.Map<FarmersMarketModel>(farmersMarket);
