@@ -36,7 +36,7 @@ public class ShoppingPageService : IShoppingPageService
         return viewModel;
     }
     /// <inheritdoc/>
-    public async Task<VeganCompanyModel> GetVeganCompanyById(int id)
+    public async Task<VeganCompanyModel> GetVeganCompanyById(int? id)
     {
         var veganCompany = await _veganCompanyAppService.GetVeganCompanyById(id);
         var mapped = _mapper.Map<VeganCompanyModel>(veganCompany);
@@ -87,7 +87,7 @@ public class ShoppingPageService : IShoppingPageService
         return mappedModel;
     }
     /// <inheritdoc/>
-    public async Task<FarmersMarketModel> GetFarmersMarketById(int id)
+    public async Task<FarmersMarketModel> GetFarmersMarketById(int? id)
     {
         var farmersMarket = await _farmersMarketAppService.GetFarmersMarketById(id);
         var mapped = _mapper.Map<FarmersMarketModel>(farmersMarket);

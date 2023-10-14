@@ -9,9 +9,9 @@ public interface IShoppingPageService
     Task<VeganCompanyModel> CreateVeganCompany(VeganCompanyModel veganCompanyModel);
     Task DeleteFarmersMarket(FarmersMarketModel farmersMarket);
     Task DeleteVeganCompany(VeganCompanyModel veganCompany);
-    Task<FarmersMarketModel> GetFarmersMarketById(int id);
+    Task<FarmersMarketModel> GetFarmersMarketById(int? id);
     Task<ShoppingViewModel> GetPageInformation();
-    Task<VeganCompanyModel> GetVeganCompanyById(int id);
+    Task<VeganCompanyModel> GetVeganCompanyById(int? id);
     Task UpdateFarmersMarket(FarmersMarketModel farmersMarketModel);
     Task UpdateVeganCompany(VeganCompanyModel veganCompanyModel);
 }

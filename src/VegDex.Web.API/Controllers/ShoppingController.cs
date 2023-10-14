@@ -40,7 +40,7 @@ public class ShoppingController : Controller
     }
     [HttpDelete]
     [Route("FarmersMarket/Delete")]
-    public StatusCodeResult DeleteFarmersMarketConfirmed(int id)
+    public StatusCodeResult DeleteFarmersMarketConfirmed(int? id)
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
         if (id == null)
@@ -53,7 +53,7 @@ public class ShoppingController : Controller
     }
     [HttpDelete]
     [Route("VeganCompany/Delete")]
-    public StatusCodeResult DeleteVeganCompanyConfirmed(int id)
+    public StatusCodeResult DeleteVeganCompanyConfirmed(int? id)
     {
         _logger.Debug("{Method} got GET", MethodBase.GetCurrentMethod()?.Name);
         if (id == null)
@@ -111,7 +111,7 @@ public class ShoppingController : Controller
     }
     private bool FarmersMarketExists(int id)
     {
-        var farmersMarket = _shoppingPageService.GetFarmersMarketById(id);
+        var farmersMarket = _shoppingPageService.GetFarmersMarketById(id).Result;
         return farmersMarket != null;
     }
     // GET
@@ -124,7 +124,7 @@ public class ShoppingController : Controller
     }
     private bool VeganCompanyExists(int id)
     {
-        var veganCompany = _shoppingPageService.GetVeganCompanyById(id);
+        var veganCompany = _shoppingPageService.GetVeganCompanyById(id).Result;
         return veganCompany != null;
     }
 }

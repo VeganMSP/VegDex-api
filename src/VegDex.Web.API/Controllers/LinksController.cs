@@ -138,12 +138,12 @@ public class LinksController : Controller
     }
     private bool LinkCategoryExists(int id)
     {
-        var linkCategory = _linksPageService.GetLinkCategoryById(id);
+        var linkCategory = _linksPageService.GetLinkCategoryById(id).Result;
         return linkCategory != null;
     }
     private bool LinkExists(int? id)
     {
-        var link = _linksPageService.GetLinkById(id);
+        var link = _linksPageService.GetLinkById(id).Result;
         return link != null;
     }
 }

@@ -8,7 +8,7 @@ namespace VegDex.Web.API.Controllers;
 [ApiVersion("1")]
 [Route("[controller]")]
 [ApiController]
-public class UsersController : ControllerBase
+public class UsersController : Controller
 {
     private IUserService _userService;
     public UsersController(IUserService userService)
@@ -28,9 +28,9 @@ public class UsersController : ControllerBase
     }
     [Authorize]
     [HttpGet]
-    public IActionResult GetAll()
+    public async Task<IActionResult> GetAll()
     {
-        var users = _userService.GetAll();
+        var users = await _userService.GetAll();
         return Ok(users);
     }
     [HttpPost("register")]
