@@ -66,10 +66,7 @@ public class RestaurantsController : Controller
                 {
                     return NotFound();
                 }
-                else
-                {
-                    throw;
-                }
+                throw;
             }
             return Ok();
         }
@@ -86,7 +83,7 @@ public class RestaurantsController : Controller
     }
     private bool RestaurantExists(int? id)
     {
-        var restaurant = _restaurantsPageService.GetRestaurantById(id);
+        var restaurant = _restaurantsPageService.GetRestaurantById(id).Result;
         return restaurant != null;
     }
 }
