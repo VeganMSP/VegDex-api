@@ -21,7 +21,7 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 8.0.x
       - name: Restore dependencies
         run: |
           dotnet restore
@@ -58,11 +58,11 @@ jobs:
       - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: 7.0.x
+          dotnet-version: 8.0.x
       - name: Publish
         run: |
           dotnet publish VegDex.Web.API/VegDex.Web.API.csproj -c Release
-          zip -j VegDex-${{ github.ref_name }}-${{matrix.rid}}.zip VegDex.Web.API/bin/Release/net7.0/publish/* README.md LICENSE
+          zip -j VegDex-${{ github.ref_name }}-${{matrix.rid}}.zip VegDex.Web.API/bin/Release/net8.0/publish/* README.md LICENSE
       - name: Release
         uses: softprops/action-gh-release@v1
         if: startsWith(github.ref, 'refs/tags/')
